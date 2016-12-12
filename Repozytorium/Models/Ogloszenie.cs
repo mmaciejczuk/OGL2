@@ -8,7 +8,7 @@ namespace Repozytorium.Models
     {
         public Ogloszenie()
         {
-            this.Ogloszenie_Kategoria = new HashSet<Ogloszenie_Kategoria>();
+            this.Ogloszenia = new HashSet<Ogloszenie>();
         }
         [Display(Name = "Id:")]
         public int Id { get; set; }
@@ -24,7 +24,7 @@ namespace Repozytorium.Models
         public System.DateTime DataDodania { get; set; }
         public int UzytkownikId { get; set; }
 
-        public virtual ICollection<Ogloszenie_Kategoria> Ogloszenie_Kategoria { get; set; }
+        public virtual ICollection<Ogloszenie> Ogloszenia { get; set; }
 
         public virtual Uzytkownik Uzytkownik { get; set; }
     }
