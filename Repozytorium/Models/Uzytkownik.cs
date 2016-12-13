@@ -19,7 +19,8 @@ namespace Repozytorium.Models
         {
             this.Ogloszenia = new HashSet<Ogloszenie>();
         }
-
+        public int Id { get; set; }
+        // klucz podstawowy odziedziczony po klasie IdentityUser       
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
 
