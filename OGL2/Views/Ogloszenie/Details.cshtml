@@ -1,0 +1,50 @@
+﻿@model Repozytorium.Models.Ogloszenie
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ogloszenie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Uzytkownik.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Uzytkownik.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tresc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tresc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tytul)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tytul)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDodania)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataDodania)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

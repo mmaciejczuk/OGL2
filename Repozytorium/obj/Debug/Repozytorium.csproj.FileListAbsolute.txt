@@ -54,4 +54,7 @@ D:\code\OGL2\Repozytorium\obj\Debug\Repozytorium.pdb
 D:\code\OGL2\Repozytorium\bin\FluentMigrator.dll
 D:\code\OGL2\Repozytorium\bin\FluentMigrator.pdb
 D:\code\OGL2\Repozytorium\bin\FluentMigrator.xml
+D:\code\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations.startowa.resources
+D:\code\OGL2\Repozytorium\obj\Debug\Repozytorium.csproj.GenerateResource.Cache
+D:\code\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._1.resources
 D:\code\OGL2\Repozytorium\obj\Debug\Repozytorium.csprojResolveAssemblyReference.cache

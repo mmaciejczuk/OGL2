@@ -157,6 +157,14 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201612140829389_startowa.cs" />
+    <Compile Include="Migrations\201612140829389_startowa.Designer.cs">
+      <DependentUpon>201612140829389_startowa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612141052537_1.cs" />
+    <Compile Include="Migrations\201612141052537_1.Designer.cs">
+      <DependentUpon>201612141052537_1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Kategoria.cs" />
     <Compile Include="Models\OglContext.cs" />
@@ -166,7 +174,14 @@
     <Compile Include="Models\Views\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201612140829389_startowa.resx">
+      <DependentUpon>201612140829389_startowa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141052537_1.resx">
+      <DependentUpon>201612141052537_1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

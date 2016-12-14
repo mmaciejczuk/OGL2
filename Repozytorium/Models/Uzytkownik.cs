@@ -23,6 +23,7 @@ namespace Repozytorium.Models
         // klucz podstawowy odziedziczony po klasie IdentityUser       
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
+        public int? Wiek { get; set; }
 
         #region dodatkowe pole notmapped
         [NotMapped]
