@@ -51,3 +51,7 @@ D:\code\OGL2\Repozytorium\bin\System.Web.WebPages.Deployment.xml
 D:\code\OGL2\Repozytorium\bin\System.Web.WebPages.Razor.xml
 D:\code\OGL2\Repozytorium\obj\Debug\Repozytorium.dll
 D:\code\OGL2\Repozytorium\obj\Debug\Repozytorium.pdb
+D:\code\OGL2\Repozytorium\bin\FluentMigrator.dll
+D:\code\OGL2\Repozytorium\bin\FluentMigrator.pdb
+D:\code\OGL2\Repozytorium\bin\FluentMigrator.xml
+D:\code\OGL2\Repozytorium\obj\Debug\Repozytorium.csprojResolveAssemblyReference.cache
