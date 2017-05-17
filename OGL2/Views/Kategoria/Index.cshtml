@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Repozytorium.Models.Kategoria>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParentId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MetaTytul)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MetaOpis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MetaSlowa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tresc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Nazwa, "PokazOgloszenia", new { id = item.Id})
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParentId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MetaTytul)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MetaOpis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MetaSlowa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tresc)
+        </td>
+    </tr>
+}
+
+</table>

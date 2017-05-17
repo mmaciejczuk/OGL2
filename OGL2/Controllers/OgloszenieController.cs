@@ -1,36 +1,72 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
 using Repozytorium.Models;
-using System.Diagnostics;
+using Repozytorium.IRepo;
+using Microsoft.AspNet.Identity;
+using System;
+using System.Linq;
+using PagedList;
 
 namespace OGL2.Controllers
 {
     public class OgloszenieController : Controller
     {
-        private OglContext db = new OglContext();
-
-        // GET: Ogloszenies
-        public ActionResult Index()
+        private readonly IOgloszenieRepo _repo;
+        public OgloszenieController(IOgloszenieRepo repo)
         {
-            db.Database.Log = message => Trace.WriteLine(message);
-            var ogloszenia = db.Ogloszenia.AsNoTracking();
-            return View(ogloszenia.ToList());
+            _repo = repo;
         }
 
-        // GET: Ogloszenies/Details/5
+//-------------------------- INDEX----------------------------------------
+        public ActionResult Index(int? page, string sortOrder)
+        {
+            int currentPage = page ?? 1;
+            int naStronie = 3;
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.IdSort = String.IsNullOrEmpty(sortOrder) ? "IdAsc" : "";
+            ViewBag.DataDodaniaSort = sortOrder == "DataDodania" ? "DataDodaniaAsc" : "DataDodania";
+            ViewBag.TrescSort = sortOrder == "TrescAsc" ? "Tresc" : "TrescAsc";
+            ViewBag.TytulSort = sortOrder == "TytulAsc" ? "Tytul" : "TytulAsc";
+            var ogloszenia = _repo.PobierzOgloszenia();
+
+            switch(sortOrder)
+            {
+                case "DataDodania":
+                    ogloszenia = ogloszenia.OrderByDescending(s => s.DataDodania);
+                    break;
+                case "DataDodaniaAsc":
+                    ogloszenia = ogloszenia.OrderBy(s => s.DataDodania);
+                    break;
+                case "Tytul":
+                    ogloszenia = ogloszenia.OrderByDescending(s => s.Tytul);
+                    break;
+                case "TytulAsc":
+                    ogloszenia = ogloszenia.OrderBy(s => s.Tytul);
+                    break;
+                case "Tresc":
+                    ogloszenia = ogloszenia.OrderByDescending(s => s.Tytul);
+                    break;
+                case "TrescAsc":
+                    ogloszenia = ogloszenia.OrderBy(s => s.Tytul);
+                    break;
+                case "IdAsc":
+                    ogloszenia = ogloszenia.OrderBy(s => s.Tytul);
+                    break;
+                default:  // id descending
+                    ogloszenia = ogloszenia.OrderByDescending(s => s.Id);
+                    break;
+            }
+            return View(ogloszenia.ToPagedList<Ogloszenie>(currentPage, naStronie));
+        }
+
+// ------------------------- DETAILS -------------------------------------
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ogloszenie ogloszenie = db.Ogloszenia.Find(id);
+            Ogloszenie ogloszenie = _repo.GetOgloszeniaById((int)id);
             if (ogloszenie == null)
             {
                 return HttpNotFound();
@@ -38,97 +74,155 @@ namespace OGL2.Controllers
             return View(ogloszenie);
         }
 
-        // GET: Ogloszenies/Create
+// ------------------------- CREATE -------------------------------------
+        // GET
         public ActionResult Create()
         {
-            ViewBag.UzytkownikId = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
-        // POST: Ogloszenies/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Tresc,Tytul,DataDodania,UzytkownikId")] Ogloszenie ogloszenie)
+        public ActionResult Create([Bind(Include = "Tresc,Tytul")] Ogloszenie ogloszenie)
         {
             if (ModelState.IsValid)
             {
-                db.Ogloszenia.Add(ogloszenie);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                // using Microsoft.AspNet.Identity;
+                ogloszenie.UzytkownikId = User.Identity.GetUserId();
+                ogloszenie.DataDodania = DateTime.Now;
+                try
+                {
+                    _repo.Dodaj(ogloszenie);
+                    _repo.SaveChages();
+                    return RedirectToAction("MojeOgloszenia");
+                }
+                catch (Exception)
+                {
+                    return View(ogloszenie);
+                }
             }
-
-            ViewBag.UzytkownikId = new SelectList(db.Users, "Id", "Email", ogloszenie.UzytkownikId);
             return View(ogloszenie);
         }
 
-        // GET: Ogloszenies/Edit/5
+// ------------------------- EDIT -------------------------------------
+        // GET
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ogloszenie ogloszenie = db.Ogloszenia.Find(id);
+            Ogloszenie ogloszenie = _repo.GetOgloszeniaById((int)id);
             if (ogloszenie == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UzytkownikId = new SelectList(db.Users, "Id", "Email", ogloszenie.UzytkownikId);
+            else if (ogloszenie.UzytkownikId != User.Identity.GetUserId() && !(User.IsInRole("Admin") || User.IsInRole("Pracownik")))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             return View(ogloszenie);
         }
 
-        // POST: Ogloszenies/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
+        // POST
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,Tresc,Tytul,DataDodania,UzytkownikId")] Ogloszenie ogloszenie)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(ogloszenie).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    // ogloszenie.UzytkownikId = "ffgfs";
+                    _repo.Aktualizuj(ogloszenie);
+                    _repo.SaveChages();
+                }
+                catch (Exception)
+                {
+                    ViewBag.Blad = true;
+                    return View(ogloszenie);
+                }
             }
-            ViewBag.UzytkownikId = new SelectList(db.Users, "Id", "Email", ogloszenie.UzytkownikId);
+            ViewBag.Blad = false;
             return View(ogloszenie);
         }
 
-        // GET: Ogloszenies/Delete/5
-        public ActionResult Delete(int? id)
+// ------------------------- DELETE -------------------------------------
+
+        // GET
+        [Authorize]
+        public ActionResult Delete(int? id, bool? blad)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ogloszenie ogloszenie = db.Ogloszenia.Find(id);
+            Ogloszenie ogloszenie = _repo.GetOgloszeniaById((int)id);
             if (ogloszenie == null)
             {
                 return HttpNotFound();
             }
+            else if (ogloszenie.UzytkownikId != User.Identity.GetUserId() && !User.IsInRole("Admin"))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (blad != null)
+                ViewBag.Blad = true;
             return View(ogloszenie);
+
         }
 
-        // POST: Ogloszenies/Delete/5
+        //POST
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Ogloszenie ogloszenie = db.Ogloszenia.Find(id);
-            db.Ogloszenia.Remove(ogloszenie);
-            db.SaveChanges();
+            _repo.UsunOgloszenie(id);
+            try
+            {
+                _repo.SaveChages();
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Delete", new { id = id, blad = true });
+            }
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+
+// ------------------------- PARTIAL -------------------------------------
+        public ActionResult Partial(int? page)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            int currentPage = page ?? 1;
+            int naStronie = 3;
+            var ogloszenia = _repo.PobierzOgloszenia();
+            ogloszenia = ogloszenia.OrderByDescending(d => d.DataDodania);
+            return PartialView("Index", ogloszenia.ToPagedList<Ogloszenie>(currentPage, naStronie));
         }
+
+        [OutputCache(Duration = 1000)]
+        public ActionResult MojeOgloszenia(int? page)
+        {
+            int currentPage = page ?? 1;
+            int naStronie = 3;
+            string userId = User.Identity.GetUserId();
+            var ogloszenia = _repo.PobierzOgloszenia();
+            ogloszenia = ogloszenia.OrderByDescending(d => d.DataDodania).Where(o => o.UzytkownikId == userId);
+            return View(ogloszenia.ToPagedList<Ogloszenie>(currentPage, naStronie));
+        }
+
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

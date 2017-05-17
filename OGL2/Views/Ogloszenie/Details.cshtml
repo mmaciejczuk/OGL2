@@ -1,10 +1,13 @@
 ﻿@model Repozytorium.Models.Ogloszenie
+@using Microsoft.AspNet.Identity
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Tytul = "Szczegóły ogłoszenia nr " + Model.Id;
+    ViewBag.Opis = "Szczegóły ogłoszenia nr" + Model.Id + " Opis do Google";
+    ViewBag.SlowaKluczowe = "Ogloszenie, " + Model.Id + ",szczegóły";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły ogłoszenia nr @Model.Id</h2>
 
 <div>
     <h4>Ogloszenie</h4>
@@ -45,6 +48,11 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") 
+        || User.IsInRole("Pracownik") 
+        || Model.UzytkownikId == User.Identity.GetUserId())) 
+    {
+        @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    }
+    @Html.ActionLink("Wróć", "Index", null, new { @class = "btn btn-warning" })
 </p>

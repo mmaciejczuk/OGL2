@@ -57,7 +57,6 @@ namespace OGL2
             //app.UseFacebookAuthentication(
             //   appId: "",
             //   appSecret: "");
-
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
             //    ClientId = "",

@@ -1,0 +1,45 @@
+﻿@model Repozytorium.Models.Views.OgloszeniaZKategoriiViewModels
+
+@{
+    ViewBag.Tytul = "Ogłoszenia z kategorii " + Model.NazwaKategorii;
+}
+
+<h2>Ogłoszenia z kategorii: @Model.NazwaKategorii</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ogloszenia.First().UzytkownikId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ogloszenia.First().Tresc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ogloszenia.First().Tytul)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ogloszenia.First().DataDodania)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Ogloszenia) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UzytkownikId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tresc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tytul)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataDodania)
+        </td>
+
+    </tr>
+}
+
+</table>

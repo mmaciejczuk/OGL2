@@ -157,6 +157,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRepo\IKategoriaRepo.cs" />
+    <Compile Include="IRepo\IOglContext.cs" />
+    <Compile Include="IRepo\IOgloszenieRepo.cs" />
     <Compile Include="Migrations\201612140829389_startowa.cs" />
     <Compile Include="Migrations\201612140829389_startowa.Designer.cs">
       <DependentUpon>201612140829389_startowa.cs</DependentUpon>
@@ -172,7 +175,10 @@
     <Compile Include="Models\Ogloszenie_Kategoria.cs" />
     <Compile Include="Models\Uzytkownik.cs" />
     <Compile Include="Models\Views\AccountViewModels.cs" />
+    <Compile Include="Models\Views\OgloszeniaZKategoriiViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repo\KategoriaRepo.cs" />
+    <Compile Include="Repo\OgloszenieRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612140829389_startowa.resx">

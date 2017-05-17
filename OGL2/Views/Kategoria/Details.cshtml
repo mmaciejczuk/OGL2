@@ -1,0 +1,67 @@
+﻿@model Repozytorium.Models.Kategoria
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Kategoria</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetaTytul)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetaTytul)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetaOpis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetaOpis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetaSlowa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetaSlowa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tresc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tresc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

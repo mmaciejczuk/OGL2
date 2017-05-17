@@ -1,12 +1,22 @@
 ﻿@model Repozytorium.Models.Ogloszenie
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Tytul = "Usuń ogłoszenie nr" + Model.Id;
+    ViewBag.Opis = "Usuń ogłoszenie nr" + Model.Id + " Opis do Google";
+    ViewBag.SlowaKluczowe = "Ogloszenie, " + Model.Id + ", usuń";
 }
 
-<h2>Delete</h2>
+<h2>Usuń ogłoszenie nr @Model.Id</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+@if (ViewBag.Blad == true)
+{
+    <div class="alert alert-danger" role="alert">
+        Wystąpił błąd podczas usuwania.<br/>
+        Spróbuj ponownie.
+    </div>
+}
+
+<h3>Czy na pewno chcesz usunąć?</h3>
 <div>
     <h4>Ogloszenie</h4>
     <hr />
@@ -49,8 +59,17 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Usuń" class="btn btn-danger confirmation"  
+                   onclick="return confirm('Czy na pewno chcesz usunąć?')"/> 
+            @Html.ActionLink("Wróć", "Index", null, new { @class = "btn btn-warning" })
         </div>
     }
 </div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $('.confirmation').on('click', function (){
+            return confirm('Czy na pewno chcesz usunąć?');
+    })
+    </script>
+    }

@@ -107,8 +107,26 @@ namespace Repozytorium.Migrations
                 if (adminresult.Succeeded)
                     manager.AddToRole(user.Id, "Admin");                               
             }
+
+            if (!context.Users.Any(u => u.UserName == "Marek"))
+            {
+                var user = new Uzytkownik { UserName = "marek@AspNetMvc.pl" };
+                var adminresult = manager.Create(user, "1234Abc,");
+                if (adminresult.Succeeded)
+                    manager.AddToRole(user.Id, "Pracownik");
+            }
+            if (!context.Users.Any(u => u.UserName == "Prezes"))
+            {
+                var user = new Uzytkownik { UserName = "prezes@AspNetMvc.pl" };
+                var adminresult = manager.Create(user, "1234Abc,");
+                if (adminresult.Succeeded)
+                    manager.AddToRole(user.Id, "Admin");
+            }
         }
 
+        // Admin mo¿e wszystko (SZCZEGÓ£Y, EDYTUJ, USUÑ)
+        // Pracownik mo¿e (EDUTUJ, DODAJ) nie mo¿e (USUÑ)
+        // zwyk³y u¿ytkownik mo¿e wszystko (SZCZEGÓ£Y, EDYTUJ, USUÑ), ale tylko na swoich og³oszeniach
         private void SeedRoles(OglContext context)
         {
             var roleManager = 
@@ -119,6 +137,12 @@ namespace Repozytorium.Migrations
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
                 role.Name = "Admin";
+                roleManager.Create(role);
+            }
+            if(!roleManager.RoleExists("Pracownik"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Pracownik";
                 roleManager.Create(role);
             }
         }

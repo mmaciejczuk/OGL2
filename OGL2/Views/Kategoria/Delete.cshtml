@@ -1,0 +1,73 @@
+﻿@model Repozytorium.Models.Kategoria
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Kategoria</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetaTytul)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetaTytul)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetaOpis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetaOpis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetaSlowa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetaSlowa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tresc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tresc)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
