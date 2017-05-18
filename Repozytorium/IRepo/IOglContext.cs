@@ -15,6 +15,7 @@ namespace Repozytorium.IRepo
         DbSet<Uzytkownik> Uzytkownik { get; set; }
         DbSet<Ogloszenie_Kategoria> Ogloszenie_Kategoria { get; set; }
         DbSet<CV> CV { get; set; }
+        DbSet<Doswiadczenie> Doswiadczenie { get; set; }
         int SaveChanges();
         Database Database { get; }
         DbEntityEntry Entry(object entity);
