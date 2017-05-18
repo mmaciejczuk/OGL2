@@ -19,7 +19,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Agencja pośrednictwa pracy", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }) 
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -38,6 +38,23 @@
                             <li>@Html.ActionLink("Lista jako PartialView", "Partial", "Ogloszenie")</li>
                         </ul>
                     </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            CV
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Lista CV", "Index", "Ogloszenie")</li>
+                            <li>@Html.ActionLink("Lista moich CV", "MojeOgloszenia", "Ogloszenie")</li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Dodaj ogłoszenie", "Create", "Ogloszenie")</li>
+                            }
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Lista jako PartialView", "Partial", "Ogloszenie")</li>
+                        </ul>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -47,7 +64,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - JobProfit Application</p>
         </footer>
     </div>
 

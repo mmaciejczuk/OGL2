@@ -24,6 +24,15 @@ namespace Repozytorium.Models
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
         public int? Wiek { get; set; }
+        public string Firma { get; set; }
+        public DateTime? DataUrodzenia { get; set; }
+        public string Ulica { get; set; }
+        public string NumerDomu { get; set; }
+        public string Miasto { get; set; }
+        public string Kod { get; set; }
+        public string Telefon { get; set; }
+        public string Description { get; set; }
+
 
         #region dodatkowe pole notmapped
         [NotMapped]

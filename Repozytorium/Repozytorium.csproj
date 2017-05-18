@@ -160,15 +160,20 @@
     <Compile Include="IRepo\IKategoriaRepo.cs" />
     <Compile Include="IRepo\IOglContext.cs" />
     <Compile Include="IRepo\IOgloszenieRepo.cs" />
-    <Compile Include="Migrations\201612140829389_startowa.cs" />
-    <Compile Include="Migrations\201612140829389_startowa.Designer.cs">
-      <DependentUpon>201612140829389_startowa.cs</DependentUpon>
+    <Compile Include="Migrations\201705181727440__1.cs" />
+    <Compile Include="Migrations\201705181727440__1.Designer.cs">
+      <DependentUpon>201705181727440__1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612141052537_1.cs" />
-    <Compile Include="Migrations\201612141052537_1.Designer.cs">
-      <DependentUpon>201612141052537_1.cs</DependentUpon>
+    <Compile Include="Migrations\201705181735259__2.cs" />
+    <Compile Include="Migrations\201705181735259__2.Designer.cs">
+      <DependentUpon>201705181735259__2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705181737468__3.cs" />
+    <Compile Include="Migrations\201705181737468__3.Designer.cs">
+      <DependentUpon>201705181737468__3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\CV.cs" />
     <Compile Include="Models\Kategoria.cs" />
     <Compile Include="Models\OglContext.cs" />
     <Compile Include="Models\Ogloszenie.cs" />
@@ -181,11 +186,14 @@
     <Compile Include="Repo\OgloszenieRepo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612140829389_startowa.resx">
-      <DependentUpon>201612140829389_startowa.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705181727440__1.resx">
+      <DependentUpon>201705181727440__1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612141052537_1.resx">
-      <DependentUpon>201612141052537_1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705181735259__2.resx">
+      <DependentUpon>201705181735259__2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705181737468__3.resx">
+      <DependentUpon>201705181737468__3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

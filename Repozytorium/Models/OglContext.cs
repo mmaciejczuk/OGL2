@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Repozytorium.Models;
 using Repozytorium.IRepo;
+using System;
 
 namespace Repozytorium.Models
 {
@@ -25,6 +26,7 @@ namespace Repozytorium.Models
         public DbSet<Ogloszenie> Ogloszenia { get; set; }
         public DbSet<Uzytkownik> Uzytkownik { get; set; }
         public DbSet<Ogloszenie_Kategoria> Ogloszenie_Kategoria { get; set; }
+        public DbSet<CV> CV { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -112,9 +112,10 @@ F:\Git_Repo\OGL2\Repozytorium\bin\System.Web.Razor.xml
 F:\Git_Repo\OGL2\Repozytorium\bin\System.Web.WebPages.xml
 F:\Git_Repo\OGL2\Repozytorium\bin\System.Web.WebPages.Deployment.xml
 F:\Git_Repo\OGL2\Repozytorium\bin\System.Web.WebPages.Razor.xml
-F:\Git_Repo\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations.startowa.resources
-F:\Git_Repo\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._1.resources
-F:\Git_Repo\OGL2\Repozytorium\obj\Debug\Repozytorium.csproj.GenerateResource.Cache
 F:\Git_Repo\OGL2\Repozytorium\obj\Debug\Repozytorium.dll
 F:\Git_Repo\OGL2\Repozytorium\obj\Debug\Repozytorium.pdb
 F:\Git_Repo\OGL2\Repozytorium\obj\Debug\Repozytorium.csprojResolveAssemblyReference.cache
+F:\Git_Repo\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._1.resources
+F:\Git_Repo\OGL2\Repozytorium\obj\Debug\Repozytorium.csproj.GenerateResource.Cache
+F:\Git_Repo\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._2.resources
+F:\Git_Repo\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._3.resources
