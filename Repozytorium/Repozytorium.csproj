@@ -160,6 +160,10 @@
     <Compile Include="IRepo\IKategoriaRepo.cs" />
     <Compile Include="IRepo\IOglContext.cs" />
     <Compile Include="IRepo\IOgloszenieRepo.cs" />
+    <Compile Include="Migrations\201705190918182__12.cs" />
+    <Compile Include="Migrations\201705190918182__12.Designer.cs">
+      <DependentUpon>201705190918182__12.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CV.cs" />
     <Compile Include="Models\Doswiadczenie.cs" />
@@ -173,6 +177,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repo\KategoriaRepo.cs" />
     <Compile Include="Repo\OgloszenieRepo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705190918182__12.resx">
+      <DependentUpon>201705190918182__12.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

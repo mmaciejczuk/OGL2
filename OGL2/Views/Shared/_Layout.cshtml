@@ -19,17 +19,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Agencja pośrednictwa pracy", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }) 
+                @*@Html.ActionLink("Agencja pośrednictwa pracy", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@ 
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ogłoszenia
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Oferty pracy
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Lista ogłoszeń", "Index", "Ogloszenie")</li>
-                            <li>@Html.ActionLink("Lista moich ogłoszeń", "MojeOgloszenia", "Ogloszenie")</li>
+                            <li>@Html.ActionLink("Lista ofert", "Index", "Ogloszenie")</li>
+                            <li>@Html.ActionLink("Lista moich ofert", "MojeOgloszenia", "Ogloszenie")</li>
                             @if (User.Identity.IsAuthenticated)
                             {
                                 <li>@Html.ActionLink("Dodaj ogłoszenie", "Create", "Ogloszenie")</li>

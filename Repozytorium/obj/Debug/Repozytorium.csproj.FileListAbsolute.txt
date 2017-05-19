@@ -174,3 +174,5 @@ C:\Code\OGL2\Repozytorium\bin\System.Web.WebPages.Deployment.xml
 C:\Code\OGL2\Repozytorium\bin\System.Web.WebPages.Razor.xml
 C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.dll
 C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.pdb
+C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._12.resources
+C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.csproj.GenerateResource.Cache

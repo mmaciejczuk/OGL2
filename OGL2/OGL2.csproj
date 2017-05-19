@@ -229,6 +229,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KategoriaController.cs" />
@@ -312,6 +313,9 @@
     <Content Include="Views\Kategoria\Edit.cshtml" />
     <Content Include="Views\Kategoria\Index.cshtml" />
     <Content Include="Views\Kategoria\PokazOgloszenia.cshtml" />
+    <Content Include="Views\About\Firma.cshtml" />
+    <Content Include="Views\About\Instrukcja.cshtml" />
+    <Content Include="Views\About\Kursy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

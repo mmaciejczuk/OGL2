@@ -409,7 +409,7 @@ p {
   font-size: 16.099999999999998px;
   font-weight: 200;
   line-height: 1.4;
-  height: 300px;
+  height: 270px;
 }
 
 @media (min-width: 768px) {
@@ -4938,10 +4938,16 @@ a.list-group-item.active > .badge,
     background-color: #d8f2bd;
     background-image: url('Images/banner1.jpg');
 }
+.jumbotron h1{
+    color: #49547e;
+}
+
+.jumbotron h3{
+    color: #49547e;
+}
 
 .jumbotron h1 {
   line-height: 1;
-  color: inherit;
 }
 
 .jumbotron p {
