@@ -404,6 +404,14 @@ p {
   margin: 0 0 10px;
 }
 
+.lead2 {
+  margin-bottom: 20px;
+  font-size: 16.099999999999998px;
+  font-weight: 200;
+  line-height: 1.4;
+  height: 160px;
+}
+
 .lead {
   margin-bottom: 20px;
   font-size: 16.099999999999998px;
@@ -4926,6 +4934,28 @@ a.list-group-item.active > .badge,
 
 .nav-pills > li > a > .badge {
   margin-left: 3px;
+}
+
+.jumbotron3 {
+    padding: 30px;
+    margin-bottom: 30px;
+    font-size: 21px;
+    font-weight: 200;
+    line-height: 2.1428571435;
+    color: inherit;
+    background-color: #d8f2bd;
+    background-image: url('Images/banner3.jpg');
+}
+
+.jumbotron2 {
+    padding: 30px;
+    margin-bottom: 30px;
+    font-size: 21px;
+    font-weight: 200;
+    line-height: 2.1428571435;
+    color: inherit;
+    background-color: #d8f2bd;
+    background-image: url('Images/banner2.jpg');
 }
 
 .jumbotron {
