@@ -25,7 +25,9 @@ namespace Repozytorium.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime DataZakonczenia { get; set; }
         public string CVId { get; set; }
+        public int KategoriaId { get; set; }
 
         public virtual CV CV { get; set; }
+        public virtual Kategoria Kategoria { get; set; }
     }
 }

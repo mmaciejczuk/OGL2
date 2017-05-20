@@ -868,7 +868,7 @@ pre code {
   position: relative;
   min-height: 1px;
   padding-right: 15px;
-  padding-left: 15px;
+  padding-left: 60px;
 }
 
 .col-xs-1,
@@ -4995,7 +4995,7 @@ a.list-group-item.active > .badge,
   }
   .container .jumbotron {
     padding-right: 60px;
-    padding-left: 60px;
+    /*padding-left: 60px;*/
   }
   .jumbotron h1 {
     font-size: 63px;

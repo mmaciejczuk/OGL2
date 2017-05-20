@@ -1,4 +1,5 @@
 ﻿using Repozytorium.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -21,7 +22,8 @@ namespace Repozytorium.Models
         [Display(Name = "Data dodania:")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public System.DateTime DataDodania { get; set; }
+        public DateTime DataDodania { get; set; }
+        public DateTime DataWaznosci { get; set; }
         public string UzytkownikId { get; set; }
 
         public virtual ICollection<Ogloszenie_Kategoria> Ogloszenie_Kategoria { get; set; }

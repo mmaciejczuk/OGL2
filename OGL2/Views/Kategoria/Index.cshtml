@@ -1,5 +1,5 @@
-﻿@model IEnumerable<Repozytorium.Models.Kategoria>
-
+﻿@model PagedList.IPagedList<Repozytorium.Models.Kategoria>
+@using PagedList.Mvc
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -55,3 +55,9 @@
 }
 
 </table>
+
+<div>
+    <br />
+    Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort }))
+</div>
