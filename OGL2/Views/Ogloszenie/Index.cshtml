@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Repozytorium.Models.Ogloszenie>
+﻿@model PagedList.IPagedList<Repozytorium.Models.Views.OgloszeniaViewModel>
 @using PagedList.Mvc
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
 
@@ -39,7 +39,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.UzytkownikId)
+            @Html.DisplayFor(modelItem => item.Firma)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Tresc)
@@ -51,15 +51,15 @@
             @Html.DisplayFor(modelItem => item.DataDodania)
         </td>
         <td>
-            @Html.ActionLink("Szczegóły", "Details", new { id = item.Id }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Szczegóły", "Details", new { id = item.IdOgloszenia }, new { @class = "btn btn-warning" })
             @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
                     {
                 <br/>
-                @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.IdOgloszenia }, new { @class = "btn btn-primary" })
                 if(User.IsInRole("Admin"))
                 {
                     <br/>
-                    @Html.ActionLink("Usuń", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Usuń", "Delete", new { id = item.IdOgloszenia }, new { @class = "btn btn-danger" })
                 }
             }
 

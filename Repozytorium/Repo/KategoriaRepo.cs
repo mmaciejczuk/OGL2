@@ -29,6 +29,14 @@ namespace Repozytorium.Repo
             return kategorie;
         }
 
+        public IQueryable<Kategoria> PobierzStrone(int? page = 1, int? pageSize = 10)
+        {
+            _db.Database.Log = message => Trace.WriteLine(message);
+            var kategorie = _db.Kategorie.AsNoTracking().Skip((page.Value - 1) * pageSize.Value)
+                .Take(pageSize.Value);
+            return kategorie;
+        }
+
         public IQueryable<Ogloszenie> PobierzOgloszeniaZKategorii(int id)
         {
             _db.Database.Log = message => Trace.WriteLine(message);

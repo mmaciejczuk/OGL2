@@ -5,6 +5,11 @@ namespace Repozytorium.Models
 {
     public class CV
     {
+        public CV()
+        {
+            this.Doswiadczenia = new HashSet<Doswiadczenie>();
+        }
+
         [Display(Name = "Id:")]
         public int Id { get; set; }
         [Display(Name = "Treść ogłoszenia:")]
@@ -20,5 +25,6 @@ namespace Repozytorium.Models
         public string UzytkownikId { get; set; }
 
         public virtual Uzytkownik Uzytkownik { get; set; }
+        public virtual ICollection<Doswiadczenie> Doswiadczenia { get; set; }
     }
 }

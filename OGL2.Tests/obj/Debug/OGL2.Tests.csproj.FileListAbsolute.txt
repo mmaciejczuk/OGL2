@@ -260,3 +260,4 @@ F:\Git_Repo\OGL\OGL2.Tests\bin\Debug\Microsoft.Practices.ServiceLocation.xml
 F:\Git_Repo\OGL\OGL2.Tests\obj\Debug\OGL2.Tests.csprojResolveAssemblyReference.cache
 F:\Git_Repo\OGL\OGL2.Tests\obj\Debug\OGL2.Tests.dll
 F:\Git_Repo\OGL\OGL2.Tests\obj\Debug\OGL2.Tests.pdb
+F:\Git_Repo\OGL\OGL2.Tests\bin\Debug\AutoMapper.dll

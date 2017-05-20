@@ -282,6 +282,7 @@ C:\Code\OGL2\OGL2\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Code\OGL2\OGL2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Code\OGL2\OGL2\obj\Debug\OGL2.dll
 C:\Code\OGL2\OGL2\obj\Debug\OGL2.pdb
+F:\Git_Repo\OGL\OGL2\obj\Debug\OGL2.csprojResolveAssemblyReference.cache
 F:\Git_Repo\OGL\OGL2\bin\ApplicationInsights.config
 F:\Git_Repo\OGL\OGL2\bin\roslyn\csc.exe
 F:\Git_Repo\OGL\OGL2\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -379,6 +380,5 @@ F:\Git_Repo\OGL\OGL2\bin\Microsoft.Owin.Security.OAuth.xml
 F:\Git_Repo\OGL\OGL2\bin\Microsoft.Owin.Security.Google.xml
 F:\Git_Repo\OGL\OGL2\bin\Microsoft.Owin.Security.Twitter.xml
 F:\Git_Repo\OGL\OGL2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-F:\Git_Repo\OGL\OGL2\obj\Debug\OGL2.csprojResolveAssemblyReference.cache
 F:\Git_Repo\OGL\OGL2\obj\Debug\OGL2.dll
 F:\Git_Repo\OGL\OGL2\obj\Debug\OGL2.pdb

@@ -10,6 +10,7 @@ namespace Repozytorium.IRepo
     public interface IKategoriaRepo
     {
         IQueryable<Kategoria> PobierzKategorie();
+        IQueryable<Kategoria> PobierzStrone(int? currentPage, int? naStronie);
         IQueryable<Ogloszenie> PobierzOgloszeniaZKategorii(int id);
         string NazwaDlaKategorii(int id);
     }

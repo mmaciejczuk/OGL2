@@ -18,11 +18,26 @@ namespace OGL2.Controllers
             _repo = repo;
         }
         // GET: Kategoria
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string sortOrder)
         {
             int currentPage = page ?? 1;
-            int naStronie = 3;
-            var kategorie = _repo.PobierzKategorie().AsNoTracking();
+            int naStronie = 12;
+            var kategorie = _repo.PobierzKategorie();
+
+            switch (sortOrder)
+            {
+                case "Nazwa":
+                    kategorie = kategorie.OrderByDescending(s => s.Id);
+                    break;
+                case "Opis":
+                    kategorie = kategorie.OrderByDescending(s => s.MetaOpis);
+                    break;
+                case "IloscOfert": // tutaj dodać ilość ofert
+                    kategorie = kategorie.OrderByDescending(s => s.MetaOpis);
+                    break;
+            }
+
+            kategorie = kategorie.OrderBy(d => d.Nazwa);
             return View(kategorie.ToPagedList<Kategoria>(currentPage, naStronie));
         }
 

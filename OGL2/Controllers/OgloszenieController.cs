@@ -6,12 +6,19 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Linq;
 using PagedList;
+using Repozytorium.Models.Views;
 
 namespace OGL2.Controllers
 {
     public class OgloszenieController : Controller
     {
         private readonly IOgloszenieRepo _repo;
+
+        public OgloszenieController()
+        {
+
+        }
+
         public OgloszenieController(IOgloszenieRepo repo)
         {
             _repo = repo;
@@ -29,7 +36,7 @@ namespace OGL2.Controllers
             ViewBag.TytulSort = sortOrder == "TytulAsc" ? "Tytul" : "TytulAsc";
             var ogloszenia = _repo.PobierzOgloszenia();
 
-            switch(sortOrder)
+            switch (sortOrder)
             {
                 case "DataDodania":
                     ogloszenia = ogloszenia.OrderByDescending(s => s.DataDodania);
@@ -53,10 +60,11 @@ namespace OGL2.Controllers
                     ogloszenia = ogloszenia.OrderBy(s => s.Tytul);
                     break;
                 default:  // id descending
-                    ogloszenia = ogloszenia.OrderByDescending(s => s.Id);
+                    ogloszenia = ogloszenia.OrderByDescending(s => s.DataDodania);
                     break;
             }
-            return View(ogloszenia.ToPagedList<Ogloszenie>(currentPage, naStronie));
+            ogloszenia = ogloszenia.OrderBy(d => d.DataDodania);
+            return View(ogloszenia.ToPagedList<OgloszeniaViewModel>(currentPage, naStronie));
         }
 
 // ------------------------- DETAILS -------------------------------------
@@ -198,22 +206,24 @@ namespace OGL2.Controllers
 // ------------------------- PARTIAL -------------------------------------
         public ActionResult Partial(int? page)
         {
-            int currentPage = page ?? 1;
-            int naStronie = 3;
-            var ogloszenia = _repo.PobierzOgloszenia();
-            ogloszenia = ogloszenia.OrderByDescending(d => d.DataDodania);
-            return PartialView("Index", ogloszenia.ToPagedList<Ogloszenie>(currentPage, naStronie));
+            //int currentPage = page ?? 1;
+            //int naStronie = 3;
+            //var ogloszenia = _repo.PobierzOgloszenia();
+            //ogloszenia = ogloszenia.OrderByDescending(d => d.DataDodania);
+            //return PartialView("Index", ogloszenia.ToPagedList<Ogloszenie>(currentPage, naStronie));
+            return null;
         }
 
         [OutputCache(Duration = 1000)]
         public ActionResult MojeOgloszenia(int? page)
         {
-            int currentPage = page ?? 1;
-            int naStronie = 3;
-            string userId = User.Identity.GetUserId();
-            var ogloszenia = _repo.PobierzOgloszenia();
-            ogloszenia = ogloszenia.OrderByDescending(d => d.DataDodania).Where(o => o.UzytkownikId == userId);
-            return View(ogloszenia.ToPagedList<Ogloszenie>(currentPage, naStronie));
+            //int currentPage = page ?? 1;
+            //int naStronie = 3;
+            //string userId = User.Identity.GetUserId();
+            //var ogloszenia = _repo.PobierzOgloszenia();
+            //ogloszenia = ogloszenia.OrderByDescending(d => d.DataDodania).Where(o => o.UzytkownikId == userId);
+            //return View(ogloszenia.ToPagedList<Ogloszenie>(currentPage, naStronie));
+            return null;
         }
 
         //protected override void Dispose(bool disposing)

@@ -10,6 +10,7 @@ namespace Repozytorium.Models
         public Ogloszenie()
         {
             this.Ogloszenie_Kategoria = new HashSet<Ogloszenie_Kategoria>();
+            this.Wymagania = new HashSet<Wymaganie>();
         }
         [Display(Name = "Id:")]
         public int Id { get; set; }
@@ -27,6 +28,7 @@ namespace Repozytorium.Models
         public string UzytkownikId { get; set; }
 
         public virtual ICollection<Ogloszenie_Kategoria> Ogloszenie_Kategoria { get; set; }
+        public virtual ICollection<Wymaganie> Wymagania { get; set; }
 
         public virtual Uzytkownik Uzytkownik { get; set; }
     }

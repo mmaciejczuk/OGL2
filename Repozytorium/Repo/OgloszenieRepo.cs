@@ -5,12 +5,16 @@ using System.Linq;
 using System;
 using System.Web.Mvc;
 using System.Data.Entity;
+using Repozytorium.Models.Views;
+using System.Collections.Generic;
+using AutoMapper;
 
 namespace Repozytorium.Repo
 {
     public class OgloszenieRepo : IOgloszenieRepo
     {
         private readonly IOglContext _db;
+        //private readonly IMappingService _mapper;
         public OgloszenieRepo(IOglContext db)
         {
             _db = db;
@@ -32,20 +36,52 @@ namespace Repozytorium.Repo
             return ogloszenie;
         }
 
-        public IQueryable<Ogloszenie> PobierzOgloszenia()
+        public IQueryable<OgloszeniaViewModel> PobierzOgloszenia()
         {
-            _db.Database.Log = message => Trace.WriteLine(message);
-            var ogloszenia = _db.Ogloszenia.AsNoTracking();
-            return ogloszenia;
+            var ogloszeniaList = new List<OgloszeniaViewModel>();
+            //_db.Database.Log = message => Trace.WriteLine(message);
+            //var ogloszenia = _db.Ogloszenia.AsNoTracking();
+            //return ogloszenia;
+            var ogloszenia = from o in _db.Ogloszenia
+                             join u in _db.Uzytkownik on o.UzytkownikId equals u.Id where o.DataWaznosci > DateTime.UtcNow
+                             select new
+                             {
+                                 UzytkownikId = u.Id,
+                                 Imie = u.Imie,
+                                 Nazwisko = u.Nazwisko,
+                                 Firma = u.Firma,
+                                 IdOgloszenia = o.Id,
+                                 Tresc = o.Tresc,
+                                 Tytul = o.Tytul,
+                                 DataDodania = o.DataDodania,
+                                 DataWaznosci = o.DataWaznosci
+                             };
+            foreach (var ogloszenie in ogloszenia)
+            {
+                ogloszeniaList.Add(new OgloszeniaViewModel 
+                {
+                    UzytkownikId = ogloszenie.UzytkownikId,
+                    Imie = ogloszenie.Imie,
+                    Nazwisko = ogloszenie.Nazwisko,
+                    Firma = ogloszenie.Firma,
+                    IdOgloszenia = ogloszenie.IdOgloszenia,
+                    Tresc = ogloszenie.Tresc,
+                    Tytul = ogloszenie.Tytul,
+                    DataDodania = ogloszenie.DataDodania,
+                    DataWaznosci = ogloszenie.DataWaznosci
+                });
+            }            
+            return ogloszeniaList.AsQueryable();
         }
 
-        public IQueryable<Ogloszenie> PobierzStrone(int? page = 1, int? pageSize = 10)
+        public IQueryable<OgloszeniaViewModel> PobierzStrone(int? page = 1, int? pageSize = 10)
         {
-            var ogloszenia = _db.Ogloszenia
-                .OrderByDescending(o => o.DataDodania)
-                .Skip((page.Value - 1) * pageSize.Value)
-                .Take(pageSize.Value);
-            return ogloszenia;
+            //var ogloszenia = _db.Ogloszenia
+            //    .OrderByDescending(o => o.DataDodania)
+            //    .Skip((page.Value - 1) * pageSize.Value)
+            //    .Take(pageSize.Value);
+            //return ogloszenia;
+            return null;
         }
 
         public void SaveChages()

@@ -1,32 +1,24 @@
 ﻿@model PagedList.IPagedList<Repozytorium.Models.Kategoria>
 @using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Kategorie ofert pracy";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Kategorie ofert pracy</h2>
 
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nazwa)
+            @Html.ActionLink("Nazwa", "Index", new { sortOrder = ViewBag.Nazwa })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ParentId)
+            @Html.ActionLink("Opis kategorii", "Index", new { sortOrder = ViewBag.Opis })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MetaTytul)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MetaOpis)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MetaSlowa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tresc)
+            @Html.ActionLink("Ilość ofert", "Index", new { sortOrder = ViewBag.IloscOfert })
         </th>
         <th></th>
     </tr>
@@ -37,20 +29,12 @@
             @Html.ActionLink(item.Nazwa, "PokazOgloszenia", new { id = item.Id})
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ParentId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MetaTytul)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.MetaOpis)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.MetaSlowa)
+            @Html.DisplayFor(modelItem => item.ParentId)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tresc)
-        </td>
+
     </tr>
 }
 
