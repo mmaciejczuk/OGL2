@@ -232,7 +232,7 @@ F:\Git_Repo\OGL\Repozytorium\bin\System.Web.WebPages.Deployment.xml
 F:\Git_Repo\OGL\Repozytorium\bin\System.Web.WebPages.Razor.xml
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.dll
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.pdb
-F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.csprojResolveAssemblyReference.cache
 F:\Git_Repo\OGL\Repozytorium\bin\AutoMapper.dll
-F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.Migrations._4.resources
+F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.csprojResolveAssemblyReference.cache
+F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.Migrations._3.resources
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.csproj.GenerateResource.Cache

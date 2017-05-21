@@ -36,7 +36,7 @@
                                 <li>@Html.ActionLink("Dodaj ogłoszenie", "Create", "Ogloszenie")</li>
                             }
                             @*<li class="divider"></li>
-                            <li>@Html.ActionLink("Lista jako PartialView", "Partial", "Ogloszenie")</li>*@
+                            <li>@Html.ActionLink("Dodaj ofertę", "Partial", "Ogloszenie")</li>*@
                         </ul>
                     </li>
 
@@ -52,11 +52,12 @@
                             {
                                 <li>@Html.ActionLink("Dodaj ogłoszenie", "Create", "Ogloszenie")</li>
                             }
-                            <li class="divider"></li>
-                            <li>@Html.ActionLink("Lista jako PartialView", "Partial", "Ogloszenie")</li>
-                            <li>@Html.ActionLink("Jak napisać własne CV", "StworzCV", "CV")</li>
+                            @*<li class="divider"></li>*@
+                            @*<li>@Html.ActionLink("Lista jako PartialView", "Partial", "Ogloszenie")</li>
+                            <li>@Html.ActionLink("Dodaj CV", "Partial", "Ogloszenie")</li>*@
                         </ul>
                     </li>
+                    <li>@Html.ActionLink("Stwórz własne CV", "StworzCV", "CV", null, new { @style = "color: lightskyblue;" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

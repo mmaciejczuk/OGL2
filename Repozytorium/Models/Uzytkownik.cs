@@ -19,6 +19,7 @@ namespace Repozytorium.Models
         {
             this.Ogloszenia = new HashSet<Ogloszenie>();
             this.CVs = new HashSet<CV>();
+            this.Wiadomosci = new HashSet<Wiadomosc>();
         }
         //public int Id { get; set; }
         // klucz podstawowy odziedziczony po klasie IdentityUser       
@@ -46,6 +47,7 @@ namespace Repozytorium.Models
 
         public virtual ICollection<Ogloszenie> Ogloszenia { get; private set; }
         public virtual ICollection<CV> CVs { get; private set; }
+        public virtual ICollection<Wiadomosc> Wiadomosci { get; private set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Uzytkownik> manager)
         {
