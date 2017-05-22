@@ -9,8 +9,6 @@ namespace Repozytorium.Models.Views
     public class OgloszeniaViewModel
     {
         public string UzytkownikId { get; set; }
-        public string Imie { get; set; }
-        public string Nazwisko { get; set; }
         public string Firma { get; set; }
         public int IdOgloszenia { get; set; }
         public string Tresc { get; set; }

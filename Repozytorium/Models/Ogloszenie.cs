@@ -26,6 +26,7 @@ namespace Repozytorium.Models
         public DateTime DataDodania { get; set; }
         public DateTime DataWaznosci { get; set; }
         public string UzytkownikId { get; set; }
+        public string Miasto { get; set; }
 
         public virtual ICollection<Ogloszenie_Kategoria> Ogloszenie_Kategoria { get; set; }
         public virtual ICollection<Wymaganie> Wymagania { get; set; }

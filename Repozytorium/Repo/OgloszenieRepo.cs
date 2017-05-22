@@ -42,27 +42,25 @@ namespace Repozytorium.Repo
             //_db.Database.Log = message => Trace.WriteLine(message);
             //var ogloszenia = _db.Ogloszenia.AsNoTracking();
             //return ogloszenia;
-            var ogloszenia = from o in _db.Ogloszenia
-                             join u in _db.Uzytkownik on o.UzytkownikId equals u.Id where o.DataWaznosci > DateTime.UtcNow
+
+            var ogloszenia = from o in _db.Ogloszenia.Include("Uzytkownik")
+                            
                              select new
-                             {
-                                 UzytkownikId = u.Id,
-                                 Imie = u.Imie,
-                                 Nazwisko = u.Nazwisko,
-                                 Firma = u.Firma,
-                                 IdOgloszenia = o.Id,
-                                 Tresc = o.Tresc,
-                                 Tytul = o.Tytul,
-                                 DataDodania = o.DataDodania,
-                                 DataWaznosci = o.DataWaznosci
-                             };
-            foreach (var ogloszenie in ogloszenia)
+                                        {
+                                            UzytkownikId = o.Id.ToString(),
+                                            Firma = o.Uzytkownik.Firma,
+                                            IdOgloszenia = o.Id,
+                                            Tresc = o.Tresc,
+                                            Tytul = o.Tytul,
+                                            DataDodania = o.DataDodania,
+                                            DataWaznosci = o.DataWaznosci
+                                        };
+            var x = ogloszenia.ToList();
+            foreach (var ogloszenie in x)
             {
                 ogloszeniaList.Add(new OgloszeniaViewModel 
                 {
                     UzytkownikId = ogloszenie.UzytkownikId,
-                    Imie = ogloszenie.Imie,
-                    Nazwisko = ogloszenie.Nazwisko,
                     Firma = ogloszenie.Firma,
                     IdOgloszenia = ogloszenie.IdOgloszenia,
                     Tresc = ogloszenie.Tresc,

@@ -174,8 +174,6 @@ C:\Code\OGL2\Repozytorium\bin\System.Web.WebPages.Deployment.xml
 C:\Code\OGL2\Repozytorium\bin\System.Web.WebPages.Razor.xml
 C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.dll
 C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.pdb
-C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._12.resources
-C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.csproj.GenerateResource.Cache
 F:\Git_Repo\OGL\Repozytorium\bin\ApplicationInsights.config
 F:\Git_Repo\OGL\Repozytorium\bin\roslyn\csc.exe
 F:\Git_Repo\OGL\Repozytorium\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -236,3 +234,5 @@ F:\Git_Repo\OGL\Repozytorium\bin\AutoMapper.dll
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.csprojResolveAssemblyReference.cache
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.Migrations._3.resources
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.csproj.GenerateResource.Cache
+C:\Code\OGL2\Repozytorium\bin\AutoMapper.dll
+C:\Code\OGL2\Repozytorium\bin\AutoMapper.xml

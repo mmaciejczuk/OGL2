@@ -261,3 +261,4 @@ F:\Git_Repo\OGL\OGL2.Tests\obj\Debug\OGL2.Tests.csprojResolveAssemblyReference.c
 F:\Git_Repo\OGL\OGL2.Tests\obj\Debug\OGL2.Tests.dll
 F:\Git_Repo\OGL\OGL2.Tests\obj\Debug\OGL2.Tests.pdb
 F:\Git_Repo\OGL\OGL2.Tests\bin\Debug\AutoMapper.dll
+C:\Code\OGL2\OGL2.Tests\bin\Debug\AutoMapper.dll

@@ -37,7 +37,7 @@ namespace Repozytorium.Migrations
             //    System.Diagnostics.Debugger.Launch();
 
             //SeedRoles(context);
-            SeedUsers(context);
+            //SeedUsers(context);
             //SeedOgloszenia(context);
             //SeedKategorie(context);
             //SeedOgloszenie_Kategoria(context);
@@ -167,20 +167,21 @@ namespace Repozytorium.Migrations
 
         private void SeedOgloszenia(OglContext context)
         {
-            var idUzytkownika = context.Set<Uzytkownik>().Where(u => u.UserName == "Admin").FirstOrDefault().Id;
-            for (int i = 0; i <= 10; i++)
-            {
-                var ogl = new Ogloszenie()
-                {
-                    Id = i,
-                    UzytkownikId = idUzytkownika,
-                    Tresc = "Treœæ og³oszenia" + i.ToString(),
-                    Tytul = "Tytu³ og³oszenia" + i.ToString(),
-                    DataDodania = DateTime.Now.AddDays(-i),
-                };
-                context.Set<Ogloszenie>().AddOrUpdate(ogl);
-            }
-            context.SaveChanges();
+            //var idUzytkownika = context.Set<Uzytkownik>().Where(u => u.UserName == "Admin").FirstOrDefault().Id;
+            //var listaUzytkownikow = context.
+            //for (int i = 0; i <= 10; i++)
+            //{
+            //    var ogl = new Ogloszenie()
+            //    {
+            //        Id = i,
+            //        UzytkownikId = idUzytkownika,
+            //        Tresc = "Treœæ og³oszenia" + i.ToString(),
+            //        Tytul = "Tytu³ og³oszenia" + i.ToString(),
+            //        DataDodania = DateTime.Now.AddDays(-i),
+            //    };
+            //    context.Set<Ogloszenie>().AddOrUpdate(ogl);
+            //}
+            //context.SaveChanges();
         }
 
         private void SeedUsers(OglContext context)

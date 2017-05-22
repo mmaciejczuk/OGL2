@@ -28,6 +28,7 @@ namespace Repozytorium.Models
         public DbSet<Ogloszenie_Kategoria> Ogloszenie_Kategoria { get; set; }
         public DbSet<CV> CV { get; set; }
         public DbSet<Doswiadczenie> Doswiadczenie { get; set; }
+        public DbSet<Wiadomosc> Wiadomosci { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
