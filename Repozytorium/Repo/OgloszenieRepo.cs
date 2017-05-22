@@ -44,7 +44,8 @@ namespace Repozytorium.Repo
             //return ogloszenia;
 
             var ogloszenia = from o in _db.Ogloszenia.Include("Uzytkownik")
-                            
+                            where o.Zaakceptowane == true && o.DataWaznosci > DateTime.Now 
+                            orderby o.DataDodania
                              select new
                                         {
                                             UzytkownikId = o.Id.ToString(),

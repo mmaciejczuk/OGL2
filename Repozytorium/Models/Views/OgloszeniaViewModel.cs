@@ -15,5 +15,8 @@ namespace Repozytorium.Models.Views
         public string Tytul { get; set; }
         public DateTime DataDodania { get; set; }
         public DateTime DataWaznosci { get; set; }
+
+        public string GetFormattedDateAdd { get { return this.DataDodania.ToString("dd-MM-yyyy"); } }
+        public DateTime GetFormattedDateExp { get; set; }
     }
 }

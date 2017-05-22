@@ -22,15 +22,15 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Id użytkownika", "Index", new { sortOrder = ViewBag.IdSort})
+            @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.IdSort})
         </th>
         <th>
-            @Html.ActionLink("Treść", "Index", new { sortOrder = ViewBag.TrescSort })
+            @Html.ActionLink("Firma", "Index", new { sortOrder = ViewBag.TrescSort })
         </th>
         <th>
-            @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.TytulSort })
+            @Html.ActionLink("Treść", "Index", new { sortOrder = ViewBag.TytulSort })
         </th>
-        <th>
+        <th style="width:110px">
             @Html.ActionLink("Data dodania", "Index", new { sortOrder = ViewBag.DataDodaniaSort })
         </th>
         <th></th>
@@ -39,16 +39,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Tytul)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Firma)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Tresc)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Tytul)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataDodania)
+            @Html.DisplayFor(modelItem => item.GetFormattedDateAdd)
         </td>
         <td>
             @Html.ActionLink("Szczegóły", "Details", new { id = item.IdOgloszenia }, new { @class = "btn btn-warning" })

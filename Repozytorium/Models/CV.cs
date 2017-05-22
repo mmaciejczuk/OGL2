@@ -23,6 +23,7 @@ namespace Repozytorium.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime DataDodania { get; set; }
         public string UzytkownikId { get; set; }
+        public bool Zaakceptowane { get; set; }
 
         public virtual Uzytkownik Uzytkownik { get; set; }
         public virtual ICollection<Doswiadczenie> Doswiadczenia { get; set; }

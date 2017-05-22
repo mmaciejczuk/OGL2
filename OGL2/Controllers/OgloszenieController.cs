@@ -28,7 +28,7 @@ namespace OGL2.Controllers
         public ActionResult Index(int? page, string sortOrder)
         {
             int currentPage = page ?? 1;
-            int naStronie = 3;
+            int naStronie = 6;
             ViewBag.CurrentSort = sortOrder;
             ViewBag.IdSort = String.IsNullOrEmpty(sortOrder) ? "IdAsc" : "";
             ViewBag.DataDodaniaSort = sortOrder == "DataDodania" ? "DataDodaniaAsc" : "DataDodania";
