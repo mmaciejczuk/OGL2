@@ -23,6 +23,8 @@ namespace Repozytorium.Models
         public System.DateTime DataDodania { get; set; }
         public string UzytkownikId { get; set; }
         public string NadawcaId { get; set; }
+        public string TypOferty { get; set; }
+        public int IdOferty { get; set; }
 
         public virtual Uzytkownik Uzytkownik { get; set; }
     }

@@ -165,9 +165,21 @@
     <Compile Include="IRepo\IMappingService.cs" />
     <Compile Include="IRepo\IOglContext.cs" />
     <Compile Include="IRepo\IOgloszenieRepo.cs" />
-    <Compile Include="Migrations\201705221611025__2.cs" />
-    <Compile Include="Migrations\201705221611025__2.Designer.cs">
-      <DependentUpon>201705221611025__2.cs</DependentUpon>
+    <Compile Include="Migrations\201705231219162__2.cs" />
+    <Compile Include="Migrations\201705231219162__2.Designer.cs">
+      <DependentUpon>201705231219162__2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705231230096__3.cs" />
+    <Compile Include="Migrations\201705231230096__3.Designer.cs">
+      <DependentUpon>201705231230096__3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705231319489__4.cs" />
+    <Compile Include="Migrations\201705231319489__4.Designer.cs">
+      <DependentUpon>201705231319489__4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705231332342__6.cs" />
+    <Compile Include="Migrations\201705231332342__6.Designer.cs">
+      <DependentUpon>201705231332342__6.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CV.cs" />
@@ -188,8 +200,17 @@
     <Compile Include="Repo\OgloszenieRepo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705221611025__2.resx">
-      <DependentUpon>201705221611025__2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705231219162__2.resx">
+      <DependentUpon>201705231219162__2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705231230096__3.resx">
+      <DependentUpon>201705231230096__3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705231319489__4.resx">
+      <DependentUpon>201705231319489__4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705231332342__6.resx">
+      <DependentUpon>201705231332342__6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
