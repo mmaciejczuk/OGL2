@@ -34,6 +34,17 @@
         <td>
             @Html.DisplayFor(modelItem => item.ParentId)
         </td>
+        <td style="">
+            @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
+            {
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Usuń", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                }
+            }
+
+        </td>
 
     </tr>
 }
