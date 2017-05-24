@@ -10,16 +10,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Ogloszenia.First().UzytkownikId)
+            @Html.ActionLink("Tytuł", "PokazOgloszenia", new { sortOrder = ViewBag.IdSort })         
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Ogloszenia.First().Tresc)
+            @Html.ActionLink("Treść", "PokazOgloszenia", new { sortOrder = ViewBag.TytulSort })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Ogloszenia.First().Tytul)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ogloszenia.First().DataDodania)
+            @Html.ActionLink("Data dodania", "PokazOgloszenia", new { sortOrder = ViewBag.DataDodaniaSort })
         </th>
         <th></th>
     </tr>
@@ -27,18 +24,28 @@
 @foreach (var item in Model.Ogloszenia) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.UzytkownikId)
+            @Html.DisplayFor(modelItem => item.Tytul)            
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Tresc)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Tytul)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.DataDodania)
         </td>
+        <td>
+            @Html.ActionLink("Szczegóły", "Details", new { id = item.Id }, new { @class = "btn btn-warning" })
+            @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
+            {
+                <br />
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                if (User.IsInRole("Admin"))
+                {
+                    <br />
+                    @Html.ActionLink("Usuń", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                }
+            }
 
+        </td>
     </tr>
 }
 

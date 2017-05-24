@@ -7,13 +7,13 @@ namespace Repozytorium.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class _2 : IMigrationMetadata
+    public sealed partial class _3 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(_3));
         
         string IMigrationMetadata.Id
         {
-            get { return "201705231219162__2"; }
+            get { return "201705241210225__3"; }
         }
         
         string IMigrationMetadata.Source

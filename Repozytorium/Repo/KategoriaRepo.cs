@@ -41,9 +41,10 @@ namespace Repozytorium.Repo
         {
             _db.Database.Log = message => Trace.WriteLine(message);
             var ogloszenia = from o in _db.Ogloszenia
-                             join k in _db.Ogloszenie_Kategoria on o.Id equals k.Id
+                             join k in _db.Ogloszenie_Kategoria on o.Id equals k.OgloszenieId
                              where k.KategoriaId == id
                              select o;
+            var ogloszenia2 = ogloszenia.ToList();
             return ogloszenia;
         }
     }

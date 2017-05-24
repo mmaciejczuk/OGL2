@@ -8,6 +8,7 @@ namespace Repozytorium.Models
 {
     public class Doswiadczenie
     {
+        [Key]
         [Display(Name = "Id:")]
         public int Id { get; set; }
         [Display(Name = "Nazwa firmy:")]

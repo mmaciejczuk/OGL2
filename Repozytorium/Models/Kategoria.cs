@@ -11,6 +11,7 @@ namespace Repozytorium.Models
         public Kategoria()
         {
             this.Ogloszenie_Kategoria = new HashSet<Ogloszenie_Kategoria>();
+            this.CV = new HashSet<CV>();
         }
 
         [Key]
@@ -34,8 +35,10 @@ namespace Repozytorium.Models
         [Display(Name = "Treść strony:")]
         [MaxLength(500)]
         public string Tresc { get; set; }
+        public int CVId { get; set; }
         #endregion
 
         public ICollection<Ogloszenie_Kategoria> Ogloszenie_Kategoria { get; set; }
+        public ICollection<CV> CV { get; set; }
     }
 }

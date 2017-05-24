@@ -10,7 +10,7 @@ namespace Repozytorium.Models
             this.Doswiadczenia = new HashSet<Doswiadczenie>();
             this.Kategorie = new HashSet<Kategoria>();
         }
-
+        [Key]
         [Display(Name = "Id:")]
         public int Id { get; set; }
         [Display(Name = "Treść ogłoszenia:")]
