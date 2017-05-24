@@ -8,7 +8,6 @@ namespace Repozytorium.Models
         public CV()
         {
             this.Doswiadczenia = new HashSet<Doswiadczenie>();
-            this.Kategorie = new HashSet<Kategoria>();
         }
         [Key]
         [Display(Name = "Id:")]
@@ -24,11 +23,11 @@ namespace Repozytorium.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime DataDodania { get; set; }
         public string UzytkownikId { get; set; }
-        public int KategoriaId { get; set; }
+        public int? KategoriaId { get; set; }
         public bool Zaakceptowane { get; set; }
 
         public virtual Uzytkownik Uzytkownik { get; set; }
         public virtual ICollection<Doswiadczenie> Doswiadczenia { get; set; }
-        public virtual ICollection<Kategoria> Kategorie { get; set; }
+        public virtual Kategoria Kategoria { get; set; }
     }
 }

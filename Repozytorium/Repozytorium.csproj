@@ -165,17 +165,9 @@
     <Compile Include="IRepo\IMappingService.cs" />
     <Compile Include="IRepo\IOglContext.cs" />
     <Compile Include="IRepo\IOgloszenieRepo.cs" />
-    <Compile Include="Migrations\201705241132218__1.cs" />
-    <Compile Include="Migrations\201705241132218__1.Designer.cs">
-      <DependentUpon>201705241132218__1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705241207420__11.cs" />
-    <Compile Include="Migrations\201705241207420__11.Designer.cs">
-      <DependentUpon>201705241207420__11.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705241210225__3.cs" />
-    <Compile Include="Migrations\201705241210225__3.Designer.cs">
-      <DependentUpon>201705241210225__3.cs</DependentUpon>
+    <Compile Include="Migrations\201705241910227__1.cs" />
+    <Compile Include="Migrations\201705241910227__1.Designer.cs">
+      <DependentUpon>201705241910227__1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CV.cs" />
@@ -198,14 +190,8 @@
     <Compile Include="Repo\OgloszenieRepo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705241132218__1.resx">
-      <DependentUpon>201705241132218__1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705241207420__11.resx">
-      <DependentUpon>201705241207420__11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705241210225__3.resx">
-      <DependentUpon>201705241210225__3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705241910227__1.resx">
+      <DependentUpon>201705241910227__1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

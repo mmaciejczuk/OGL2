@@ -15,10 +15,10 @@ namespace Repozytorium.Models
         [Display(Name = "Id:")]
         public int Id { get; set; }
         [Display(Name = "Treść ogłoszenia:")]
-        [MaxLength(500)]
+        [Required(ErrorMessage ="Treść jest wymagana")]
         public string Tresc { get; set; }
         [Display(Name = "Tytuł ogłoszenia:")]
-        [MaxLength(72)]
+        [Required(ErrorMessage = "Tytuł jest wymagany")]
         public string Tytul { get; set; }
         [Display(Name = "Data dodania:")]
         [DataType(DataType.Date)]
@@ -26,12 +26,15 @@ namespace Repozytorium.Models
         public DateTime DataDodania { get; set; }
         public DateTime DataWaznosci { get; set; }
         public string UzytkownikId { get; set; }
-        public string Miasto { get; set; }
-        public bool Zaakceptowane { get; set; }
+        public int MiastoId { get; set; }
+        public int RodzajUmowyId { get; set; }
+        public bool? Zaakceptowane { get; set; }
 
         public virtual ICollection<Ogloszenie_Kategoria> Ogloszenie_Kategoria { get; set; }
         public virtual ICollection<Wymaganie> Wymagania { get; set; }
 
         public virtual Uzytkownik Uzytkownik { get; set; }
+        public virtual Miasto Miasto { get; set; }
+        public virtual RodzajUmowy RodzajUmowy { get; set; }
     }
 }

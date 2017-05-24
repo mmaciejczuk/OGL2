@@ -39,6 +39,6 @@ namespace Repozytorium.Models
         #endregion
 
         public ICollection<Ogloszenie_Kategoria> Ogloszenie_Kategoria { get; set; }
-        public ICollection<CV> CV { get; set; }
+        public virtual HashSet<CV> CV { get; set; }
     }
 }
