@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Repozytorium.Models.Ogloszenie>
+﻿@model PagedList.IPagedList<Repozytorium.Models.Views.OgloszenieViewModel>
 @using PagedList.Mvc
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
@@ -21,14 +21,14 @@
     </p>
     <table class="table">
         <tr>
-            <th>
+            @*<th>
                 @Html.ActionLink("Id użytkownika", "Index", new { sortOrder = ViewBag.IdSort })
+            </th>*@
+            <th>
+                @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.TytulSort })
             </th>
             <th>
                 @Html.ActionLink("Treść", "Index", new { sortOrder = ViewBag.TrescSort })
-            </th>
-            <th>
-                @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.TytulSort })
             </th>
             <th>
                 @Html.ActionLink("Data dodania", "Index", new { sortOrder = ViewBag.DataDodaniaSort })
@@ -39,32 +39,30 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.UzytkownikId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tresc)
-                </td>
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Tytul)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DataDodania)
+                    @Html.DisplayFor(modelItem => item.Tresc)
                 </td>
+                <th style="width:110px">
+                    @Html.DisplayFor(modelItem => item.GetFormattedDateAdd)
+                </th>
                 <td>
-                    @Html.ActionLink("Szczegóły", "Details", new { id = item.Id }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Szczegóły", "Details", new { id = item.IdOgloszenia }, new { @class = "btn btn-warning" })
                     @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
                     {
                         <br />
-                        @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Edytuj", "Edit", new { id = item.IdOgloszenia }, new { @class = "btn btn-primary" })
                         if (User.IsInRole("Admin"))
                         {
                             <br />
-                            @Html.ActionLink("Usuń", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                            @Html.ActionLink("Usuń", "Delete", new { id = item.IdOgloszenia }, new { @class = "btn btn-danger" })
                         }
                     }
-
-
                 </td>
             </tr>
         }

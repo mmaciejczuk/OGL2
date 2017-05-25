@@ -30,10 +30,14 @@ namespace Repozytorium.Repo
             _db.Ogloszenia.Add(ogloszenie);
         }
 
+        public Ogloszenie GetOgloszenieDetailsById(int id)
+        {
+            Ogloszenie ogloszenie = _db.Ogloszenia.Find(id);
+            return ogloszenie;
+        }
+
         public OgloszenieViewModel GetOgloszeniaById(int id)
         {
-            //Ogloszenie ogloszenie = _db.Ogloszenia.Find(id);
-            //return ogloszenie;
             var ogloszenie = from o in _db.Ogloszenia.Include("Uzytkownik")
                              where o.Zaakceptowane == true && o.DataWaznosci > DateTime.Now
                              orderby o.DataDodania
