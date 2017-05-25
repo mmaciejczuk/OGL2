@@ -64,7 +64,7 @@ namespace OGL2.Controllers
                     break;
             }
             ogloszenia = ogloszenia.OrderBy(d => d.DataDodania);
-            return View(ogloszenia.ToPagedList<OgloszeniaViewModel>(currentPage, naStronie));
+            return View(ogloszenia.ToPagedList<OgloszenieViewModel>(currentPage, naStronie));
         }
 
 // ------------------------- DETAILS -------------------------------------
@@ -74,7 +74,7 @@ namespace OGL2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ogloszenie ogloszenie = _repo.GetOgloszeniaById((int)id);
+            OgloszenieViewModel ogloszenie = _repo.GetOgloszeniaById((int)id);
             if (ogloszenie == null)
             {
                 return HttpNotFound();
@@ -123,7 +123,7 @@ namespace OGL2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ogloszenie ogloszenie = _repo.GetOgloszeniaById((int)id);
+            OgloszenieViewModel ogloszenie = _repo.GetOgloszeniaById((int)id);
             if (ogloszenie == null)
             {
                 return HttpNotFound();
@@ -170,7 +170,7 @@ namespace OGL2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ogloszenie ogloszenie = _repo.GetOgloszeniaById((int)id);
+            OgloszenieViewModel ogloszenie = _repo.GetOgloszeniaById((int)id);
             if (ogloszenie == null)
             {
                 return HttpNotFound();

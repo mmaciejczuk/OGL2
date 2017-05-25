@@ -35,7 +35,6 @@ namespace Repozytorium.Models
         [Display(Name = "Treść strony:")]
         [MaxLength(500)]
         public string Tresc { get; set; }
-        public int CVId { get; set; }
         #endregion
 
         public ICollection<Ogloszenie_Kategoria> Ogloszenie_Kategoria { get; set; }
