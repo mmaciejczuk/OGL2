@@ -30,15 +30,34 @@ namespace Repozytorium.Repo
             _db.Ogloszenia.Add(ogloszenie);
         }
 
-        public Ogloszenie GetOgloszeniaById(int id)
+        public Ogloszenie GetOgloszenieDetailsById(int id)
         {
             Ogloszenie ogloszenie = _db.Ogloszenia.Find(id);
             return ogloszenie;
         }
 
-        public IQueryable<OgloszeniaViewModel> PobierzOgloszenia()
+        public OgloszenieViewModel GetOgloszeniaById(int id)
         {
-            var ogloszeniaList = new List<OgloszeniaViewModel>();
+            var ogloszenie = from o in _db.Ogloszenia.Include("Uzytkownik")
+                             where o.Zaakceptowane == true && o.DataWaznosci > DateTime.Now
+                             orderby o.DataDodania
+                             select new OgloszenieViewModel
+                             {
+                                 UzytkownikId = o.UzytkownikId,
+                                 Firma = o.Uzytkownik.Firma,
+                                 IdOgloszenia = o.Id,
+                                 Tresc = o.Tresc,
+                                 Tytul = o.Tytul,
+                                 DataDodania = o.DataDodania,
+                                 DataWaznosci = o.DataWaznosci
+                             };
+            var x = ogloszenie.Where(p => p.IdOgloszenia == id).FirstOrDefault();
+            return x;
+        }
+
+        public IQueryable<OgloszenieViewModel> PobierzOgloszenia()
+        {
+            var ogloszeniaList = new List<OgloszenieViewModel>();
             //_db.Database.Log = message => Trace.WriteLine(message);
             //var ogloszenia = _db.Ogloszenia.AsNoTracking();
             //return ogloszenia;
@@ -48,7 +67,7 @@ namespace Repozytorium.Repo
                             orderby o.DataDodania
                              select new
                                         {
-                                            UzytkownikId = o.Id.ToString(),
+                                            UzytkownikId = o.UzytkownikId,
                                             Firma = o.Uzytkownik.Firma,
                                             IdOgloszenia = o.Id,
                                             Tresc = o.Tresc,
@@ -59,7 +78,7 @@ namespace Repozytorium.Repo
             var x = ogloszenia.ToList();
             foreach (var ogloszenie in x)
             {
-                ogloszeniaList.Add(new OgloszeniaViewModel 
+                ogloszeniaList.Add(new OgloszenieViewModel 
                 {
                     UzytkownikId = ogloszenie.UzytkownikId,
                     Firma = ogloszenie.Firma,
@@ -73,7 +92,7 @@ namespace Repozytorium.Repo
             return ogloszeniaList.AsQueryable();
         }
 
-        public IQueryable<OgloszeniaViewModel> PobierzStrone(int? page = 1, int? pageSize = 10)
+        public IQueryable<OgloszenieViewModel> PobierzStrone(int? page = 1, int? pageSize = 10)
         {
             //var ogloszenia = _db.Ogloszenia
             //    .OrderByDescending(o => o.DataDodania)

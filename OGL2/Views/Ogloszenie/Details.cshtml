@@ -1,32 +1,24 @@
-﻿@model Repozytorium.Models.Ogloszenie
+﻿@model Repozytorium.Models.Views.OgloszenieViewModel
 @using Microsoft.AspNet.Identity
 
 @{
-    ViewBag.Tytul = "Szczegóły ogłoszenia nr " + Model.Id;
-    ViewBag.Opis = "Szczegóły ogłoszenia nr" + Model.Id + " Opis do Google";
-    ViewBag.SlowaKluczowe = "Ogloszenie, " + Model.Id + ",szczegóły";
+    ViewBag.Tytul = "Szczegóły ogłoszenia nr " + Model.IdOgloszenia;
+    ViewBag.Opis = "Szczegóły ogłoszenia nr" + Model.IdOgloszenia + " Opis do Google";
+    ViewBag.SlowaKluczowe = "Ogloszenie, " + Model.IdOgloszenia + ",szczegóły";
 }
 
-<h2>Szczegóły ogłoszenia nr @Model.Id</h2>
+<h2>Szczegóły ogłoszenia nr @Model.IdOgloszenia</h2>
 
 <div>
-    <h4>Ogloszenie</h4>
+    <h4></h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Uzytkownik.Email)
+            @Html.DisplayNameFor(model => model.Firma)
         </dt>
 
         <dd>
-            @Html.ActionLink(Model.Uzytkownik.Email, "Index")
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Tresc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tresc)
+            @Html.DisplayFor(model => model.Firma)
         </dd>
 
         <dt>
@@ -38,11 +30,19 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Tresc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tresc)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.DataDodania)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DataDodania)
+            @Html.DisplayFor(model => model.GetFormattedDateAdd)
         </dd>
         <dt>
             <br />
@@ -54,7 +54,9 @@
             <br />
             @Html.TextAreaFor(model => model.Tresc, new {style="width: 100%; max-width: 100%; height: 120px" })
             <br />
-            @Html.ActionLink("Wyślij", "Index", null, new { @class = "btn btn-info" })
+            @Html.ActionLink("Wyślij", "Wyslano", "Wiadomosc", 
+                                                   new { userId = Model.UzytkownikId, ofertaId = Model.IdOgloszenia }, 
+                                                   new { @class = "btn btn-info" })
         </dd>
     </dl>
 </div>
@@ -63,7 +65,7 @@
         || User.IsInRole("Pracownik") 
         || Model.UzytkownikId == User.Identity.GetUserId())) 
     {
-        @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Edytuj", "Edit", new { id = Model.IdOgloszenia }, new { @class = "btn btn-primary" })
     }
     @Html.ActionLink("Wróć", "Index", null, new { @class = "btn btn-warning" })
 </p>

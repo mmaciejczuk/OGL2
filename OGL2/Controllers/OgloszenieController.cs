@@ -64,7 +64,7 @@ namespace OGL2.Controllers
                     break;
             }
             ogloszenia = ogloszenia.OrderBy(d => d.DataDodania);
-            return View(ogloszenia.ToPagedList<OgloszeniaViewModel>(currentPage, naStronie));
+            return View(ogloszenia.ToPagedList<OgloszenieViewModel>(currentPage, naStronie));
         }
 
 // ------------------------- DETAILS -------------------------------------
@@ -74,7 +74,7 @@ namespace OGL2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ogloszenie ogloszenie = _repo.GetOgloszeniaById((int)id);
+            OgloszenieViewModel ogloszenie = _repo.GetOgloszeniaById((int)id);
             if (ogloszenie == null)
             {
                 return HttpNotFound();
@@ -123,7 +123,7 @@ namespace OGL2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ogloszenie ogloszenie = _repo.GetOgloszeniaById((int)id);
+            Ogloszenie ogloszenie = _repo.GetOgloszenieDetailsById((int)id);
             if (ogloszenie == null)
             {
                 return HttpNotFound();
@@ -170,7 +170,7 @@ namespace OGL2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ogloszenie ogloszenie = _repo.GetOgloszeniaById((int)id);
+            OgloszenieViewModel ogloszenie = _repo.GetOgloszeniaById((int)id);
             if (ogloszenie == null)
             {
                 return HttpNotFound();
@@ -217,12 +217,12 @@ namespace OGL2.Controllers
         [OutputCache(Duration = 1000)]
         public ActionResult MojeOgloszenia(int? page)
         {
-            //int currentPage = page ?? 1;
-            //int naStronie = 3;
-            //string userId = User.Identity.GetUserId();
-            //var ogloszenia = _repo.PobierzOgloszenia();
-            //ogloszenia = ogloszenia.OrderByDescending(d => d.DataDodania).Where(o => o.UzytkownikId == userId);
-            //return View(ogloszenia.ToPagedList<Ogloszenie>(currentPage, naStronie));
+            int currentPage = page ?? 1;
+            int naStronie = 3;
+            string userId = User.Identity.GetUserId();
+            var ogloszenia = _repo.PobierzOgloszenia();
+            ogloszenia = ogloszenia.OrderByDescending(d => d.DataDodania).Where(o => o.UzytkownikId == userId);
+            return View(ogloszenia.ToPagedList<OgloszenieViewModel>(currentPage, naStronie));
             return null;
         }
 

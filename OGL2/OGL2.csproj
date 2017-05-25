@@ -326,6 +326,7 @@
     <Content Include="Views\About\Kursy.cshtml" />
     <Content Include="Views\CV\StworzCV.cshtml" />
     <Content Include="Views\Wiadomosc\Index.cshtml" />
+    <Content Include="Views\Wiadomosc\Wyslano.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

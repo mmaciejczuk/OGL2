@@ -165,9 +165,14 @@
     <Compile Include="IRepo\IMappingService.cs" />
     <Compile Include="IRepo\IOglContext.cs" />
     <Compile Include="IRepo\IOgloszenieRepo.cs" />
+    <Compile Include="IRepo\IWiadomoscRepo.cs" />
     <Compile Include="Migrations\201705241910227__1.cs" />
     <Compile Include="Migrations\201705241910227__1.Designer.cs">
       <DependentUpon>201705241910227__1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705250755385__2.cs" />
+    <Compile Include="Migrations\201705250755385__2.Designer.cs">
+      <DependentUpon>201705250755385__2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CV.cs" />
@@ -180,7 +185,7 @@
     <Compile Include="Models\RodzajUmowy.cs" />
     <Compile Include="Models\Uzytkownik.cs" />
     <Compile Include="Models\Views\AccountViewModels.cs" />
-    <Compile Include="Models\Views\OgloszeniaViewModel.cs" />
+    <Compile Include="Models\Views\OgloszenieViewModel.cs" />
     <Compile Include="Models\Views\OgloszeniaZKategoriiViewModels.cs" />
     <Compile Include="Models\Wiadomosc.cs" />
     <Compile Include="Models\Wymaganie.cs" />
@@ -188,10 +193,14 @@
     <Compile Include="Repo\KategoriaRepo.cs" />
     <Compile Include="Repo\MappingService.cs" />
     <Compile Include="Repo\OgloszenieRepo.cs" />
+    <Compile Include="Repo\WiadomoscRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705241910227__1.resx">
       <DependentUpon>201705241910227__1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705250755385__2.resx">
+      <DependentUpon>201705250755385__2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Repozytorium.Models.Views
 {
-    public class OgloszeniaViewModel
+    public class OgloszenieViewModel
     {
         public string UzytkownikId { get; set; }
         public string Firma { get; set; }

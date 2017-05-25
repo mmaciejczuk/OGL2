@@ -6,12 +6,13 @@ namespace Repozytorium.IRepo
 {
     public interface IOgloszenieRepo
     {
-        IQueryable<OgloszeniaViewModel> PobierzOgloszenia();
-        Ogloszenie GetOgloszeniaById(int id);
+        IQueryable<OgloszenieViewModel> PobierzOgloszenia();
+        Ogloszenie GetOgloszenieDetailsById(int id);
+        OgloszenieViewModel GetOgloszeniaById(int id);
         void UsunOgloszenie(int id);
         void SaveChages();
         void Dodaj(Ogloszenie ogloszenie);
         void Aktualizuj(Ogloszenie ogloszenie);
-        IQueryable<OgloszeniaViewModel> PobierzStrone(int? page, int? pageSize);
+        IQueryable<OgloszenieViewModel> PobierzStrone(int? page, int? pageSize);
     }
 }

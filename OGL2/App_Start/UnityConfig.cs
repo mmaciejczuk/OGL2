@@ -47,6 +47,7 @@ namespace OGL2.App_Start
             container.RegisterType<IOgloszenieRepo, OgloszenieRepo>(new PerRequestLifetimeManager());
             container.RegisterType<IOglContext, OglContext>(new PerRequestLifetimeManager());
             container.RegisterType<IKategoriaRepo, KategoriaRepo>(new PerRequestLifetimeManager());
+            container.RegisterType<IWiadomoscRepo, WiadomoscRepo>(new PerRequestLifetimeManager());
             container.RegisterType<IMappingService, MappingService>(new PerRequestLifetimeManager());
         }
     }
