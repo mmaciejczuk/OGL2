@@ -38,7 +38,7 @@ namespace Repozytorium.Repo
 
         public OgloszenieViewModel GetOgloszeniaById(int id)
         {
-            var ogloszenie = from o in _db.Ogloszenia.Include("Uzytkownik")
+            var ogloszenie = from o in _db.Ogloszenia.Include("Uzytkownik").Include("Miasto")
                              where o.Zaakceptowane == true && o.DataWaznosci > DateTime.Now
                              orderby o.DataDodania
                              select new OgloszenieViewModel
@@ -48,6 +48,8 @@ namespace Repozytorium.Repo
                                  IdOgloszenia = o.Id,
                                  Tresc = o.Tresc,
                                  Tytul = o.Tytul,
+                                 Miasto = o.Miasto.Nazwa,
+                                 RodzajUmowy = o.RodzajUmowy.Nazwa,
                                  DataDodania = o.DataDodania,
                                  DataWaznosci = o.DataWaznosci
                              };
@@ -62,8 +64,8 @@ namespace Repozytorium.Repo
             //var ogloszenia = _db.Ogloszenia.AsNoTracking();
             //return ogloszenia;
 
-            var ogloszenia = from o in _db.Ogloszenia.Include("Uzytkownik")
-                            where o.Zaakceptowane == true && o.DataWaznosci > DateTime.Now 
+            var ogloszenia = from o in _db.Ogloszenia.Include("Uzytkownik").Include("Miasto")
+                             where o.Zaakceptowane == true && o.DataWaznosci > DateTime.Now 
                             orderby o.DataDodania
                              select new
                                         {
@@ -72,19 +74,23 @@ namespace Repozytorium.Repo
                                             IdOgloszenia = o.Id,
                                             Tresc = o.Tresc,
                                             Tytul = o.Tytul,
+                                            Miasto = o.Miasto.Nazwa,
+                                            RodzajUmowy = o.RodzajUmowy.Nazwa,
                                             DataDodania = o.DataDodania,
                                             DataWaznosci = o.DataWaznosci
                                         };
             var x = ogloszenia.ToList();
             foreach (var ogloszenie in x)
             {
-                ogloszeniaList.Add(new OgloszenieViewModel 
+                ogloszeniaList.Add(new OgloszenieViewModel
                 {
                     UzytkownikId = ogloszenie.UzytkownikId,
                     Firma = ogloszenie.Firma,
                     IdOgloszenia = ogloszenie.IdOgloszenia,
                     Tresc = ogloszenie.Tresc,
                     Tytul = ogloszenie.Tytul,
+                    Miasto = ogloszenie.Miasto,
+                    RodzajUmowy = ogloszenie.RodzajUmowy,
                     DataDodania = ogloszenie.DataDodania,
                     DataWaznosci = ogloszenie.DataWaznosci
                 });
@@ -92,15 +98,15 @@ namespace Repozytorium.Repo
             return ogloszeniaList.AsQueryable();
         }
 
-        public IQueryable<OgloszenieViewModel> PobierzStrone(int? page = 1, int? pageSize = 10)
-        {
+        //public IQueryable<OgloszenieViewModel> PobierzStrone(int? page = 1, int? pageSize = 10)
+        //{
             //var ogloszenia = _db.Ogloszenia
             //    .OrderByDescending(o => o.DataDodania)
             //    .Skip((page.Value - 1) * pageSize.Value)
             //    .Take(pageSize.Value);
             //return ogloszenia;
-            return null;
-        }
+        //    return null;
+        //}
 
         public void SaveChages()
         {

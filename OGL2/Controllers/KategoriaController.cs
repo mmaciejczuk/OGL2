@@ -22,23 +22,38 @@ namespace OGL2.Controllers
         {
             int currentPage = page ?? 1;
             int naStronie = 12;
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NazwaSort = sortOrder == "NazwaAsc" ? "Nazwa" : "NazwaAsc";
+            ViewBag.OpisSort = sortOrder == "OpisAsc" ? "Opis" : "OpisAsc";
+            ViewBag.IloscOfertSort = sortOrder == "IloscOfertAsc" ? "IloscOfert" : "IloscOfertAsc";
+
             var kategorie = _repo.PobierzKategorie();
 
             switch (sortOrder)
             {
                 case "Nazwa":
-                    kategorie = kategorie.OrderByDescending(s => s.Id);
+                    kategorie = kategorie.OrderByDescending(s => s.Nazwa);
                     break;
+                case "NazwaAsc":
+                    kategorie = kategorie.OrderBy(s => s.Nazwa);
+                    break;
+
                 case "Opis":
-                    kategorie = kategorie.OrderByDescending(s => s.MetaOpis);
+                    kategorie = kategorie.OrderByDescending(s => s.Nazwa);
                     break;
-                case "IloscOfert": // tutaj dodać ilość ofert
-                    kategorie = kategorie.OrderByDescending(s => s.MetaOpis);
+                case "OpisAsc":
+                    kategorie = kategorie.OrderBy(s => s.Opis);
+                    break;
+
+                case "IloscOfert": 
+                    kategorie = kategorie.OrderByDescending(s => s.LiczbaOfert);
+                    break;
+                case "IloscOfertAsc":
+                    kategorie = kategorie.OrderBy(s => s.LiczbaOfert);
                     break;
             }
-
-            kategorie = kategorie.OrderBy(d => d.Nazwa);
-            return View(kategorie.ToPagedList<Kategoria>(currentPage, naStronie));
+            return View(kategorie.ToPagedList<KategoriaViewModel>(currentPage, naStronie));
         }
 
         public ActionResult PokazOgloszenia(int id)

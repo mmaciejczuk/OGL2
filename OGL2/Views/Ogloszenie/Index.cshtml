@@ -14,21 +14,27 @@
     @if (User.Identity.IsAuthenticated)
     {
         <p>
-        @Html.ActionLink("Dodaj nowe ogłoszenie", "Create", null, new { @class = "btn btn-primary" })
-            </p>
-    }
-    
+            @Html.ActionLink("Dodaj nowe ogłoszenie", "Create", null, new { @class = "btn btn-primary" })
+        </p>
+    }    
 </p>
+
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.IdSort})
+            @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.TytulSort})
         </th>
-        <th>
+        <th style="width:150px">
             @Html.ActionLink("Firma", "Index", new { sortOrder = ViewBag.TrescSort })
         </th>
         <th>
             @Html.ActionLink("Treść", "Index", new { sortOrder = ViewBag.TytulSort })
+        </th>
+        <th>
+            @Html.ActionLink("Miasto", "Index", new { sortOrder = ViewBag.MiastoSort })
+        </th>
+        <th style="width:110px">
+            @Html.ActionLink("Rodzaj umowy", "Index", new { sortOrder = ViewBag.RodzajUmowySort })
         </th>
         <th style="width:110px">
             @Html.ActionLink("Data dodania", "Index", new { sortOrder = ViewBag.DataDodaniaSort })
@@ -46,6 +52,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Tresc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Miasto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RodzajUmowy)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.GetFormattedDateAdd)

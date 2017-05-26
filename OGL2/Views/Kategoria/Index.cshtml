@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Repozytorium.Models.Kategoria>
+﻿@model PagedList.IPagedList<Repozytorium.Models.Views.KategoriaViewModel>
 @using PagedList.Mvc
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
@@ -12,13 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Nazwa", "Index", new { sortOrder = ViewBag.Nazwa })
+            @Html.ActionLink("Nazwa", "Index", new { sortOrder = ViewBag.NazwaSort })
         </th>
         <th>
-            @Html.ActionLink("Opis kategorii", "Index", new { sortOrder = ViewBag.Opis })
+            @Html.ActionLink("Opis kategorii", "Index", new { sortOrder = ViewBag.OpisSort })
         </th>
         <th>
-            @Html.ActionLink("Ilość ofert", "Index", new { sortOrder = ViewBag.IloscOfert })
+            @Html.ActionLink("Ilość ofert", "Index", new { sortOrder = ViewBag.IloscOfertSort })
         </th>
         <th></th>
     </tr>
@@ -29,10 +29,10 @@
             @Html.ActionLink(item.Nazwa, "PokazOgloszenia", new { id = item.Id})
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.MetaOpis)
+            @Html.DisplayFor(modelItem => item.Opis)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ParentId)
+            @Html.DisplayFor(modelItem => item.LiczbaOfert)
         </td>
         <td style="">
             @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))

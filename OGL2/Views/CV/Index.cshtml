@@ -1,0 +1,83 @@
+﻿@model PagedList.IPagedList<Repozytorium.Models.Views.CVViewModel>
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Tytul = "Lista ogłoszeń - metatytuł do 60 znaków";
+    ViewBag.Opis = "Lista ogłoszeń z naszej aplikacji - metaopis do 160 znaków";
+    ViewBag.SlowaKluczowe = "Lista, ogłoszeń, słowa, kluczowe, aplikacja";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista CV</h2>
+
+<p>
+    @if (User.Identity.IsAuthenticated)
+    {
+    <p>
+        @Html.ActionLink("Dodaj nowe CV", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+    }
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.NazwaSort })
+            </th>
+            <th style="width:150px">
+                @Html.ActionLink("Firma", "Index", new { sortOrder = ViewBag.TytulSort })
+            </th>
+            <th>
+                @Html.ActionLink("Treść", "Index", new { sortOrder = ViewBag.TrescSort })
+            </th>
+            <th>
+                @Html.ActionLink("Miasto", "Index", new { sortOrder = ViewBag.MiastoSort })
+            </th>
+            <th style="width:110px">
+                @Html.ActionLink("Data dodania", "Index", new { sortOrder = ViewBag.DataDodaniaSort })
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GetUserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tytul)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tresc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Miasto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GetFormattedDateAdd)
+                </td>
+                <td>
+                    @Html.ActionLink("Szczegóły", "Details", new { id = item.IdCV }, new { @class = "btn btn-warning" })
+                    @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
+                    {
+                        <br />
+                        @Html.ActionLink("Edytuj", "Edit", new { id = item.IdCV }, new { @class = "btn btn-primary" })
+                        if (User.IsInRole("Admin"))
+                        {
+                            <br />
+                            @Html.ActionLink("Usuń", "Delete", new { id = item.IdCV }, new { @class = "btn btn-danger" })
+                        }
+                    }
+
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div>
+        <br />
+        Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort }))
+    </div>
