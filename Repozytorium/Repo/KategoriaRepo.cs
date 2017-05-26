@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using Repozytorium.Models;
 using System.Diagnostics;
+using Repozytorium.Models.Views;
 
 namespace Repozytorium.Repo
 {
@@ -22,11 +23,20 @@ namespace Repozytorium.Repo
             return nazwa;
         }
 
-        public IQueryable<Kategoria> PobierzKategorie()
+        public IQueryable<KategoriaViewModel> PobierzKategorie()
         {
-            _db.Database.Log = message => Trace.WriteLine(message);
-            var kategorie = _db.Kategorie.AsNoTracking();
-            return kategorie;
+            var kategorie = from o in _db.Kategorie.Include("Ogloszenie_Kategoria")
+                            select new KategoriaViewModel
+                            {
+                                Id = o.Id,
+                                Nazwa = o.Nazwa,
+                                Opis = o.MetaOpis,
+                                LiczbaOfert = o.Ogloszenie_Kategoria.Select(p => p.OgloszenieId).Count(),
+                            };
+
+            //_db.Database.Log = message => Trace.WriteLine(message);
+            //var kategorie = _db.Kategorie.AsNoTracking();
+            return kategorie.ToList().AsQueryable();
         }
 
         public IQueryable<Kategoria> PobierzStrone(int? page = 1, int? pageSize = 10)

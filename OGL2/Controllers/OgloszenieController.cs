@@ -30,40 +30,54 @@ namespace OGL2.Controllers
             int currentPage = page ?? 1;
             int naStronie = 6;
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.IdSort = String.IsNullOrEmpty(sortOrder) ? "IdAsc" : "";
             ViewBag.DataDodaniaSort = sortOrder == "DataDodania" ? "DataDodaniaAsc" : "DataDodania";
             ViewBag.TrescSort = sortOrder == "TrescAsc" ? "Tresc" : "TrescAsc";
             ViewBag.TytulSort = sortOrder == "TytulAsc" ? "Tytul" : "TytulAsc";
+            ViewBag.MiastoSort = sortOrder == "MiastoAsc" ? "Miasto" : "MiastoAsc";
+            ViewBag.RodzajUmowySort = sortOrder == "RodzajUmowyAsc" ? "RodzajUmowy" : "RodzajUmowyAsc";
             var ogloszenia = _repo.PobierzOgloszenia();
 
             switch (sortOrder)
             {
+                case "RodzajUmowy":
+                    ogloszenia = ogloszenia.OrderByDescending(s => s.RodzajUmowy);
+                    break;
+                case "RodzajUmowyAsc":
+                    ogloszenia = ogloszenia.OrderBy(s => s.RodzajUmowy);
+                    break;
+
+                case "Miasto":
+                    ogloszenia = ogloszenia.OrderByDescending(s => s.Miasto);
+                    break;
+                case "MiastoAsc":
+                    ogloszenia = ogloszenia.OrderBy(s => s.Miasto);
+                    break;
+
                 case "DataDodania":
                     ogloszenia = ogloszenia.OrderByDescending(s => s.DataDodania);
                     break;
                 case "DataDodaniaAsc":
                     ogloszenia = ogloszenia.OrderBy(s => s.DataDodania);
                     break;
+
                 case "Tytul":
                     ogloszenia = ogloszenia.OrderByDescending(s => s.Tytul);
                     break;
                 case "TytulAsc":
                     ogloszenia = ogloszenia.OrderBy(s => s.Tytul);
                     break;
+
                 case "Tresc":
                     ogloszenia = ogloszenia.OrderByDescending(s => s.Tytul);
                     break;
                 case "TrescAsc":
                     ogloszenia = ogloszenia.OrderBy(s => s.Tytul);
                     break;
-                case "IdAsc":
-                    ogloszenia = ogloszenia.OrderBy(s => s.Tytul);
-                    break;
+
                 default:  // id descending
                     ogloszenia = ogloszenia.OrderByDescending(s => s.DataDodania);
                     break;
             }
-            ogloszenia = ogloszenia.OrderBy(d => d.DataDodania);
             return View(ogloszenia.ToPagedList<OgloszenieViewModel>(currentPage, naStronie));
         }
 

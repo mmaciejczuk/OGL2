@@ -13,6 +13,6 @@ namespace Repozytorium.IRepo
         void SaveChages();
         void Dodaj(Ogloszenie ogloszenie);
         void Aktualizuj(Ogloszenie ogloszenie);
-        IQueryable<OgloszenieViewModel> PobierzStrone(int? page, int? pageSize);
+        //IQueryable<OgloszenieViewModel> PobierzStrone(int? page, int? pageSize);
     }
 }

@@ -13,6 +13,8 @@ namespace Repozytorium.Models.Views
         public int IdOgloszenia { get; set; }
         public string Tresc { get; set; }
         public string Tytul { get; set; }
+        public string Miasto { get; set; }
+        public string RodzajUmowy { get; set; }
         public DateTime DataDodania { get; set; }
         public DateTime DataWaznosci { get; set; }
 
