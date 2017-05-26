@@ -68,10 +68,10 @@ namespace OGL2.Controllers
                     break;
 
                 case "Tresc":
-                    ogloszenia = ogloszenia.OrderByDescending(s => s.Tytul);
+                    ogloszenia = ogloszenia.OrderByDescending(s => s.Tresc);
                     break;
                 case "TrescAsc":
-                    ogloszenia = ogloszenia.OrderBy(s => s.Tytul);
+                    ogloszenia = ogloszenia.OrderBy(s => s.Tresc);
                     break;
 
                 default:  // id descending
@@ -237,7 +237,6 @@ namespace OGL2.Controllers
             var ogloszenia = _repo.PobierzOgloszenia();
             ogloszenia = ogloszenia.OrderByDescending(d => d.DataDodania).Where(o => o.UzytkownikId == userId);
             return View(ogloszenia.ToPagedList<OgloszenieViewModel>(currentPage, naStronie));
-            return null;
         }
 
         //protected override void Dispose(bool disposing)

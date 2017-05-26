@@ -46,8 +46,8 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Lista CV", "Index", "Ogloszenie")</li>
-                            <li>@Html.ActionLink("Lista moich CV", "MojeOgloszenia", "Ogloszenie")</li>
+                            <li>@Html.ActionLink("Lista CV", "Index", "CV")</li>
+                            <li>@Html.ActionLink("Lista moich CV", "MojeCV", "CV")</li>
                             @if (User.Identity.IsAuthenticated)
                             {
                                 <li>@Html.ActionLink("Dodaj ogłoszenie", "Create", "Ogloszenie")</li>
