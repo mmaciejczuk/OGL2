@@ -8,7 +8,7 @@
     ViewBag.SlowaKluczowe = "Lista, ogłoszeń, słowa, kluczowe, aplikacja";
 }
 
-<h2>Lista moich ogłoszeń</h2>
+<h2>Lista moich ofert</h2>
 
 <p>
     @if (User.Identity.IsAuthenticated)
@@ -19,54 +19,66 @@
     }
 
     </p>
-    <table class="table">
-        <tr>
-            @*<th>
-                @Html.ActionLink("Id użytkownika", "Index", new { sortOrder = ViewBag.IdSort })
-            </th>*@
-            <th>
-                @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.TytulSort })
-            </th>
-            <th>
-                @Html.ActionLink("Treść", "Index", new { sortOrder = ViewBag.TrescSort })
-            </th>
-            <th>
-                @Html.ActionLink("Data dodania", "Index", new { sortOrder = ViewBag.DataDodaniaSort })
-            </th>
-            <th></th>
-        </tr>
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Id", "Index", new { sortOrder = ViewBag.IdOgloszenia })
+        </th>
+        <th style="width:400px">
+            @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.TytulSort })
+        </th>
+        <th style="width:150px">
+            @Html.ActionLink("Firma", "Index", new { sortOrder = ViewBag.TrescSort })
+        </th>
+        <th>
+            @Html.ActionLink("Miasto", "Index", new { sortOrder = ViewBag.MiastoSort })
+        </th>
+        <th style="width:110px">
+            @Html.ActionLink("Rodzaj umowy", "Index", new { sortOrder = ViewBag.RodzajUmowySort })
+        </th>
+        <th style="width:110px">
+            @Html.ActionLink("Data dodania", "Index", new { sortOrder = ViewBag.DataDodaniaSort })
+        </th>
+        <th></th>
+    </tr>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.UzytkownikId)
-                </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tytul)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tresc)
-                </td>
-                <th style="width:110px">
-                    @Html.DisplayFor(modelItem => item.GetFormattedDateAdd)
-                </th>
-                <td>
-                    @Html.ActionLink("Szczegóły", "Details", new { id = item.IdOgloszenia }, new { @class = "btn btn-warning" })
-                    @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdOgloszenia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tytul)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Miasto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RodzajUmowy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GetFormattedDateAdd)
+            </td>
+            <td width="250px;">
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.IdOgloszenia }, new { @class = "btn btn-warning" })
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
+                {
+                    @Html.ActionLink("Edytuj", "Edit", new { id = item.IdOgloszenia }, new { @class = "btn btn-primary" })
+                    if (User.IsInRole("Admin"))
                     {
-                        <br />
-                        @Html.ActionLink("Edytuj", "Edit", new { id = item.IdOgloszenia }, new { @class = "btn btn-primary" })
-                        if (User.IsInRole("Admin"))
-                        {
-                            <br />
-                            @Html.ActionLink("Usuń", "Delete", new { id = item.IdOgloszenia }, new { @class = "btn btn-danger" })
-                        }
+                        @Html.ActionLink("Usuń", "Delete", new { id = item.IdOgloszenia }, new { @class = "btn btn-danger" })
                     }
-                </td>
-            </tr>
-        }
-    </table>
+                }
+
+            </td>
+
+        </tr>
+    }
+</table>
 
     <div>
         <br />

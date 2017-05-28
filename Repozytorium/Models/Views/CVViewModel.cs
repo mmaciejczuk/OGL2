@@ -17,6 +17,6 @@ namespace Repozytorium.Models.Views
         public DateTime DataDodania { get; set; }
 
         public string GetFormattedDateAdd { get { return this.DataDodania.ToString("dd-MM-yyyy"); } }
-        public string GetUserName { get { return string.Concat(this.Imie, this.Nazwisko); } }
+        public string GetUserName { get { return string.Concat(this.Imie, " ", this.Nazwisko); } }
     }
 }

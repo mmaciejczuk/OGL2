@@ -28,15 +28,16 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Oferty pracy
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Kategorie ofert", "Index", "Kategoria")</li>
                             <li>@Html.ActionLink("Lista ofert", "Index", "Ogloszenie")</li>
                             <li>@Html.ActionLink("Lista moich ofert", "MojeOgloszenia", "Ogloszenie")</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Wyszukaj po kategorii", "Index", "Kategoria")</li>
+                            <li>@Html.ActionLink("Wyszukaj po mieście", "Index", "Miasto")</li>
+                            <li class="divider"></li>
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <li>@Html.ActionLink("Dodaj ogłoszenie", "Create", "Ogloszenie")</li>
+                                <li>@Html.ActionLink("Dodaj ofertę", "Create", "Ogloszenie")</li>
                             }
-                            @*<li class="divider"></li>
-                            <li>@Html.ActionLink("Dodaj ofertę", "Partial", "Ogloszenie")</li>*@
                         </ul>
                     </li>
 
@@ -47,18 +48,35 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Lista CV", "Index", "CV")</li>
-                            <li>@Html.ActionLink("Lista moich CV", "MojeCV", "CV")</li>
+                            <li>@Html.ActionLink("Moje CV", "MojeCV", "CV")</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Wyszukaj po kategorii", "Index", "Kategoria")</li>
+                            <li>@Html.ActionLink("Wyszukaj po mieście", "Index", "Kategoria")</li>
+                            <li class="divider"></li>
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <li>@Html.ActionLink("Dodaj ogłoszenie", "Create", "Ogloszenie")</li>
+                                <li>@Html.ActionLink("Dodaj CV", "Create", "Ogloszenie")</li>
                             }
-                            @*<li class="divider"></li>*@
-                            @*<li>@Html.ActionLink("Lista jako PartialView", "Partial", "Ogloszenie")</li>
-                            <li>@Html.ActionLink("Dodaj CV", "Partial", "Ogloszenie")</li>*@
                         </ul>
                     </li>
+
+                    @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin")))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Dodaj
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Miasta", "Dodaj", "Miasto")</li>
+                                <li>@Html.ActionLink("Kategorie", "Dodaj", "Kategoria")</li>
+                            </ul>
+                        </li>
+                    }
+
                     <li>@Html.ActionLink("Wiadomości", "Index", "Wiadomosc")</li>
-                    <li>@Html.ActionLink("Stwórz własne CV", "StworzCV", "CV", null, new { @style = "color: lightskyblue;" })</li>
+
+                    <li>@Html.ActionLink("Jak stworzyć własne CV", "StworzCV", "CV", null, new { @style = "color: lightskyblue;" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

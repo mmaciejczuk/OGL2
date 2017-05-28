@@ -30,18 +30,55 @@ namespace Repozytorium.Repo
             _db.Ogloszenia.Add(ogloszenie);
         }
 
-        public Ogloszenie GetOgloszenieDetailsById(int id)
+        public List<Miasto> GetCities()
         {
-            Ogloszenie ogloszenie = _db.Ogloszenia.Find(id);
-            return ogloszenie;
+            var miasta = from o in _db.Miasto select o;
+            return miasta.ToList();
         }
 
-        public OgloszenieViewModel GetOgloszeniaById(int id)
+        public List<RodzajUmowy> GetAgreementTypes()
+        {
+            var umowy = from o in _db.RodzajUmowy select o;
+            return umowy.ToList();
+        }
+
+        public List<Kategoria> GetCategories()
+        {
+            var kategorie = from o in _db.Kategorie select o;
+            return kategorie.ToList();
+        }
+
+        public OgloszenieEditViewModel GetOgloszenieDetailsById(int id)
+        {
+            var ogloszenie = from o in _db.Ogloszenia.Include("Uzytkownik").Include("Miasto")
+                             join k in _db.Ogloszenie_Kategoria on o.Id equals k.OgloszenieId
+                             where o.Zaakceptowane == true && o.DataWaznosci > DateTime.Now
+                             orderby o.DataDodania
+                             select new OgloszenieEditViewModel
+                             {
+                                 UzytkownikId = o.UzytkownikId,
+                                 Firma = o.Uzytkownik.Firma,
+                                 IdOgloszenia = o.Id,
+                                 Tresc = o.Tresc,
+                                 Tytul = o.Tytul,
+                                 MiastoId = o.MiastoId,
+                                 RodzajUmowyId = o.RodzajUmowyId,
+                                 KategoriaId = k.KategoriaId,
+                                 ZarobkiOd = o.ZarobkiOd,
+                                 ZarobkiDo = o.ZarobkiDo,
+                                 DataDodania = o.DataDodania,
+                                 Zaakceptowane = o.Zaakceptowane.HasValue ? true : false
+                             };
+            var x = ogloszenie.Where(p => p.IdOgloszenia == id).FirstOrDefault();
+            return x;
+        }
+
+        public OgloszenieDetailsViewModel GetOgloszeniaById(int id)
         {
             var ogloszenie = from o in _db.Ogloszenia.Include("Uzytkownik").Include("Miasto")
                              where o.Zaakceptowane == true && o.DataWaznosci > DateTime.Now
                              orderby o.DataDodania
-                             select new OgloszenieViewModel
+                             select new OgloszenieDetailsViewModel
                              {
                                  UzytkownikId = o.UzytkownikId,
                                  Firma = o.Uzytkownik.Firma,
@@ -50,8 +87,9 @@ namespace Repozytorium.Repo
                                  Tytul = o.Tytul,
                                  Miasto = o.Miasto.Nazwa,
                                  RodzajUmowy = o.RodzajUmowy.Nazwa,
-                                 DataDodania = o.DataDodania,
-                                 DataWaznosci = o.DataWaznosci
+                                 ZarobkiOd = o.ZarobkiOd,
+                                 ZarobkiDo = o.ZarobkiDo,
+                                 DataDodania = o.DataDodania
                              };
             var x = ogloszenie.Where(p => p.IdOgloszenia == id).FirstOrDefault();
             return x;
@@ -72,13 +110,12 @@ namespace Repozytorium.Repo
                                             UzytkownikId = o.UzytkownikId,
                                             Firma = o.Uzytkownik.Firma,
                                             IdOgloszenia = o.Id,
-                                            Tresc = o.Tresc,
                                             Tytul = o.Tytul,
                                             Miasto = o.Miasto.Nazwa,
                                             RodzajUmowy = o.RodzajUmowy.Nazwa,
                                             DataDodania = o.DataDodania,
-                                            DataWaznosci = o.DataWaznosci
-                                        };
+                                            Zaakceptowane = o.Zaakceptowane.HasValue ? true : false
+                             };
             var x = ogloszenia.ToList();
             foreach (var ogloszenie in x)
             {
@@ -87,12 +124,11 @@ namespace Repozytorium.Repo
                     UzytkownikId = ogloszenie.UzytkownikId,
                     Firma = ogloszenie.Firma,
                     IdOgloszenia = ogloszenie.IdOgloszenia,
-                    Tresc = ogloszenie.Tresc,
                     Tytul = ogloszenie.Tytul,
                     Miasto = ogloszenie.Miasto,
                     RodzajUmowy = ogloszenie.RodzajUmowy,
                     DataDodania = ogloszenie.DataDodania,
-                    DataWaznosci = ogloszenie.DataWaznosci
+                    Zaakceptowane = ogloszenie.Zaakceptowane
                 });
             }            
             return ogloszeniaList.AsQueryable();

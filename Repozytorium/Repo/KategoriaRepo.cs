@@ -17,6 +17,17 @@ namespace Repozytorium.Repo
             _db = db;
         }
 
+        public void Dodaj(Kategoria kategoria)
+        {
+            _db.Kategorie.Add(kategoria);
+        }
+
+        public bool KategoriaIstnieje(string kategoria)
+        {
+            var m = from o in _db.Kategorie.Where(x => x.Nazwa == kategoria) select o;
+            return m == null ? false : true;
+        }
+
         public string NazwaDlaKategorii(int id)
         {
             var nazwa = _db.Kategorie.Find(id).Nazwa;
@@ -47,15 +58,57 @@ namespace Repozytorium.Repo
             return kategorie;
         }
 
-        public IQueryable<Ogloszenie> PobierzOgloszeniaZKategorii(int id)
+        public IQueryable<OgloszeniaZKategoriiViewModels> PobierzOgloszeniaZKategorii(int id)
         {
-            _db.Database.Log = message => Trace.WriteLine(message);
-            var ogloszenia = from o in _db.Ogloszenia
+            //_db.Database.Log = message => Trace.WriteLine(message);
+            //var ogloszenia = from o in _db.Ogloszenia
+            //                 join k in _db.Ogloszenie_Kategoria on o.Id equals k.OgloszenieId
+            //                 where k.KategoriaId == id
+            //                 select o;
+            //var ogloszenia2 = ogloszenia.ToList();
+            //return ogloszenia;
+
+            var ogloszeniaList = new List<OgloszeniaZKategoriiViewModels>();
+            //_db.Database.Log = message => Trace.WriteLine(message);
+            //var ogloszenia = _db.Ogloszenia.AsNoTracking();
+            //return ogloszenia;
+
+            var ogloszenia = from o in _db.Ogloszenia.Include("Uzytkownik").Include("Miasto").Include("Ogloszenie_Kategoria")
                              join k in _db.Ogloszenie_Kategoria on o.Id equals k.OgloszenieId
-                             where k.KategoriaId == id
-                             select o;
-            var ogloszenia2 = ogloszenia.ToList();
-            return ogloszenia;
+                             where o.Zaakceptowane == true && o.DataWaznosci > DateTime.Now  && k.KategoriaId == id
+                             orderby o.DataDodania
+                             select new
+                             {
+                                 UzytkownikId = o.UzytkownikId,
+                                 Firma = o.Uzytkownik.Firma,
+                                 IdOgloszenia = o.Id,
+                                 Tytul = o.Tytul,
+                                 Miasto = o.Miasto.Nazwa,
+                                 RodzajUmowy = o.RodzajUmowy.Nazwa,
+                                 DataDodania = o.DataDodania,
+                                 NazwaKategorii = _db.Kategorie.Where(q => q.Id == id).Select(p => p.Nazwa).FirstOrDefault()
+                             };
+            var x = ogloszenia.ToList();
+            foreach (var ogloszenie in x)
+            {
+                ogloszeniaList.Add(new OgloszeniaZKategoriiViewModels
+                {
+                    UzytkownikId = ogloszenie.UzytkownikId,
+                    Firma = ogloszenie.Firma,
+                    IdOgloszenia = ogloszenie.IdOgloszenia,
+                    Tytul = ogloszenie.Tytul,
+                    Miasto = ogloszenie.Miasto,
+                    RodzajUmowy = ogloszenie.RodzajUmowy,
+                    DataDodania = ogloszenie.DataDodania,
+                    NazwaKategorii = ogloszenie.NazwaKategorii
+                });
+            }
+            return ogloszeniaList.AsQueryable();
+        }
+
+        public void SaveChanges()
+        {
+            _db.SaveChanges();
         }
     }
 }

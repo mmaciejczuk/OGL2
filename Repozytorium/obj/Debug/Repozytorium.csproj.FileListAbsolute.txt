@@ -240,3 +240,5 @@ C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.csprojResolveAssemblyReference.
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.Migrations._1.resources
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.csproj.GenerateResource.Cache
 C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._2.resources
+F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.Migrations._2.resources
+F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.Migrations._3.resources

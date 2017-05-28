@@ -1,4 +1,4 @@
-﻿@model Repozytorium.Models.Views.OgloszenieViewModel
+﻿@model Repozytorium.Models.Views.OgloszenieDetailsViewModel
 @using Microsoft.AspNet.Identity
 
 @{
@@ -22,11 +22,35 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Tytul)
+            @Html.DisplayNameFor(model => model.Miasto)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Tytul)
+            @Html.DisplayFor(model => model.Miasto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RodzajUmowy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RodzajUmowy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GetEarningsFrom)
+        </dt>
+
+        <dd>
+            @String.Concat(Html.DisplayFor(model => model.GetEarningsFrom), " zł")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GetEarningsTo)
+        </dt>
+
+        <dd>
+            @String.Concat(Html.DisplayFor(model => model.GetEarningsTo), " zł")
         </dd>
 
         <dt>

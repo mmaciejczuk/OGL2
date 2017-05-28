@@ -22,13 +22,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.TytulSort})
+            @Html.ActionLink("Id", "Index", new { sortOrder = ViewBag.IdOgloszenia })
+        </th>
+        <th style="width:300px">
+            @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.TytulSort })
         </th>
         <th style="width:150px">
             @Html.ActionLink("Firma", "Index", new { sortOrder = ViewBag.TrescSort })
-        </th>
-        <th>
-            @Html.ActionLink("Treść", "Index", new { sortOrder = ViewBag.TytulSort })
         </th>
         <th>
             @Html.ActionLink("Miasto", "Index", new { sortOrder = ViewBag.MiastoSort })
@@ -39,19 +39,22 @@
         <th style="width:110px">
             @Html.ActionLink("Data dodania", "Index", new { sortOrder = ViewBag.DataDodaniaSort })
         </th>
+        <th style="width:110px">
+            @Html.ActionLink("Zaakceptowane", "Index", new { sortOrder = ViewBag.ZaakceptowaneSort })
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.IdOgloszenia)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Tytul)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Firma)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tresc)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Miasto)
@@ -63,19 +66,24 @@
             @Html.DisplayFor(modelItem => item.GetFormattedDateAdd)
         </td>
         <td>
+        @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin")))
+        {
+            @Html.CheckBoxFor(modelItem => item.Zaakceptowane, new { @disabled = "disabled" })
+        }
+        </td>
+        <td width="250px;">
             @Html.ActionLink("Szczegóły", "Details", new { id = item.IdOgloszenia }, new { @class = "btn btn-warning" })
             @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
-                    {
-                <br/>
+            {
                 @Html.ActionLink("Edytuj", "Edit", new { id = item.IdOgloszenia }, new { @class = "btn btn-primary" })
-                if(User.IsInRole("Admin"))
+                if (User.IsInRole("Admin"))
                 {
-                    <br/>
                     @Html.ActionLink("Usuń", "Delete", new { id = item.IdOgloszenia }, new { @class = "btn btn-danger" })
                 }
             }
 
         </td>
+
     </tr>
 }
 </table>

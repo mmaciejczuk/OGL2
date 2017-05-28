@@ -30,15 +30,23 @@ namespace OGL2.Controllers
             int currentPage = page ?? 1;
             int naStronie = 6;
             ViewBag.CurrentSort = sortOrder;
+            ViewBag.IdOgloszenia = sortOrder == "IdOgloszenia" ? "IdOgloszeniaAsc" : "IdOgloszenia";
             ViewBag.DataDodaniaSort = sortOrder == "DataDodania" ? "DataDodaniaAsc" : "DataDodania";
-            ViewBag.TrescSort = sortOrder == "TrescAsc" ? "Tresc" : "TrescAsc";
             ViewBag.TytulSort = sortOrder == "TytulAsc" ? "Tytul" : "TytulAsc";
             ViewBag.MiastoSort = sortOrder == "MiastoAsc" ? "Miasto" : "MiastoAsc";
             ViewBag.RodzajUmowySort = sortOrder == "RodzajUmowyAsc" ? "RodzajUmowy" : "RodzajUmowyAsc";
+            ViewBag.ZaakceptowaneSort = sortOrder == "ZaakceptowaneAsc" ? "Zaakceptowane" : "ZaakceptowaneAsc";
             var ogloszenia = _repo.PobierzOgloszenia();
 
             switch (sortOrder)
             {
+                case "IdOgloszenia":
+                    ogloszenia = ogloszenia.OrderByDescending(s => s.IdOgloszenia);
+                    break;
+                case "IdOgloszeniaAsc":
+                    ogloszenia = ogloszenia.OrderBy(s => s.IdOgloszenia);
+                    break;
+
                 case "RodzajUmowy":
                     ogloszenia = ogloszenia.OrderByDescending(s => s.RodzajUmowy);
                     break;
@@ -67,11 +75,11 @@ namespace OGL2.Controllers
                     ogloszenia = ogloszenia.OrderBy(s => s.Tytul);
                     break;
 
-                case "Tresc":
-                    ogloszenia = ogloszenia.OrderByDescending(s => s.Tresc);
+                case "Zaakceptowane":
+                    ogloszenia = ogloszenia.OrderByDescending(s => s.Zaakceptowane);
                     break;
-                case "TrescAsc":
-                    ogloszenia = ogloszenia.OrderBy(s => s.Tresc);
+                case "ZaakceptowaneAsc":
+                    ogloszenia = ogloszenia.OrderBy(s => s.Zaakceptowane);
                     break;
 
                 default:  // id descending
@@ -88,7 +96,7 @@ namespace OGL2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OgloszenieViewModel ogloszenie = _repo.GetOgloszeniaById((int)id);
+            OgloszenieDetailsViewModel ogloszenie = _repo.GetOgloszeniaById((int)id);
             if (ogloszenie == null)
             {
                 return HttpNotFound();
@@ -137,7 +145,10 @@ namespace OGL2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ogloszenie ogloszenie = _repo.GetOgloszenieDetailsById((int)id);
+            OgloszenieEditViewModel ogloszenie = _repo.GetOgloszenieDetailsById((int)id);
+            ogloszenie.Miasta = _repo.GetCities();
+            ogloszenie.RodzajeUmowy = _repo.GetAgreementTypes();
+            ogloszenie.Kategorie = _repo.GetCategories();
             if (ogloszenie == null)
             {
                 return HttpNotFound();
@@ -184,7 +195,7 @@ namespace OGL2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OgloszenieViewModel ogloszenie = _repo.GetOgloszeniaById((int)id);
+            OgloszenieDetailsViewModel ogloszenie = _repo.GetOgloszeniaById((int)id);
             if (ogloszenie == null)
             {
                 return HttpNotFound();

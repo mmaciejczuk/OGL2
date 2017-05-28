@@ -22,16 +22,13 @@
 
     <table class="table">
         <tr>
+            <th style="width:150px">
+                @Html.ActionLink("Imię i nazwisko", "Index", new { sortOrder = ViewBag.NazwaSort })
+            </th>
             <th>
-                @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.NazwaSort })
+                @Html.ActionLink("Opis", "Index", new { sortOrder = ViewBag.TrescSort })
             </th>
             <th style="width:150px">
-                @Html.ActionLink("Firma", "Index", new { sortOrder = ViewBag.TytulSort })
-            </th>
-            <th>
-                @Html.ActionLink("Treść", "Index", new { sortOrder = ViewBag.TrescSort })
-            </th>
-            <th>
                 @Html.ActionLink("Miasto", "Index", new { sortOrder = ViewBag.MiastoSort })
             </th>
             <th style="width:110px">
@@ -47,9 +44,6 @@
                     @Html.DisplayFor(modelItem => item.GetUserName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Tytul)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Tresc)
                 </td>
                 <td>
@@ -58,15 +52,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.GetFormattedDateAdd)
                 </td>
-                <td>
+                <td width="250px;">
                     @Html.ActionLink("Szczegóły", "Details", new { id = item.IdCV }, new { @class = "btn btn-warning" })
                     @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
                     {
-                        <br />
                         @Html.ActionLink("Edytuj", "Edit", new { id = item.IdCV }, new { @class = "btn btn-primary" })
                         if (User.IsInRole("Admin"))
                         {
-                            <br />
                             @Html.ActionLink("Usuń", "Delete", new { id = item.IdCV }, new { @class = "btn btn-danger" })
                         }
                     }

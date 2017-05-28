@@ -239,6 +239,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KategoriaController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MiastoController.cs" />
     <Compile Include="Controllers\OgloszenieController.cs" />
     <Compile Include="Controllers\UzytkownikController.cs" />
     <Compile Include="Controllers\WiadomoscController.cs" />
@@ -329,6 +330,19 @@
     <Content Include="Views\Wiadomosc\Wyslano.cshtml" />
     <Content Include="Views\CV\Index.cshtml" />
     <Content Include="Views\CV\MojecCV.cshtml" />
+    <Content Include="Views\Miasto\Index.cshtml" />
+    <Content Include="Views\Miasto\PokazOgloszenia.cshtml" />
+    <Content Include="Views\Miasto\Details.cshtml" />
+    <Content Include="Views\Miasto\Edit.cshtml" />
+    <Content Include="Views\CV\Details.cshtml" />
+    <Content Include="Views\CV\Edit.cshtml" />
+    <Content Include="Views\CV\Delete.cshtml" />
+    <Content Include="Views\Kategoria\PokazCV.cshtml" />
+    <Content Include="Views\Miasto\PokazCV.cshtml" />
+    <Content Include="Views\Kategoria\Dodaj.cshtml" />
+    <Content Include="Views\Miasto\Dodaj.cshtml" />
+    <Content Include="Views\Kategoria\Sukces.cshtml" />
+    <Content Include="Views\Miasto\Sukces.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,52 +1,73 @@
-﻿@model Repozytorium.Models.Views.OgloszeniaZKategoriiViewModels
-
+﻿@model PagedList.IPagedList<Repozytorium.Models.Views.OgloszeniaZKategoriiViewModels>
+@using PagedList.Mvc
 @{
-    ViewBag.Tytul = "Ogłoszenia z kategorii " + Model.NazwaKategorii;
+    ViewBag.Tytul = "Ogłoszenia z kategorii " + Model.First().NazwaKategorii;
 }
 
-<h2>Ogłoszenia z kategorii: @Model.NazwaKategorii</h2>
-
+<h2>Ogłoszenia z kategorii: @Model.First().NazwaKategorii</h2>
 
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Tytuł", "PokazOgloszenia", new { sortOrder = ViewBag.IdSort })         
+            @Html.ActionLink("Id", "Index", new { sortOrder = ViewBag.IdOgloszenia })
+        </th>
+        <th style="width:400px">
+            @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.TytulSort })
+        </th>
+        <th style="width:150px">
+            @Html.ActionLink("Firma", "Index", new { sortOrder = ViewBag.TrescSort })
         </th>
         <th>
-            @Html.ActionLink("Treść", "PokazOgloszenia", new { sortOrder = ViewBag.TytulSort })
+            @Html.ActionLink("Miasto", "Index", new { sortOrder = ViewBag.MiastoSort })
         </th>
         <th style="width:110px">
-            @Html.ActionLink("Data dodania", "PokazOgloszenia", new { sortOrder = ViewBag.DataDodaniaSort })
+            @Html.ActionLink("Rodzaj umowy", "Index", new { sortOrder = ViewBag.RodzajUmowySort })
+        </th>
+        <th style="width:110px">
+            @Html.ActionLink("Data dodania", "Index", new { sortOrder = ViewBag.DataDodaniaSort })
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model.Ogloszenia) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tytul)            
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tresc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataDodania)
-        </td>
-        <td>
-            @Html.ActionLink("Szczegóły", "Details", "Ogloszenie", new { id = item.Id }, new { @class = "btn btn-warning" })
-            @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
-            {
-                <br />
-                @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
-                if (User.IsInRole("Admin"))
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdOgloszenia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tytul)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Miasto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RodzajUmowy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GetFormattedDateAdd)
+            </td>
+            <td width="250px;">
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.IdOgloszenia }, new { @class = "btn btn-warning" })
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
                 {
-                    <br />
-                    @Html.ActionLink("Usuń", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Edytuj", "Edit", "Ogloszenie", new { id = item.IdOgloszenia }, new { @class = "btn btn-primary" })
+                    if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Usuń", "Delete", new { id = item.IdOgloszenia }, new { @class = "btn btn-danger" })
+                    }
                 }
-            }
 
-        </td>
-    </tr>
-}
+            </td>
 
+        </tr>
+    }
 </table>
+<div>
+    <br />
+    Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("PokazOgloszenia", new { page, sortOrder = ViewBag.CurrentSort }))
+</div>

@@ -50,5 +50,50 @@ namespace Repozytorium.Repo
             }
             return cvList.AsQueryable();
         }
+        public OgloszenieEditViewModel GetCVDetailsById(int id)
+        {
+            var ogloszenie = from o in _db.Ogloszenia.Include("Uzytkownik").Include("Miasto")
+                             where o.Zaakceptowane == true && o.DataWaznosci > DateTime.Now
+                             orderby o.DataDodania
+                             select new OgloszenieEditViewModel
+                             {
+                                 UzytkownikId = o.UzytkownikId,
+                                 Firma = o.Uzytkownik.Firma,
+                                 IdOgloszenia = o.Id,
+                                 Tresc = o.Tresc,
+                                 Tytul = o.Tytul,
+                                 //Miasto = o.Miasto.Nazwa,
+                                 //RodzajUmowy = o.RodzajUmowy.Nazwa,
+                                 MiastoId = o.MiastoId,
+                                 RodzajUmowyId = o.RodzajUmowyId,
+                                 ZarobkiOd = o.ZarobkiOd,
+                                 ZarobkiDo = o.ZarobkiDo,
+                                 DataDodania = o.DataDodania
+                             };
+            var x = ogloszenie.Where(p => p.IdOgloszenia == id).FirstOrDefault();
+            return x;
+        }
+
+        public OgloszenieDetailsViewModel GetCVById(int id)
+        {
+            var ogloszenie = from o in _db.Ogloszenia.Include("Uzytkownik").Include("Miasto")
+                             where o.Zaakceptowane == true && o.DataWaznosci > DateTime.Now
+                             orderby o.DataDodania
+                             select new OgloszenieDetailsViewModel
+                             {
+                                 UzytkownikId = o.UzytkownikId,
+                                 Firma = o.Uzytkownik.Firma,
+                                 IdOgloszenia = o.Id,
+                                 Tresc = o.Tresc,
+                                 Tytul = o.Tytul,
+                                 Miasto = o.Miasto.Nazwa,
+                                 RodzajUmowy = o.RodzajUmowy.Nazwa,
+                                 ZarobkiOd = o.ZarobkiOd,
+                                 ZarobkiDo = o.ZarobkiDo,
+                                 DataDodania = o.DataDodania
+                             };
+            var x = ogloszenie.Where(p => p.IdOgloszenia == id).FirstOrDefault();
+            return x;
+        }
     }
 }
