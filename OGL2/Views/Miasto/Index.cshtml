@@ -20,26 +20,33 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.ActionLink(item.Nazwa, "PokazOgloszenia", new { id = item.Id })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LiczbaOfert)
-            </td>
-            <td style="">
-                @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.LiczbaOfert == 0)
                 {
-                    @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
-                    if (User.IsInRole("Admin"))
-                    {
-                        @Html.ActionLink("Usuń", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink(item.Nazwa, null)
                     }
-                }
-            </td>
-        </tr>
+                    else
+                    {
+                        @Html.ActionLink(item.Nazwa, "PokazOgloszenia", new { id = item.Id })
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LiczbaOfert)
+                </td>
+                <td style="">
+                    @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
+                {
+                        @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        if (User.IsInRole("Admin"))
+                        {
+                            @Html.ActionLink("Usuń", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                        }
+                    }
+                </td>
+            </tr>
     }
 
 </table>

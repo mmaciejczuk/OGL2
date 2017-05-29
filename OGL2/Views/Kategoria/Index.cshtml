@@ -26,8 +26,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.ActionLink(item.Nazwa, "PokazOgloszenia", new { id = item.Id})
+            @if (item.LiczbaOfert == 0)
+                {
+                @Html.ActionLink(item.Nazwa, null)
+            }
+            else
+            {
+                @Html.ActionLink(item.Nazwa, "PokazOgloszenia", new { id = item.Id })
+            }
         </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.Opis)
         </td>

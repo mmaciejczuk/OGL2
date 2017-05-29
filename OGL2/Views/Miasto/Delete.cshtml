@@ -1,0 +1,60 @@
+﻿@model Repozytorium.Models.Miasto
+
+@{
+    ViewBag.Tytul = "Usuń miasto" + Model.Nazwa;
+    ViewBag.Opis = "Usuń miasto" + Model.Nazwa + " Opis do Google";
+    ViewBag.SlowaKluczowe = "Miasto, " + Model.Nazwa + ", usuń";
+}
+
+<h2>Usuń Miasto @Model.Nazwa</h2>
+
+@if (ViewBag.Blad == true)
+{
+    <div class="alert alert-danger" role="alert">
+        Wystąpił błąd podczas usuwania.<br />
+        Spróbuj ponownie.
+    </div>
+}
+
+<h3>Czy na pewno chcesz usunąć?</h3>
+<div>
+    <h4>Ogloszenie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nazwa)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-danger confirmation"
+                   onclick="return confirm('Czy na pewno chcesz usunąć?')" />
+            @Html.ActionLink("Wróć", "Index", null, new { @class = "btn btn-warning" })
+        </div>
+    }
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $('.confirmation').on('click', function (){
+            return confirm('Czy na pewno chcesz usunąć?');
+    })
+    </script>
+}

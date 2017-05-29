@@ -33,9 +33,9 @@
                             <li class="divider"></li>
                             <li>@Html.ActionLink("Wyszukaj po kategorii", "Index", "Kategoria")</li>
                             <li>@Html.ActionLink("Wyszukaj po mieście", "Index", "Miasto")</li>
-                            <li class="divider"></li>
                             @if (User.Identity.IsAuthenticated)
                             {
+                                <li class="divider"></li>
                                 <li>@Html.ActionLink("Dodaj ofertę", "Create", "Ogloszenie")</li>
                             }
                         </ul>
@@ -52,9 +52,9 @@
                             <li class="divider"></li>
                             <li>@Html.ActionLink("Wyszukaj po kategorii", "Index", "Kategoria")</li>
                             <li>@Html.ActionLink("Wyszukaj po mieście", "Index", "Kategoria")</li>
-                            <li class="divider"></li>
                             @if (User.Identity.IsAuthenticated)
                             {
+                                <li class="divider"></li>
                                 <li>@Html.ActionLink("Dodaj CV", "Create", "Ogloszenie")</li>
                             }
                         </ul>
@@ -64,12 +64,15 @@
                     {
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Dodaj
+                                Administracja
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("Miasta", "Dodaj", "Miasto")</li>
-                                <li>@Html.ActionLink("Kategorie", "Dodaj", "Kategoria")</li>
+                                <li>@Html.ActionLink("Dodaj miasto", "Dodaj", "Miasto")</li>
+                                <li>@Html.ActionLink("Dodaj kategorię", "Dodaj", "Kategoria")</li>
+                                <li class="divider"></li>
+                                <li>@Html.ActionLink("Usuń miasto", "Delete", "Miasto")</li>
+                                <li>@Html.ActionLink("Usuń kategorię", "Delete", "Kategoria")</li>
                             </ul>
                         </li>
                     }

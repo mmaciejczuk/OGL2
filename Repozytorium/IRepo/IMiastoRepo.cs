@@ -13,6 +13,8 @@ namespace Repozytorium.IRepo
         IQueryable<OgloszeniaZMiastaViewModel> PobierzOgloszeniaZMiasta(int id);
         void Dodaj(Miasto miasto);
         bool MiastoIstnieje(Miasto miasto);
+        Miasto GetMiastoById(int id);
+        void UsunMiasto(int id);
         void SaveChanges();
     }
 }

@@ -72,6 +72,18 @@ namespace Repozytorium.Repo
             return ogloszeniaList.AsQueryable();
         }
 
+        public Miasto GetMiastoById(int id)
+        {
+            var miasto = from o in _db.Miasto.Where(p => p.Id == id) select o;
+            return miasto.FirstOrDefault();
+        }
+
+        public void UsunMiasto(int id)
+        {
+            Miasto ogloszenie = _db.Miasto.Find(id);
+            _db.Miasto.Remove(ogloszenie);
+        }
+
         public void SaveChanges()
         {
             _db.SaveChanges();

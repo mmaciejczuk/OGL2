@@ -33,7 +33,7 @@ namespace OGL2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Dodaj(Miasto miasto)
         {
-            if (ModelState.IsValid && !_repo.MiastoIstnieje(miasto))
+            if (ModelState.IsValid)
             {
                 try
                 {
@@ -58,7 +58,7 @@ namespace OGL2.Controllers
         public ActionResult Index(int? page, string sortOrder)
         {
         int currentPage = page ?? 1;
-            int naStronie = 12;
+            int naStronie = 10;
 
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NazwaSort = sortOrder == "NazwaAsc" ? "Nazwa" : "NazwaAsc";
@@ -152,6 +152,45 @@ namespace OGL2.Controllers
                     break;
             }
             return View(ogloszenia.ToPagedList<OgloszeniaZMiastaViewModel>(currentPage, naStronie));
+        }
+
+        // GET
+        [Authorize]
+        public ActionResult Delete(int? id, bool? blad)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Miasto miasto = _repo.GetMiastoById((int)id);
+            if (miasto == null)
+            {
+                return HttpNotFound();
+            }
+            else if (!User.IsInRole("Admin"))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (blad != null)
+                ViewBag.Blad = true;
+            return View(miasto);
+        }
+
+        //POST
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            _repo.UsunMiasto(id);
+            try
+            {
+                _repo.SaveChanges();
+            }
+            catch (System.Exception)
+            {
+                return RedirectToAction("Delete", new { id = id, blad = true });
+            }
+            return RedirectToAction("Index");
         }
 
     }

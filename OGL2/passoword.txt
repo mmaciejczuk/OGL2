@@ -1,0 +1,2 @@
+login: admin@jobprofit.pl
+password: Abc123_

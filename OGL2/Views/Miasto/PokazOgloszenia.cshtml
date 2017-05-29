@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Ogłoszenia z Miasta: @Model.First().Miasto</h2>
+<h2>Ogłoszenia z Miasta: @Model.FirstOrDefault().Miasto</h2>
 
 <table class="table">
     <tr>

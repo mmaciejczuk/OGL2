@@ -40,49 +40,94 @@
             @Html.ActionLink("Data dodania", "Index", new { sortOrder = ViewBag.DataDodaniaSort })
         </th>
         <th style="width:110px">
-            @Html.ActionLink("Zaakceptowane", "Index", new { sortOrder = ViewBag.ZaakceptowaneSort })
+            @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin")))
+            {
+                @Html.ActionLink("Zaakceptowane", "Index", new { sortOrder = ViewBag.ZaakceptowaneSort })
+            }
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdOgloszenia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tytul)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Firma)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Miasto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RodzajUmowy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GetFormattedDateAdd)
-        </td>
-        <td>
-        @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin")))
+        @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") && item.Zaakceptowane == false))
         {
-            @Html.CheckBoxFor(modelItem => item.Zaakceptowane, new { @disabled = "disabled" })
-        }
-        </td>
-        <td width="250px;">
-            @Html.ActionLink("Szczegóły", "Details", new { id = item.IdOgloszenia }, new { @class = "btn btn-warning" })
-            @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
-            {
-                @Html.ActionLink("Edytuj", "Edit", new { id = item.IdOgloszenia }, new { @class = "btn btn-primary" })
-                if (User.IsInRole("Admin"))
+            <td>
+                @Html.DisplayFor(modelItem => item.IdOgloszenia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tytul)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Miasto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RodzajUmowy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GetFormattedDateAdd)
+            </td>
+            <td>
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin")))
                 {
-                    @Html.ActionLink("Usuń", "Delete", new { id = item.IdOgloszenia }, new { @class = "btn btn-danger" })
-                }
-            }
 
-        </td>
+                    @Html.CheckBoxFor(modelItem => item.Zaakceptowane, new { @disabled = "disabled" })
+                }
+            </td>
+            <td width="250px;">
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.IdOgloszenia }, new { @class = "btn btn-warning" })
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
+                {
+                    @Html.ActionLink("Edytuj", "Edit", new { id = item.IdOgloszenia }, new { @class = "btn btn-primary" })
+                    if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Usuń", "Delete", new { id = item.IdOgloszenia }, new { @class = "btn btn-danger" })
+                    }
+                }
+
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.IdOgloszenia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tytul)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Miasto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RodzajUmowy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GetFormattedDateAdd)
+            </td>
+            <td>
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin")))
+                {
+                    @Html.CheckBoxFor(modelItem => item.Zaakceptowane, new { @disabled = "disabled" })
+                }
+            </td>
+            <td width="250px;">
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.IdOgloszenia }, new { @class = "btn btn-warning" })
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
+                {
+                    @Html.ActionLink("Edytuj", "Edit", new { id = item.IdOgloszenia }, new { @class = "btn btn-primary" })
+                    if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Usuń", "Delete", new { id = item.IdOgloszenia }, new { @class = "btn btn-danger" })
+                    }
+                }
+            </td>
+        }
 
     </tr>
 }

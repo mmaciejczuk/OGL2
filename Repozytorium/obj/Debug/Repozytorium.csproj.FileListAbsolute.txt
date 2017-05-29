@@ -242,3 +242,4 @@ F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.csproj.GenerateResource.Cach
 C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._2.resources
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.Migrations._2.resources
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.Migrations._3.resources
+C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._3.resources

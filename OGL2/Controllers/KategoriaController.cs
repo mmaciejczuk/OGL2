@@ -33,7 +33,7 @@ namespace OGL2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Dodaj(Kategoria kategoria)
         {
-            if (ModelState.IsValid && !_repo.KategoriaIstnieje(kategoria.Nazwa))
+            if (ModelState.IsValid)
             {
                 try
                 {
@@ -58,7 +58,7 @@ namespace OGL2.Controllers
         public ActionResult Index(int? page, string sortOrder)
         {
             int currentPage = page ?? 1;
-            int naStronie = 12;
+            int naStronie = 10;
 
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NazwaSort = sortOrder == "NazwaAsc" ? "Nazwa" : "NazwaAsc";
