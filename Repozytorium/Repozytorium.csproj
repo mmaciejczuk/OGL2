@@ -195,6 +195,7 @@
     <Compile Include="Models\Views\KategoriaViewModel.cs" />
     <Compile Include="Models\Views\MiastoViewModel.cs" />
     <Compile Include="Models\Views\OgloszeniaZMiastaViewModel.cs" />
+    <Compile Include="Models\Views\OgloszenieCreateViewModel.cs" />
     <Compile Include="Models\Views\OgloszenieDetailsViewModel.cs" />
     <Compile Include="Models\Views\OgloszenieEditViewModel.cs" />
     <Compile Include="Models\Views\OgloszenieViewModel.cs" />

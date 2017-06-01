@@ -108,20 +108,32 @@ namespace OGL2.Controllers
         // GET
         public ActionResult Create()
         {
-            return View();
+            OgloszenieEditViewModel ogloszenie = new OgloszenieEditViewModel();
+            ogloszenie.Miasta = _repo.GetCities();
+            ogloszenie.RodzajeUmowy = _repo.GetAgreementTypes();
+            ogloszenie.Kategorie = _repo.GetCategories();
+            if (ogloszenie == null)
+            {
+                return HttpNotFound();
+            }
+            else if (ogloszenie.UzytkownikId != User.Identity.GetUserId() && !(User.IsInRole("Admin") || User.IsInRole("Pracownik")))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return View(ogloszenie);
         }
 
         // POST
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Tresc,Tytul")] Ogloszenie ogloszenie)
+        public ActionResult Create([Bind(Include = "Tresc,Tytul")] OgloszenieCreateViewModel ogloszenie)
         {
             if (ModelState.IsValid)
             {
                 // using Microsoft.AspNet.Identity;
-                ogloszenie.UzytkownikId = User.Identity.GetUserId();
-                ogloszenie.DataDodania = DateTime.Now;
+                ogloszenie.Ogloszenie.UzytkownikId = User.Identity.GetUserId();
+                ogloszenie.Ogloszenie.DataDodania = DateTime.Now;
                 try
                 {
                     _repo.Dodaj(ogloszenie);

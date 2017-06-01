@@ -14,6 +14,8 @@ namespace Repozytorium.IRepo
         IQueryable<Kategoria> PobierzStrone(int? currentPage, int? naStronie);
         IQueryable<OgloszeniaZKategoriiViewModels> PobierzOgloszeniaZKategorii(int id);
         bool KategoriaIstnieje(string kategoria);
+        Kategoria GetKategoriaById(int id);
+        void Aktualizuj(Kategoria kategoria);
         void Dodaj(Kategoria kategoria);
         void SaveChanges();
         string NazwaDlaKategorii(int id);

@@ -25,9 +25,9 @@ namespace Repozytorium.Repo
             _db.Entry(ogloszenie).State = EntityState.Modified;
         }
 
-        public void Dodaj(Ogloszenie ogloszenie)
+        public void Dodaj(OgloszenieCreateViewModel ogloszenie)
         {
-            _db.Ogloszenia.Add(ogloszenie);
+            _db.Ogloszenia.Add(ogloszenie.Ogloszenie);
         }
 
         public List<Miasto> GetCities()

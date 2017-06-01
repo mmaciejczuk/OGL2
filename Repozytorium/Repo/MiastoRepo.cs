@@ -3,6 +3,7 @@ using Repozytorium.Models;
 using Repozytorium.Models.Views;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -19,6 +20,17 @@ namespace Repozytorium.Repo
         public void Dodaj(Miasto miasto)
         {
             _db.Miasto.Add(miasto);
+        }
+
+        public Miasto GetMiastoById(int id)
+        {
+            var miasto = _db.Miasto.FirstOrDefault(p => p.Id == id);
+            return miasto;
+        }
+
+        public void Aktualizuj(Miasto miasto)
+        {
+            _db.Entry(miasto).State = EntityState.Modified;
         }
 
         public bool MiastoIstnieje(Miasto miasto)
@@ -70,12 +82,6 @@ namespace Repozytorium.Repo
                 });
             }
             return ogloszeniaList.AsQueryable();
-        }
-
-        public Miasto GetMiastoById(int id)
-        {
-            var miasto = from o in _db.Miasto.Where(p => p.Id == id) select o;
-            return miasto.FirstOrDefault();
         }
 
         public void UsunMiasto(int id)

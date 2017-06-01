@@ -236,10 +236,10 @@ C:\Code\OGL2\Repozytorium\bin\AutoMapper.xml
 F:\Git_Repo\OGL\Repozytorium\bin\AutoMapper.xml
 C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._1.resources
 C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.csproj.GenerateResource.Cache
-C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.csprojResolveAssemblyReference.cache
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.Migrations._1.resources
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.csproj.GenerateResource.Cache
 C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._2.resources
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.Migrations._2.resources
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.Migrations._3.resources
 C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._3.resources
+C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.csprojResolveAssemblyReference.cache

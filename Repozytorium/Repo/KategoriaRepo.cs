@@ -6,6 +6,7 @@ using System.Web;
 using Repozytorium.Models;
 using System.Diagnostics;
 using Repozytorium.Models.Views;
+using System.Data.Entity;
 
 namespace Repozytorium.Repo
 {
@@ -20,6 +21,17 @@ namespace Repozytorium.Repo
         public void Dodaj(Kategoria kategoria)
         {
             _db.Kategorie.Add(kategoria);
+        }
+
+        public Kategoria GetKategoriaById(int id)
+        {
+            var kategoria = _db.Kategorie.FirstOrDefault(p => p.Id == id);
+            return kategoria;
+        }
+
+        public void Aktualizuj(Kategoria kategoria)
+        {
+            _db.Entry(kategoria).State = EntityState.Modified;
         }
 
         public bool KategoriaIstnieje(string kategoria)

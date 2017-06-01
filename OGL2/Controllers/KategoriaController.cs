@@ -168,5 +168,52 @@ namespace OGL2.Controllers
             var kategorie = _repo.PobierzKategorie().AsNoTracking();
             return Json(kategorie, JsonRequestBehavior.AllowGet);
         }
+
+        // ------------------------- EDIT -------------------------------------
+        // GET
+        [Authorize]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Kategoria kategoria = _repo.GetKategoriaById((int)id);
+
+            if (kategoria == null)
+            {
+                return HttpNotFound();
+            }
+            else if (!(User.IsInRole("Admin")))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return View(kategoria);
+        }
+
+
+        // POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult Edit(Kategoria kategoria)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // ogloszenie.UzytkownikId = "ffgfs";
+                    _repo.Aktualizuj(kategoria);
+                    _repo.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    ViewBag.Blad = true;
+                    return View(kategoria);
+                }
+            }
+            ViewBag.Blad = false;
+            return View(kategoria);
+        }
     }
 }

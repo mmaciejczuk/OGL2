@@ -193,5 +193,51 @@ namespace OGL2.Controllers
             return RedirectToAction("Index");
         }
 
+        // ------------------------- EDIT -------------------------------------
+        // GET
+        [Authorize]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Miasto kategoria = _repo.GetMiastoById((int)id);
+
+            if (kategoria == null)
+            {
+                return HttpNotFound();
+            }
+            else if (!(User.IsInRole("Admin")))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return View(kategoria);
+        }
+
+        // POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult Edit(Miasto miasto)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // ogloszenie.UzytkownikId = "ffgfs";
+                    _repo.Aktualizuj(miasto);
+                    _repo.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    ViewBag.Blad = true;
+                    return View(miasto);
+                }
+            }
+            ViewBag.Blad = false;
+            return View(miasto);
+        }
+
     }
 }
