@@ -144,7 +144,7 @@ namespace Repozytorium.Repo
         //    return null;
         //}
 
-        public void SaveChages()
+        public void SaveChanges()
         {
             _db.SaveChanges();
         }

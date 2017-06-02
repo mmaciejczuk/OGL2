@@ -180,6 +180,10 @@
     <Compile Include="Migrations\201705261548060__3.Designer.cs">
       <DependentUpon>201705261548060__3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706021200105__4.cs" />
+    <Compile Include="Migrations\201706021200105__4.Designer.cs">
+      <DependentUpon>201706021200105__4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CV.cs" />
     <Compile Include="Models\Doswiadczenie.cs" />
@@ -200,6 +204,7 @@
     <Compile Include="Models\Views\OgloszenieEditViewModel.cs" />
     <Compile Include="Models\Views\OgloszenieViewModel.cs" />
     <Compile Include="Models\Views\OgloszeniaZKategoriiViewModels.cs" />
+    <Compile Include="Models\Views\WiadomosciViewModel.cs" />
     <Compile Include="Models\Wiadomosc.cs" />
     <Compile Include="Models\Wymaganie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -219,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705261548060__3.resx">
       <DependentUpon>201705261548060__3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706021200105__4.resx">
+      <DependentUpon>201706021200105__4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

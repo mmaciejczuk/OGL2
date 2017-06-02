@@ -13,15 +13,16 @@ namespace OGL2.Controllers
     public class OgloszenieController : Controller
     {
         private readonly IOgloszenieRepo _repo;
-
+        private readonly IWiadomoscRepo _messageRepo;
         public OgloszenieController()
         {
 
         }
 
-        public OgloszenieController(IOgloszenieRepo repo)
+        public OgloszenieController(IOgloszenieRepo repo, IWiadomoscRepo messageRepo)
         {
             _repo = repo;
+            _messageRepo = messageRepo;
         }
 
 //-------------------------- INDEX----------------------------------------
@@ -90,6 +91,7 @@ namespace OGL2.Controllers
         }
 
 // ------------------------- DETAILS -------------------------------------
+        [HttpGet]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -104,7 +106,32 @@ namespace OGL2.Controllers
             return View(ogloszenie);
         }
 
-// ------------------------- CREATE -------------------------------------
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Details(string UzytkownikId, int IdOgloszenia, string tresc)
+        {
+            OgloszenieDetailsViewModel ogloszenie = _repo.GetOgloszeniaById((int)IdOgloszenia);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //tutaj zapis do bazy
+                    _messageRepo.SendMessage(UzytkownikId, IdOgloszenia, tresc);
+                    _messageRepo.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    ViewBag.Blad = true;
+                    return View(ogloszenie);
+                }
+            }
+            
+            ViewBag.Blad = false;
+            return View(ogloszenie);
+        }
+
+        // ------------------------- CREATE -------------------------------------
         // GET
         public ActionResult Create()
         {
@@ -137,7 +164,7 @@ namespace OGL2.Controllers
                 try
                 {
                     _repo.Dodaj(ogloszenie);
-                    _repo.SaveChages();
+                    _repo.SaveChanges();
                     return RedirectToAction("MojeOgloszenia");
                 }
                 catch (Exception)
@@ -185,7 +212,7 @@ namespace OGL2.Controllers
                 {
                     // ogloszenie.UzytkownikId = "ffgfs";
                     _repo.Aktualizuj(ogloszenie);
-                    _repo.SaveChages();
+                    _repo.SaveChanges();
                 }
                 catch (Exception)
                 {
@@ -230,7 +257,7 @@ namespace OGL2.Controllers
             _repo.UsunOgloszenie(id);
             try
             {
-                _repo.SaveChages();
+                _repo.SaveChanges();
             }
             catch (System.Exception)
             {

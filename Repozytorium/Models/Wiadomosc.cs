@@ -15,7 +15,7 @@ namespace Repozytorium.Models
         [MaxLength(500)]
         public string Tresc { get; set; }
         [Display(Name = "Tytuł wiadomości:")]
-        [MaxLength(72)]
+        [MaxLength(500)]
         public string Tytul { get; set; }
         [Display(Name = "Data dodania:")]
         [DataType(DataType.Date)]

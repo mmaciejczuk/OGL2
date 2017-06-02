@@ -14,7 +14,7 @@ namespace Repozytorium.IRepo
         List<RodzajUmowy> GetAgreementTypes();
         List<Kategoria> GetCategories();
         void UsunOgloszenie(int id);
-        void SaveChages();
+        void SaveChanges();
         void Dodaj(OgloszenieCreateViewModel ogloszenie);
         void Aktualizuj(Ogloszenie ogloszenie);
         //IQueryable<OgloszenieViewModel> PobierzStrone(int? page, int? pageSize);

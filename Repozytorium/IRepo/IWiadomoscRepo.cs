@@ -8,6 +8,7 @@ namespace Repozytorium.IRepo
 {
     public interface IWiadomoscRepo
     {
-        void WyslijWiadomosc(Wiadomosc wiadomosc);
+        void SendMessage(string UzytkownikId, int IdOgloszenia, string tresc);
+        void SaveChanges();
     }
 }

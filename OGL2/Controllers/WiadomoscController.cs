@@ -26,9 +26,9 @@ namespace OGL2.Controllers
         [Authorize]
         public ActionResult Wyslano(string userId, int ofertaId)
         {    
-            string authId = User.Identity.GetUserId();
-            Wiadomosc wiadomosc = new Wiadomosc();
-            _repo.WyslijWiadomosc(wiadomosc);
+            //string authId = User.Identity.GetUserId();
+            //Wiadomosc wiadomosc = new Wiadomosc();
+            //_repo.WyslijWiadomosc(wiadomosc);
             return View();
         }
     }

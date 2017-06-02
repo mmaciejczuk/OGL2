@@ -202,9 +202,9 @@ namespace OGL2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Miasto kategoria = _repo.GetMiastoById((int)id);
+            Miasto miasto = _repo.GetMiastoById((int)id);
 
-            if (kategoria == null)
+            if (miasto == null)
             {
                 return HttpNotFound();
             }
@@ -212,7 +212,7 @@ namespace OGL2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(kategoria);
+            return View(miasto);
         }
 
         // POST
