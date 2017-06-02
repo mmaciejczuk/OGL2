@@ -7,6 +7,8 @@ namespace Repozytorium.Models.Views
 {
     public class WiadomosciViewModel
     {
-        public int MyProperty { get; set; }
+        public string UzytkownikId { get; set; }
+        public List<Wiadomosc> Wiadomosci { get; set; }
+
     }
 }

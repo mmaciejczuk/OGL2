@@ -76,8 +76,10 @@
                             </ul>
                         </li>
                     }
-
+                @if (User.Identity.IsAuthenticated)
+                {
                     <li>@Html.ActionLink("Wiadomości", "Index", "Wiadomosc")</li>
+                }
 
                     <li>@Html.ActionLink("Jak stworzyć własne CV", "StworzCV", "CV", null, new { @style = "color: lightskyblue;" })</li>
                 </ul>

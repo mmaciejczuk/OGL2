@@ -19,7 +19,7 @@
 else if (ViewBag.Blad == false)
 {
     <div class="alert alert-success" role="alert">
-        Pomyślnie wysłano
+        Pomyślnie wysłano wiadomość!
     </div>
 }
 
@@ -90,12 +90,14 @@ else if (ViewBag.Blad == false)
         <dd>
             @Html.DisplayFor(model => model.GetFormattedDateAdd)
         </dd>
+@if (User.Identity.IsAuthenticated)
+{
         <dt>
             <br />
             <br />
             Odpowiedź
         </dt>
-        @using (Html.BeginForm())
+        using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
                 <dd>
@@ -113,6 +115,7 @@ else if (ViewBag.Blad == false)
                             <input type="submit" value="Wyślij" class="btn btn-success" />
                 </dd>
         }
+}
     </dl>
 </div>
 <p>

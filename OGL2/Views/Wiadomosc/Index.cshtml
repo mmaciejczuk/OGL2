@@ -1,8 +1,73 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model Repozytorium.Models.Views.WiadomosciViewModel
+@using Microsoft.AspNet.Identity
+
+<h2>Twoje wiadomości</h2>
+
+@if (ViewBag.Blad == true)
+{
+    <div class="alert alert-danger" role="alert">
+        Wystąpił błąd podczas wysyłania.<br />
+        Spróbuj ponownie.
+    </div>
+}
+else if (ViewBag.Blad == false)
+{
+    <div class="alert alert-success" role="alert">
+        Pomyślnie wysłano wiadomość!
+    </div>
 }
 
-<h2>Index</h2>
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UzytkownikId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UzytkownikId)
+        </dd>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <dt>
+                <br />
+                <br />
+                Odpowiedź
+            </dt>
+            using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <dd>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.UzytkownikId)
+                    <br />
+                    <br />
+                    <input name="tresc" id="tresc" style="width: 100%; max-width: 100%; padding: 0 0 400px 0; " />
+                    <br />
+                    @*@Html.ActionLink("Wyślij", "Wyslano", "Wiadomosc",
+                        new { userId = Model.UzytkownikId, ofertaId = Model.IdOgloszenia },
+                        new { @class = "btn btn-info" })*@
+
+                    <input type="submit" value="Wyślij" class="btn btn-success" />
+                </dd>
+            }
+        }
+    </dl>
+</div>
+<p>
+    @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin")
+                || User.IsInRole("Pracownik")
+                || Model.UzytkownikId == User.Identity.GetUserId()))
+    {
+        @*@Html.ActionLink("Edytuj", "Edit", new { id = Model.IdOgloszenia }, new { @class = "btn btn-primary" })*@
+    }
+    @Html.ActionLink("Wróć", "Index", null, new { @class = "btn btn-warning" })
+</p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
 
