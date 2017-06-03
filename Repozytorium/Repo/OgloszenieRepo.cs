@@ -20,14 +20,28 @@ namespace Repozytorium.Repo
             _db = db;
         }
 
-        public void Aktualizuj(Ogloszenie ogloszenie)
+        public void Aktualizuj(OgloszenieEditViewModel ogloszenieEditViewModel)
         {
+            Ogloszenie ogloszenie = new Ogloszenie()
+            {
+                Id = ogloszenieEditViewModel.IdOgloszenia,
+                Tresc = ogloszenieEditViewModel.Tresc,
+                Tytul = ogloszenieEditViewModel.Tytul,
+                DataDodania = ogloszenieEditViewModel.DataDodania,
+                UzytkownikId = ogloszenieEditViewModel.UzytkownikId,
+                DataWaznosci = ogloszenieEditViewModel.DataDodania.AddDays(14),
+                Zaakceptowane = ogloszenieEditViewModel.Zaakceptowane,
+                MiastoId = ogloszenieEditViewModel.MiastoId,
+                RodzajUmowyId = ogloszenieEditViewModel.RodzajUmowyId,
+                ZarobkiOd = ogloszenieEditViewModel.ZarobkiOd,
+                ZarobkiDo = ogloszenieEditViewModel.ZarobkiDo
+            };
             _db.Entry(ogloszenie).State = EntityState.Modified;
         }
 
-        public void Dodaj(OgloszenieCreateViewModel ogloszenie)
+        public void Dodaj(Ogloszenie ogloszenie)
         {
-            _db.Ogloszenia.Add(ogloszenie.Ogloszenie);
+            _db.Ogloszenia.Add(ogloszenie);
         }
 
         public List<Miasto> GetCities()

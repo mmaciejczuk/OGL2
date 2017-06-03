@@ -1,13 +1,27 @@
-﻿@model Repozytorium.Models.Views.OgloszenieCreateViewModel
+﻿@model Repozytorium.Models.Views.OgloszenieEditViewModel
 
 @{
-    ViewBag.Tytul = "Dodaj ogłoszenie";
-    ViewBag.Opis = "Dodaj ogłoszenie - opis do Google";
-    ViewBag.SlowaKluczowe = "Ogłoszenie, dodaj";
+    ViewBag.Tytul = "Edytujesz ogłoszenie nr " + @Model.IdOgloszenia;
+    ViewBag.Opis = "Edytujesz ogłoszenie nr " + @Model.IdOgloszenia;
+    ViewBag.SlowaKluczowe = "Edytujesz ogłoszenie nr " + @Model.IdOgloszenia;
 }
 
-<h2>Stwórz ofertę</h2>
+<h2>Dodajesz nowe ogłoszenie.</h2>
 
+@if (ViewBag.Blad == true)
+{
+    <div class="alert alert-danger" role="alert">
+        Wystąpił błąd podczas edycji.<br />
+        Spróbuj ponownie.
+    </div>
+}
+else if (ViewBag.Blad == false)
+{
+    <div class="alert alert-success" role="alert">
+        Pomyślnie edytowano.
+        Twoje ogłoszenie wygląda teraz następująco:
+    </div>
+}
 
 @using (Html.BeginForm())
 {
@@ -17,7 +31,7 @@
         <h4></h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+        @Html.HiddenFor(model => model.IdOgloszenia)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Firma, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -50,7 +64,6 @@
                     <option disabled selected value> -- wybierz kategorię -- </option>
                     @foreach (var item in Model.Kategorie)
                     {
-                        
                         <option value="@item.Id">
                             @item.Nazwa
                         </option>
@@ -69,7 +82,6 @@
                     <option disabled selected value> -- wybierz miasto -- </option>
                     @foreach (var item in Model.Miasta)
                     {
-                        
                         <option value="@item.Id">
                             @item.Nazwa
                         </option>
@@ -86,7 +98,6 @@
                     <option disabled selected value> -- wybierz rodzaj umowy -- </option>
                     @foreach (var item in Model.RodzajeUmowy)
                     {
-                        
                         <option value="@item.Id">
                             @item.Nazwa
                         </option>
@@ -129,14 +140,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Zapisz" class="btn btn-success" />
+                <input type="submit" value="Opublikuj" class="btn btn-success" />
             </div>
         </div>
-        </div>
+    </div>
 }
 
 <div>
-    @Html.ActionLink("Wróć", "Index", null, new {@class="btn btn-warning"})
+    @Html.ActionLink("Wróć", "Index", null, new { @class = "btn btn-warning" })
 </div>
 
 @section Scripts {

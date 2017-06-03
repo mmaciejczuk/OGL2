@@ -154,13 +154,13 @@ namespace OGL2.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Tresc,Tytul")] OgloszenieCreateViewModel ogloszenie)
+        public ActionResult Create([Bind(Include = "Tresc,Tytul")] Ogloszenie ogloszenie)
         {
             if (ModelState.IsValid)
             {
                 // using Microsoft.AspNet.Identity;
-                ogloszenie.Ogloszenie.UzytkownikId = User.Identity.GetUserId();
-                ogloszenie.Ogloszenie.DataDodania = DateTime.Now;
+                ogloszenie.UzytkownikId = User.Identity.GetUserId();
+                ogloszenie.DataDodania = DateTime.Now;
                 try
                 {
                     _repo.Dodaj(ogloszenie);
@@ -177,6 +177,7 @@ namespace OGL2.Controllers
 
 // ------------------------- EDIT -------------------------------------
         // GET
+        [HttpGet]
         [Authorize]
         public ActionResult Edit(int? id)
         {
@@ -204,24 +205,30 @@ namespace OGL2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Edit([Bind(Include = "Id,Tresc,Tytul,DataDodania,UzytkownikId")] Ogloszenie ogloszenie)
+        public ActionResult Edit(OgloszenieEditViewModel ogloszenieEditViewModel, FormCollection formCollection)
         {
+            ogloszenieEditViewModel.KategoriaId = Convert.ToInt32(formCollection["kategoriaSelect"]);
+            ogloszenieEditViewModel.MiastoId = Convert.ToInt32(formCollection["miastoSelect"]);
+            ogloszenieEditViewModel.RodzajUmowyId = Convert.ToInt32(formCollection["rodzajUmowySelect"]);
+            ogloszenieEditViewModel.Miasta = _repo.GetCities();
+            ogloszenieEditViewModel.RodzajeUmowy = _repo.GetAgreementTypes();
+            ogloszenieEditViewModel.Kategorie = _repo.GetCategories();
+
             if (ModelState.IsValid)
-            {
+            {                
                 try
                 {
-                    // ogloszenie.UzytkownikId = "ffgfs";
-                    _repo.Aktualizuj(ogloszenie);
+                    _repo.Aktualizuj(ogloszenieEditViewModel);
                     _repo.SaveChanges();
                 }
                 catch (Exception)
                 {
                     ViewBag.Blad = true;
-                    return View(ogloszenie);
+                    return View(ogloszenieEditViewModel);
                 }
             }
             ViewBag.Blad = false;
-            return View(ogloszenie);
+            return View(ogloszenieEditViewModel);
         }
 
 // ------------------------- DELETE -------------------------------------

@@ -106,13 +106,9 @@ else if (ViewBag.Blad == false)
                     @Html.HiddenFor(model => model.IdOgloszenia)
                     <br />
                     <br />
-                    <input  name="tresc" id="tresc" style="width: 100%; max-width: 100%; padding: 0 0 400px 0; "  /> 
+                    <input  name="tresc" id="tresc" style="width: 100%; max-width: 100%; padding: 0 0 100px 0; "  /> 
                     <br />
-                    @*@Html.ActionLink("Wyślij", "Wyslano", "Wiadomosc",
-                                                        new { userId = Model.UzytkownikId, ofertaId = Model.IdOgloszenia },
-                                                        new { @class = "btn btn-info" })*@
-
-                            <input type="submit" value="Wyślij" class="btn btn-success" />
+                    <input type="submit" value="Wyślij" class="btn btn-success" />
                 </dd>
         }
 }
