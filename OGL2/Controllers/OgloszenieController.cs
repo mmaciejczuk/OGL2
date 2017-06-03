@@ -151,28 +151,38 @@ namespace OGL2.Controllers
         }
 
         // POST
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Tresc,Tytul")] Ogloszenie ogloszenie)
+        [Authorize]
+        public ActionResult Create(OgloszenieEditViewModel ogloszenieEditViewModel, FormCollection formCollection)
         {
-            if (ModelState.IsValid)
+            ogloszenieEditViewModel.Miasta = _repo.GetCities();
+            ogloszenieEditViewModel.RodzajeUmowy = _repo.GetAgreementTypes();
+            ogloszenieEditViewModel.Kategorie = _repo.GetCategories();
+
+            if (ModelState.IsValid && Convert.ToInt32(formCollection["kategoriaSelect"]) != 0
+                                    && Convert.ToInt32(formCollection["miastoSelect"]) != 0
+                                    && Convert.ToInt32(formCollection["rodzajUmowySelect"]) != 0)
             {
-                // using Microsoft.AspNet.Identity;
-                ogloszenie.UzytkownikId = User.Identity.GetUserId();
-                ogloszenie.DataDodania = DateTime.Now;
+                ogloszenieEditViewModel.KategoriaId = Convert.ToInt32(formCollection["kategoriaSelect"]);
+                ogloszenieEditViewModel.MiastoId = Convert.ToInt32(formCollection["miastoSelect"]);
+                ogloszenieEditViewModel.RodzajUmowyId = Convert.ToInt32(formCollection["rodzajUmowySelect"]);
+                ogloszenieEditViewModel.UzytkownikId = User.Identity.GetUserId();
+                ogloszenieEditViewModel.DataDodania = DateTime.Now;
                 try
                 {
-                    _repo.Dodaj(ogloszenie);
+                    _repo.Dodaj(ogloszenieEditViewModel);
                     _repo.SaveChanges();
                     return RedirectToAction("MojeOgloszenia");
                 }
                 catch (Exception)
                 {
-                    return View(ogloszenie);
+                    ViewBag.Blad = true;
+                    return View(ogloszenieEditViewModel);
                 }
             }
-            return View(ogloszenie);
+            ViewBag.Blad = true;
+            return View(ogloszenieEditViewModel);
         }
 
 // ------------------------- EDIT -------------------------------------

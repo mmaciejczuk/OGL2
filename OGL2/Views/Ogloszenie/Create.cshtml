@@ -11,14 +11,14 @@
 @if (ViewBag.Blad == true)
 {
     <div class="alert alert-danger" role="alert">
-        Wystąpił błąd podczas edycji.<br />
-        Spróbuj ponownie.
+        Wystąpił błąd podczas dodawania.<br />
+        Wypełnij poprawnie formularz i spróbuj ponownie.
     </div>
 }
 else if (ViewBag.Blad == false)
 {
     <div class="alert alert-success" role="alert">
-        Pomyślnie edytowano.
+        Pomyślnie dodano.
         Twoje ogłoszenie wygląda teraz następująco:
     </div>
 }
@@ -27,19 +27,20 @@ else if (ViewBag.Blad == false)
 {
     @Html.AntiForgeryToken()
 
+    @Html.HiddenFor(m => m.UzytkownikId)
+
     <div class="form-horizontal">
         <h4></h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.IdOgloszenia)
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Firma, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Firma, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Firma, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Tytul, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -60,8 +61,8 @@ else if (ViewBag.Blad == false)
         <div class="form-group">
             @Html.LabelFor(model => model.MiastoId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select name="listbox" id="listbox" class="form-control">
-                    <option disabled selected value> -- wybierz kategorię -- </option>
+                <select name="kategoriaSelect" id="listbox" class="form-control">
+                    <option selected value="0"> -- wybierz kategorię -- </option>
                     @foreach (var item in Model.Kategorie)
                     {
                         <option value="@item.Id">
@@ -78,8 +79,8 @@ else if (ViewBag.Blad == false)
         <div class="form-group">
             @Html.LabelFor(model => model.MiastoId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select name="listbox" id="listbox" class="form-control">
-                    <option disabled selected value> -- wybierz miasto -- </option>
+                <select name="miastoSelect" id="listbox" class="form-control">
+                    <option selected value="0"> -- wybierz miasto -- </option>
                     @foreach (var item in Model.Miasta)
                     {
                         <option value="@item.Id">
@@ -94,8 +95,8 @@ else if (ViewBag.Blad == false)
         <div class="form-group">
             @Html.LabelFor(model => model.RodzajUmowyId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select name="listbox" id="listbox" class="form-control">
-                    <option disabled selected value> -- wybierz rodzaj umowy -- </option>
+                <select name="rodzajUmowySelect" id="listbox" class="form-control">
+                    <option selected value="0"> -- wybierz rodzaj umowy -- </option>
                     @foreach (var item in Model.RodzajeUmowy)
                     {
                         <option value="@item.Id">

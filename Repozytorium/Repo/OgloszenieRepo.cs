@@ -39,8 +39,21 @@ namespace Repozytorium.Repo
             _db.Entry(ogloszenie).State = EntityState.Modified;
         }
 
-        public void Dodaj(Ogloszenie ogloszenie)
+        public void Dodaj(OgloszenieEditViewModel ogloszenieEditViewModel)
         {
+            Ogloszenie ogloszenie = new Ogloszenie()
+            {
+                Tresc = ogloszenieEditViewModel.Tresc,
+                Tytul = ogloszenieEditViewModel.Tytul,
+                DataDodania = ogloszenieEditViewModel.DataDodania,
+                UzytkownikId = ogloszenieEditViewModel.UzytkownikId,
+                DataWaznosci = ogloszenieEditViewModel.DataDodania.AddDays(14),
+                Zaakceptowane = ogloszenieEditViewModel.Zaakceptowane,
+                MiastoId = ogloszenieEditViewModel.MiastoId,
+                RodzajUmowyId = ogloszenieEditViewModel.RodzajUmowyId,
+                ZarobkiOd = ogloszenieEditViewModel.ZarobkiOd,
+                ZarobkiDo = ogloszenieEditViewModel.ZarobkiDo
+            };
             _db.Ogloszenia.Add(ogloszenie);
         }
 

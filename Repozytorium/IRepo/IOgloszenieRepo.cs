@@ -15,7 +15,7 @@ namespace Repozytorium.IRepo
         List<Kategoria> GetCategories();
         void UsunOgloszenie(int id);
         void SaveChanges();
-        void Dodaj(Ogloszenie ogloszenie);
+        void Dodaj(OgloszenieEditViewModel ogloszenie);
         void Aktualizuj(OgloszenieEditViewModel ogloszenie);
         //IQueryable<OgloszenieViewModel> PobierzStrone(int? page, int? pageSize);
     }
