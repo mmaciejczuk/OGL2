@@ -69,7 +69,7 @@ else if (ViewBag.Blad == false)
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.MiastoId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.KategoriaId, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <select name="kategoriaSelect" id="listbox" class="form-control">
                             @foreach (var item in Model.Kategorie)
@@ -82,8 +82,6 @@ else if (ViewBag.Blad == false)
                         @Html.ValidationMessageFor(model => model.MiastoId, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
-
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.MiastoId, htmlAttributes: new { @class = "control-label col-md-2" })
