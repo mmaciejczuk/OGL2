@@ -31,6 +31,9 @@ namespace Repozytorium.Models.Views
         [Display(Name = "Zarobki do:")]
         [Required(ErrorMessage = "Zarobki są wymagane")]
         public decimal ZarobkiDo { get; set; }
+        [Display(Name = "Wymagania:")]
+        [Required(ErrorMessage = "Wypełnij pole")]
+        public string Wymagania { get; set; }
         public DateTime DataDodania { get; set; }
         public DateTime DataWaznosci { get; set; }
 

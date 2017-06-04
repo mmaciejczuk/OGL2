@@ -10,10 +10,12 @@ namespace Repozytorium.Models
         public Ogloszenie()
         {
             this.Ogloszenie_Kategoria = new HashSet<Ogloszenie_Kategoria>();
-            this.Wymagania = new HashSet<Wymaganie>();
         }
         [Display(Name = "Id:")]
         public int Id { get; set; }
+        [Display(Name = "Nazwa firmy:")]
+        [Required(ErrorMessage = "Nazwa firmy jest wymagana")]
+        public string Firma { get; set; }
         [Display(Name = "Treść oferty:")]
         [Required(ErrorMessage ="Treść jest wymagana")]
         public string Tresc { get; set; }
@@ -28,12 +30,14 @@ namespace Repozytorium.Models
         public string UzytkownikId { get; set; }
         public int MiastoId { get; set; }
         public int RodzajUmowyId { get; set; }
+        public string Wymagania { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:F0}")]
         public decimal ZarobkiOd { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:F0}")]
         public decimal ZarobkiDo { get; set; }
         public bool? Zaakceptowane { get; set; }
 
         public virtual ICollection<Ogloszenie_Kategoria> Ogloszenie_Kategoria { get; set; }
-        public virtual ICollection<Wymaganie> Wymagania { get; set; }
 
         public virtual Uzytkownik Uzytkownik { get; set; }
         public virtual Miasto Miasto { get; set; }

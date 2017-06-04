@@ -29,7 +29,10 @@
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Lista ofert", "Index", "Ogloszenie")</li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
                             <li>@Html.ActionLink("Lista moich ofert", "MojeOgloszenia", "Ogloszenie")</li>
+                            }               
                             <li class="divider"></li>
                             <li>@Html.ActionLink("Wyszukaj po kategorii", "Index", "Kategoria")</li>
                             <li>@Html.ActionLink("Wyszukaj po mieście", "Index", "Miasto")</li>
@@ -48,7 +51,10 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Lista CV", "Index", "CV")</li>
+@if (User.Identity.IsAuthenticated)
+{
                             <li>@Html.ActionLink("Moje CV", "MojeCV", "CV")</li>
+}
                             <li class="divider"></li>
                             <li>@Html.ActionLink("Wyszukaj po kategorii", "Index", "Kategoria")</li>
                             <li>@Html.ActionLink("Wyszukaj po mieście", "Index", "Kategoria")</li>

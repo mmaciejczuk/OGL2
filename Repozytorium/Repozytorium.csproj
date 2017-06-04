@@ -184,6 +184,14 @@
     <Compile Include="Migrations\201706021200105__4.Designer.cs">
       <DependentUpon>201706021200105__4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706041137123__5.cs" />
+    <Compile Include="Migrations\201706041137123__5.Designer.cs">
+      <DependentUpon>201706041137123__5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706041159464__6.cs" />
+    <Compile Include="Migrations\201706041159464__6.Designer.cs">
+      <DependentUpon>201706041159464__6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CV.cs" />
     <Compile Include="Models\Doswiadczenie.cs" />
@@ -206,7 +214,6 @@
     <Compile Include="Models\Views\OgloszeniaZKategoriiViewModels.cs" />
     <Compile Include="Models\Views\WiadomosciViewModel.cs" />
     <Compile Include="Models\Wiadomosc.cs" />
-    <Compile Include="Models\Wymaganie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repo\CVRepo.cs" />
     <Compile Include="Repo\KategoriaRepo.cs" />
@@ -227,6 +234,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706021200105__4.resx">
       <DependentUpon>201706021200105__4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706041137123__5.resx">
+      <DependentUpon>201706041137123__5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706041159464__6.resx">
+      <DependentUpon>201706041159464__6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

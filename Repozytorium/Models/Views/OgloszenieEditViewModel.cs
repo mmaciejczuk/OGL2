@@ -36,11 +36,16 @@ namespace Repozytorium.Models.Views
         //public string RodzajUmowy { get; set; }
         public int KategoriaId { get; set; }
         [Display(Name = "Zarobki od:")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:F0}")]
         [Required(ErrorMessage = "Zarobki są wymagane")]
         public decimal ZarobkiOd { get; set; }
         [Display(Name = "Zarobki do:")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:F0}")]
         [Required(ErrorMessage = "Zarobki są wymagane")]
         public decimal ZarobkiDo { get; set; }
+        [Display(Name = "Wymagania:")]
+        [Required(ErrorMessage = "Wypełnij pole")]
+        public string Wymagania { get; set; }
         public DateTime DataDodania { get; set; }
         public DateTime DataWaznosci { get; set; }
         [Display(Name = "Zaakceptowane:")]

@@ -160,6 +160,10 @@ namespace OGL2.Controllers
             ogloszenieEditViewModel.RodzajeUmowy = _repo.GetAgreementTypes();
             ogloszenieEditViewModel.Kategorie = _repo.GetCategories();
 
+            var a = Convert.ToInt32(formCollection["kategoriaSelect"]);
+            var b = Convert.ToInt32(formCollection["miastoSelect"]);
+            var c = Convert.ToInt32(formCollection["rodzajUmowySelect"]);
+
             if (ModelState.IsValid && Convert.ToInt32(formCollection["kategoriaSelect"]) != 0
                                     && Convert.ToInt32(formCollection["miastoSelect"]) != 0
                                     && Convert.ToInt32(formCollection["rodzajUmowySelect"]) != 0)
@@ -172,6 +176,8 @@ namespace OGL2.Controllers
                 try
                 {
                     _repo.Dodaj(ogloszenieEditViewModel);
+                    _repo.SaveChanges();
+                    _repo.InsertOgloszenieKategoria(ogloszenieEditViewModel.KategoriaId);
                     _repo.SaveChanges();
                     return RedirectToAction("MojeOgloszenia");
                 }
@@ -232,7 +238,7 @@ namespace OGL2.Controllers
                     _repo.SaveChanges();
                 }
                 catch (Exception)
-                {
+                { 
                     ViewBag.Blad = true;
                     return View(ogloszenieEditViewModel);
                 }
@@ -295,7 +301,7 @@ namespace OGL2.Controllers
             return null;
         }
 
-        [OutputCache(Duration = 1000)]
+        //[OutputCache(Duration = 1000)]
         public ActionResult MojeOgloszenia(int? page)
         {
             int currentPage = page ?? 1;

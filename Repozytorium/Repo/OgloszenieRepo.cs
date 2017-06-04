@@ -24,6 +24,7 @@ namespace Repozytorium.Repo
         {
             Ogloszenie ogloszenie = new Ogloszenie()
             {
+                Firma = ogloszenieEditViewModel.Firma,
                 Id = ogloszenieEditViewModel.IdOgloszenia,
                 Tresc = ogloszenieEditViewModel.Tresc,
                 Tytul = ogloszenieEditViewModel.Tytul,
@@ -34,27 +35,46 @@ namespace Repozytorium.Repo
                 MiastoId = ogloszenieEditViewModel.MiastoId,
                 RodzajUmowyId = ogloszenieEditViewModel.RodzajUmowyId,
                 ZarobkiOd = ogloszenieEditViewModel.ZarobkiOd,
-                ZarobkiDo = ogloszenieEditViewModel.ZarobkiDo
+                ZarobkiDo = ogloszenieEditViewModel.ZarobkiDo,
+                Wymagania = ogloszenieEditViewModel.Wymagania
             };
             _db.Entry(ogloszenie).State = EntityState.Modified;
+            //var row = _db.Ogloszenie_Kategoria.Where(p => p.KategoriaId == ogloszenieEditViewModel.KategoriaId).
+            //    Where(p => p.OgloszenieId == ogloszenieEditViewModel.IdOgloszenia).FirstOrDefault();
+            //if (row != null)
+            //    InsertOgloszenieKategoria(Convert.ToInt32(ogloszenieEditViewModel.IdOgloszenia), ogloszenieEditViewModel.KategoriaId);
         }
 
         public void Dodaj(OgloszenieEditViewModel ogloszenieEditViewModel)
         {
             Ogloszenie ogloszenie = new Ogloszenie()
             {
+                Firma = ogloszenieEditViewModel.Firma,
                 Tresc = ogloszenieEditViewModel.Tresc,
                 Tytul = ogloszenieEditViewModel.Tytul,
                 DataDodania = ogloszenieEditViewModel.DataDodania,
                 UzytkownikId = ogloszenieEditViewModel.UzytkownikId,
                 DataWaznosci = ogloszenieEditViewModel.DataDodania.AddDays(14),
-                Zaakceptowane = ogloszenieEditViewModel.Zaakceptowane,
+                Zaakceptowane = ogloszenieEditViewModel.Zaakceptowane,                
                 MiastoId = ogloszenieEditViewModel.MiastoId,
                 RodzajUmowyId = ogloszenieEditViewModel.RodzajUmowyId,
                 ZarobkiOd = ogloszenieEditViewModel.ZarobkiOd,
-                ZarobkiDo = ogloszenieEditViewModel.ZarobkiDo
+                ZarobkiDo = ogloszenieEditViewModel.ZarobkiDo,
+                Wymagania = ogloszenieEditViewModel.Wymagania
             };
             _db.Ogloszenia.Add(ogloszenie);
+        }
+
+        public void InsertOgloszenieKategoria(int kategoriaId)
+        {
+            var lastId = _db.Ogloszenia.Max(p => p.Id).ToString();
+
+            Ogloszenie_Kategoria oglkat = new Ogloszenie_Kategoria()
+            {
+                KategoriaId = kategoriaId,
+                OgloszenieId = Convert.ToInt32(lastId)
+            };
+            _db.Ogloszenie_Kategoria.Add(oglkat);
         }
 
         public List<Miasto> GetCities()
@@ -84,7 +104,7 @@ namespace Repozytorium.Repo
                              select new OgloszenieEditViewModel
                              {
                                  UzytkownikId = o.UzytkownikId,
-                                 Firma = o.Uzytkownik.Firma,
+                                 Firma = o.Firma,
                                  IdOgloszenia = o.Id,
                                  Tresc = o.Tresc,
                                  Tytul = o.Tytul,
@@ -93,6 +113,7 @@ namespace Repozytorium.Repo
                                  KategoriaId = k.KategoriaId,
                                  ZarobkiOd = o.ZarobkiOd,
                                  ZarobkiDo = o.ZarobkiDo,
+                                 Wymagania = o.Wymagania,
                                  DataDodania = o.DataDodania,
                                  Zaakceptowane = o.Zaakceptowane.HasValue ? true : false
                              };
@@ -116,6 +137,7 @@ namespace Repozytorium.Repo
                                  RodzajUmowy = o.RodzajUmowy.Nazwa,
                                  ZarobkiOd = o.ZarobkiOd,
                                  ZarobkiDo = o.ZarobkiDo,
+                                 Wymagania = o.Wymagania,
                                  DataDodania = o.DataDodania
                              };
             var x = ogloszenie.Where(p => p.IdOgloszenia == id).FirstOrDefault();
@@ -135,7 +157,7 @@ namespace Repozytorium.Repo
                              select new
                                         {
                                             UzytkownikId = o.UzytkownikId,
-                                            Firma = o.Uzytkownik.Firma,
+                                            Firma = o.Firma,
                                             IdOgloszenia = o.Id,
                                             Tytul = o.Tytul,
                                             Miasto = o.Miasto.Nazwa,
