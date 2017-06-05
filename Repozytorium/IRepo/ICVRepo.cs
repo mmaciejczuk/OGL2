@@ -9,5 +9,7 @@ namespace Repozytorium.IRepo
     public interface ICVRepo
     {
         IQueryable<CVViewModel> PobierzCV();
+        CVViewModel GetCVById(int? id);
+        int GetCVByGuid(string guid);
     }
 }

@@ -18,7 +18,7 @@
     </p>
     }
 
-    </p>
+
 <table class="table">
     <tr>
         <th>
@@ -85,3 +85,4 @@
         Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
         @Html.PagedListPager(Model, page => Url.Action("MojeOgloszenia", new { page, sortOrder = ViewBag.CurrentSort }))
     </div>
+

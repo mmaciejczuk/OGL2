@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using PagedList;
 using Repozytorium.Models.Views;
+using System.Security.Principal;
 
 namespace OGL2.Controllers
 {
@@ -116,8 +117,8 @@ namespace OGL2.Controllers
             {
                 try
                 {
-                    //tutaj zapis do bazy
-                    _messageRepo.SendMessage(UzytkownikId, IdOgloszenia, tresc);
+                    string userId = User.Identity.GetUserId();
+                    _messageRepo.SendMessage(userId, IdOgloszenia, tresc);
                     _messageRepo.SaveChanges();
                 }
                 catch (Exception)
@@ -125,6 +126,11 @@ namespace OGL2.Controllers
                     ViewBag.Blad = true;
                     return View(ogloszenie);
                 }
+            }
+            else if (tresc != "")
+            {
+                ViewBag.Blad = true;
+                return View(ogloszenie);
             }
             
             ViewBag.Blad = false;

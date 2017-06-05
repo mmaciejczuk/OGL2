@@ -247,3 +247,5 @@ C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._4.resources
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.Migrations._4.resources
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.Migrations._5.resources
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.Migrations._6.resources
+C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._5.resources
+C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._6.resources

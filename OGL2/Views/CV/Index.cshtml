@@ -22,6 +22,9 @@
 
     <table class="table">
         <tr>
+            <th style="width:25px">
+                @Html.ActionLink("Id", "Index", new { sortOrder = ViewBag.IdSort })
+            </th>
             <th style="width:150px">
                 @Html.ActionLink("Imię i nazwisko", "Index", new { sortOrder = ViewBag.NazwaSort })
             </th>
@@ -40,6 +43,9 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCV)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.GetUserName)
                 </td>
@@ -62,7 +68,6 @@
                             @Html.ActionLink("Usuń", "Delete", new { id = item.IdCV }, new { @class = "btn btn-danger" })
                         }
                     }
-
                 </td>
             </tr>
         }

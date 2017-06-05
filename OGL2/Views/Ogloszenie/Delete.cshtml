@@ -1,12 +1,12 @@
 ﻿@model Repozytorium.Models.Views.OgloszenieDetailsViewModel
 
 @{
-    ViewBag.Tytul = "Usuń ogłoszenie nr" + Model.Id;
-    ViewBag.Opis = "Usuń ogłoszenie nr" + Model.Id + " Opis do Google";
-    ViewBag.SlowaKluczowe = "Ogloszenie, " + Model.Id + ", usuń";
+    ViewBag.Tytul = "Usuń ogłoszenie nr" + Model.IdOgloszenia;
+    ViewBag.Opis = "Usuń ogłoszenie nr" + Model.IdOgloszenia + " Opis do Google";
+    ViewBag.SlowaKluczowe = "Ogloszenie, " + Model.IdOgloszenia + ", usuń";
 }
 
-<h2>Usuń ogłoszenie nr @Model.Id</h2>
+<h2>Usuń ogłoszenie nr @Model.IdOgloszenia</h2>
 
 @if (ViewBag.Blad == true)
 {
@@ -21,14 +21,6 @@
     <h4>Ogloszenie</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Uzytkownik.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Uzytkownik.Email)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Tresc)
         </dt>

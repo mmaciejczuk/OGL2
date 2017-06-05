@@ -57,7 +57,7 @@ namespace OGL2.Controllers
         // GET: Miasto
         public ActionResult Index(int? page, string sortOrder)
         {
-        int currentPage = page ?? 1;
+            int currentPage = page ?? 1;
             int naStronie = 10;
 
             ViewBag.CurrentSort = sortOrder;
@@ -239,5 +239,89 @@ namespace OGL2.Controllers
             return View(miasto);
         }
 
+        public ActionResult IndexCV(int? page, string sortOrder)
+        {
+            int currentPage = page ?? 1;
+            int naStronie = 10;
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NazwaSort = sortOrder == "NazwaAsc" ? "Nazwa" : "NazwaAsc";
+            ViewBag.IloscOfertSort = sortOrder == "IloscOfertAsc" ? "IloscOfert" : "IloscOfertAsc";
+
+            var kategorie = _repo.PobierzMiasta();
+
+            switch (sortOrder)
+            {
+                case "Nazwa":
+                    kategorie = kategorie.OrderByDescending(s => s.Nazwa);
+                    break;
+                case "NazwaAsc":
+                    kategorie = kategorie.OrderBy(s => s.Nazwa);
+                    break;
+
+                case "IloscOfert":
+                    kategorie = kategorie.OrderByDescending(s => s.LiczbaOfert);
+                    break;
+                case "IloscOfertAsc":
+                    kategorie = kategorie.OrderBy(s => s.LiczbaOfert);
+                    break;
+            }
+            return View(kategorie.ToPagedList<MiastoViewModel>(currentPage, naStronie));
+        }
+
+        public ActionResult PokazCV(int id, int? page, string sortOrder)
+        {
+            int currentPage = page ?? 1;
+            int naStronie = 12;
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.IdOgloszenia = sortOrder == "IdOgloszenia" ? "IdOgloszeniaAsc" : "IdOgloszenia";
+            ViewBag.DataDodaniaSort = sortOrder == "DataDodania" ? "DataDodaniaAsc" : "DataDodania";
+            ViewBag.TytulSort = sortOrder == "TytulAsc" ? "Tytul" : "TytulAsc";
+            ViewBag.MiastoSort = sortOrder == "MiastoAsc" ? "Miasto" : "MiastoAsc";
+            ViewBag.RodzajUmowySort = sortOrder == "RodzajUmowyAsc" ? "RodzajUmowy" : "RodzajUmowyAsc";
+            var ogloszenia = _repo.PobierzOgloszeniaZMiasta(id);
+            switch (sortOrder)
+            {
+                case "IdOgloszenia":
+                    ogloszenia = ogloszenia.OrderByDescending(s => s.IdOgloszenia);
+                    break;
+                case "IdOgloszeniaAsc":
+                    ogloszenia = ogloszenia.OrderBy(s => s.IdOgloszenia);
+                    break;
+
+                case "RodzajUmowy":
+                    ogloszenia = ogloszenia.OrderByDescending(s => s.RodzajUmowy);
+                    break;
+                case "RodzajUmowyAsc":
+                    ogloszenia = ogloszenia.OrderBy(s => s.RodzajUmowy);
+                    break;
+
+                case "Miasto":
+                    ogloszenia = ogloszenia.OrderByDescending(s => s.Miasto);
+                    break;
+                case "MiastoAsc":
+                    ogloszenia = ogloszenia.OrderBy(s => s.Miasto);
+                    break;
+
+                case "DataDodania":
+                    ogloszenia = ogloszenia.OrderByDescending(s => s.DataDodania);
+                    break;
+                case "DataDodaniaAsc":
+                    ogloszenia = ogloszenia.OrderBy(s => s.DataDodania);
+                    break;
+
+                case "Tytul":
+                    ogloszenia = ogloszenia.OrderByDescending(s => s.Tytul);
+                    break;
+                case "TytulAsc":
+                    ogloszenia = ogloszenia.OrderBy(s => s.Tytul);
+                    break;
+
+                default:  // id descending
+                    ogloszenia = ogloszenia.OrderByDescending(s => s.DataDodania);
+                    break;
+            }
+            return View(ogloszenia.ToPagedList<OgloszeniaZMiastaViewModel>(currentPage, naStronie));
+        }
     }
 }

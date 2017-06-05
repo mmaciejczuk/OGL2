@@ -330,7 +330,6 @@
     <Content Include="Views\Wiadomosc\Index.cshtml" />
     <Content Include="Views\Wiadomosc\Wyslano.cshtml" />
     <Content Include="Views\CV\Index.cshtml" />
-    <Content Include="Views\CV\MojecCV.cshtml" />
     <Content Include="Views\Miasto\Index.cshtml" />
     <Content Include="Views\Miasto\PokazOgloszenia.cshtml" />
     <Content Include="Views\Miasto\Details.cshtml" />
@@ -345,6 +344,10 @@
     <Content Include="Views\Kategoria\Sukces.cshtml" />
     <Content Include="Views\Miasto\Sukces.cshtml" />
     <Content Include="Views\Miasto\Delete.cshtml" />
+    <Content Include="Views\CV\MojeCV.cshtml" />
+    <Content Include="Views\CV\Create.cshtml" />
+    <Content Include="Views\Kategoria\IndexCV.cshtml" />
+    <Content Include="Views\Miasto\IndexCV.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

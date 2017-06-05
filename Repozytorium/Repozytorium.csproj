@@ -204,6 +204,7 @@
     <Compile Include="Models\Uzytkownik.cs" />
     <Compile Include="Models\Views\AccountViewModels.cs" />
     <Compile Include="Models\Views\CVViewModel.cs" />
+    <Compile Include="Models\Views\CVZKategoriiViewModels.cs" />
     <Compile Include="Models\Views\KategoriaViewModel.cs" />
     <Compile Include="Models\Views\MiastoViewModel.cs" />
     <Compile Include="Models\Views\OgloszeniaZMiastaViewModel.cs" />

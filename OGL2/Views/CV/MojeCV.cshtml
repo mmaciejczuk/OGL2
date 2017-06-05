@@ -1,0 +1,71 @@
+﻿@model Repozytorium.Models.Views.CVViewModel
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "MojeCV";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Moje CV</h2>
+
+<p>
+    @if (User.Identity.IsAuthenticated)
+    {
+    <p>
+        @Html.ActionLink("Dodaj nowe CV", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+    }
+
+@if (Model != null)
+{
+    <table class="table">
+        <tr>
+            @*<th>
+                    @Html.ActionLink("Id użytkownika", "Index", new { sortOrder = ViewBag.IdSort })
+                </th>*@
+            <th>
+                @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.TytulSort })
+            </th>
+            <th>
+                @Html.ActionLink("Treść", "Index", new { sortOrder = ViewBag.TrescSort })
+            </th>
+            <th>
+                @Html.ActionLink("Data dodania", "Index", new { sortOrder = ViewBag.DataDodaniaSort })
+            </th>
+            <th></th>
+        </tr>
+
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.UzytkownikId)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Tytul)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Tresc)
+                </td>
+                <th style="width:110px">
+                    @Html.DisplayFor(modelItem => Model.GetFormattedDateAdd)
+                </th>
+                <td>
+                        @Html.ActionLink("Szczegóły", "Details", new { id = Model.IdCV }, new { @class = "btn btn-warning" })
+                        @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
+                        {
+                            <br />
+                            @Html.ActionLink("Edytuj", "Edit", new { id = Model.IdCV }, new { @class = "btn btn-primary" })
+                            if (User.IsInRole("Admin"))
+                            {
+                                <br />
+                                @Html.ActionLink("Usuń", "Delete", new { id = Model.IdCV }, new { @class = "btn btn-danger" })
+                            }
+                        }
+                </td>
+            </tr>
+    </table>
+}
+
+

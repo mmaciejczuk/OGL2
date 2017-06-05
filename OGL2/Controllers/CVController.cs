@@ -28,10 +28,18 @@ namespace OGL2.Controllers
             ViewBag.TytulSort = sortOrder == "TytulAsc" ? "Tytul" : "TytulAsc";
             ViewBag.MiastoSort = sortOrder == "MiastoAsc" ? "Miasto" : "MiastoAsc";
             ViewBag.NazwaSort = sortOrder == "NazwaAsc" ? "Nazwa" : "NazwaAsc";
+            ViewBag.IdSort = sortOrder == "IdAsc" ? "Id" : "IdAsc";
             var ogloszenia = _repo.PobierzCV();
 
             switch (sortOrder)
             {
+                case "Id":
+                    ogloszenia = ogloszenia.OrderByDescending(s => s.IdCV);
+                    break;
+                case "IdAsc":
+                    ogloszenia = ogloszenia.OrderBy(s => s.IdCV);
+                    break;
+
                 case "Nazwa":
                     ogloszenia = ogloszenia.OrderByDescending(s => s.Nazwisko);
                     break;
@@ -74,15 +82,13 @@ namespace OGL2.Controllers
             return View(ogloszenia.ToPagedList<CVViewModel>(currentPage, naStronie));
         }
 
-        [OutputCache(Duration = 1000)]
-        public ActionResult MojeCV(int? page)
-        {
-            int currentPage = page ?? 1;
-            int naStronie = 3;
+        //[OutputCache(Duration = 1000)]
+        public ActionResult MojeCV()
+        { 
             string userId = User.Identity.GetUserId();
-            var ogloszenia = _repo.PobierzCV();
-            ogloszenia = ogloszenia.OrderByDescending(d => d.DataDodania).Where(o => o.UzytkownikId == userId);
-            return View(ogloszenia.ToPagedList<CVViewModel>(currentPage, naStronie));
+            int cvId = _repo.GetCVByGuid(userId);
+            var ogloszenia = _repo.GetCVById(cvId);
+            return View(ogloszenia);
         }
 
         // GET: CV
@@ -90,5 +96,17 @@ namespace OGL2.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
     }
 }
