@@ -230,7 +230,6 @@ F:\Git_Repo\OGL\Repozytorium\bin\System.Web.WebPages.Razor.xml
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.dll
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.pdb
 F:\Git_Repo\OGL\Repozytorium\bin\AutoMapper.dll
-F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.csprojResolveAssemblyReference.cache
 C:\Code\OGL2\Repozytorium\bin\AutoMapper.dll
 C:\Code\OGL2\Repozytorium\bin\AutoMapper.xml
 F:\Git_Repo\OGL\Repozytorium\bin\AutoMapper.xml
@@ -249,3 +248,4 @@ F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.Migrations._5.resources
 F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.Migrations._6.resources
 C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._5.resources
 C:\Code\OGL2\Repozytorium\obj\Debug\Repozytorium.Migrations._6.resources
+F:\Git_Repo\OGL\Repozytorium\obj\Debug\Repozytorium.csprojResolveAssemblyReference.cache

@@ -216,6 +216,7 @@ namespace OGL2.Controllers
             return View(kategoria);
         }
 
+        // GET: Kategoria
         public ActionResult IndexCV(int? page, string sortOrder)
         {
             int currentPage = page ?? 1;
@@ -226,7 +227,7 @@ namespace OGL2.Controllers
             ViewBag.OpisSort = sortOrder == "OpisAsc" ? "Opis" : "OpisAsc";
             ViewBag.IloscOfertSort = sortOrder == "IloscOfertAsc" ? "IloscOfert" : "IloscOfertAsc";
 
-            var kategorie = _repo.PobierzKategorie();
+            var kategorie = _repo.PobierzKategorieCV();
 
             switch (sortOrder)
             {
@@ -250,8 +251,8 @@ namespace OGL2.Controllers
                 case "IloscOfertAsc":
                     kategorie = kategorie.OrderBy(s => s.LiczbaOfert);
                     break;
-            }
-            return View(kategorie.ToPagedList<CVViewModel>(currentPage, naStronie));
+            }            
+            return View(kategorie.ToPagedList<KategoriaCVViewModel>(currentPage, naStronie));
         }
 
         public ActionResult PokazCV(int id, int? page, string sortOrder)
@@ -263,50 +264,50 @@ namespace OGL2.Controllers
             ViewBag.DataDodaniaSort = sortOrder == "DataDodania" ? "DataDodaniaAsc" : "DataDodania";
             ViewBag.TytulSort = sortOrder == "TytulAsc" ? "Tytul" : "TytulAsc";
             ViewBag.MiastoSort = sortOrder == "MiastoAsc" ? "Miasto" : "MiastoAsc";
-            ViewBag.RodzajUmowySort = sortOrder == "RodzajUmowyAsc" ? "RodzajUmowy" : "RodzajUmowyAsc";
-            var ogloszenia = _repo.PobierzOgloszeniaZKategorii(id);
+            ViewBag.RodzajUmowySort = sortOrder == "ImieAsc" ? "Imie" : "ImieAsc";
+            var cv = _repo.PobierzCVZKategorii(id);
             switch (sortOrder)
             {
                 case "IdOgloszenia":
-                    ogloszenia = ogloszenia.OrderByDescending(s => s.IdOgloszenia);
+                    cv = cv.OrderByDescending(s => s.IdCV);
                     break;
                 case "IdOgloszeniaAsc":
-                    ogloszenia = ogloszenia.OrderBy(s => s.IdOgloszenia);
+                    cv = cv.OrderBy(s => s.IdCV);
                     break;
 
-                case "RodzajUmowy":
-                    ogloszenia = ogloszenia.OrderByDescending(s => s.RodzajUmowy);
+                case "Imie":
+                    cv = cv.OrderByDescending(s => s.Nazwisko);
                     break;
-                case "RodzajUmowyAsc":
-                    ogloszenia = ogloszenia.OrderBy(s => s.RodzajUmowy);
+                case "ImieAsc":
+                    cv = cv.OrderBy(s => s.Nazwisko);
                     break;
 
                 case "Miasto":
-                    ogloszenia = ogloszenia.OrderByDescending(s => s.Miasto);
+                    cv = cv.OrderByDescending(s => s.Miasto);
                     break;
                 case "MiastoAsc":
-                    ogloszenia = ogloszenia.OrderBy(s => s.Miasto);
+                    cv = cv.OrderBy(s => s.Miasto);
                     break;
 
                 case "DataDodania":
-                    ogloszenia = ogloszenia.OrderByDescending(s => s.DataDodania);
+                    cv = cv.OrderByDescending(s => s.DataDodania);
                     break;
                 case "DataDodaniaAsc":
-                    ogloszenia = ogloszenia.OrderBy(s => s.DataDodania);
+                    cv = cv.OrderBy(s => s.DataDodania);
                     break;
 
                 case "Tytul":
-                    ogloszenia = ogloszenia.OrderByDescending(s => s.Tytul);
+                    cv = cv.OrderByDescending(s => s.Tytul);
                     break;
                 case "TytulAsc":
-                    ogloszenia = ogloszenia.OrderBy(s => s.Tytul);
+                    cv = cv.OrderBy(s => s.Tytul);
                     break;
 
                 default:  // id descending
-                    ogloszenia = ogloszenia.OrderByDescending(s => s.DataDodania);
+                    cv = cv.OrderByDescending(s => s.DataDodania);
                     break;
             }
-            return View(ogloszenia.ToPagedList<CVZKategoriiViewModels>(currentPage, naStronie));
+            return View(cv.ToPagedList<CVZKategoriiViewModels>(currentPage, naStronie));
         }
     }
 }

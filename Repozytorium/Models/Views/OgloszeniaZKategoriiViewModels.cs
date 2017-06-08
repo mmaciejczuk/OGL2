@@ -8,21 +8,11 @@ namespace Repozytorium.Models.Views
 {
     public class OgloszeniaZKategoriiViewModels
     {
-        //public IList<Ogloszenie> Ogloszenia { get; set; }
-
         public int IdOgloszenia { get; set; }
         public string UzytkownikId { get; set; }
-        [Display(Name = "Nazwa firmy:")]
-        [Required(ErrorMessage = "Nazwa firmy jest wymagana")]
         public string Firma { get; set; }
-        [Display(Name = "Tytuł oferty:")]
-        [Required(ErrorMessage = "Treść jest wymagana")]
         public string Tytul { get; set; }
-        [Display(Name = "Miasto:")]
-        [Required(ErrorMessage = "Miasto jest wymagane")]
         public string Miasto { get; set; }
-        [Display(Name = "Rodzaj umowy:")]
-        [Required(ErrorMessage = "Rodzaj umowy jest wymagane")]
         public string RodzajUmowy { get; set; }
         public DateTime DataDodania { get; set; }
 

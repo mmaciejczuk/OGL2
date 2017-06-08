@@ -1,7 +1,7 @@
 ﻿@model PagedList.IPagedList<Repozytorium.Models.Views.CVZKategoriiViewModels>
 @using PagedList.Mvc
 @{
-    ViewBag.Tytul = "CV z kategorii " + Model.First().NazwaKategorii;
+  ViewBag.Tytul = "CV z kategorii " + Model.First().NazwaKategorii;
 }
 
 <h2>CV z kategorii: @Model.First().NazwaKategorii</h2>
@@ -9,22 +9,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Id", "Index", new { sortOrder = ViewBag.IdOgloszenia })
+            @Html.ActionLink("Id", "PokazCV", new { sortOrder = ViewBag.IdOgloszenia })
         </th>
         <th style="width:400px">
-            @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.TytulSort })
+            @Html.ActionLink("Tytuł", "PokazCV", new { sortOrder = ViewBag.TytulSort })
         </th>
         <th style="width:150px">
-            @Html.ActionLink("Firma", "Index", new { sortOrder = ViewBag.TrescSort })
+            @Html.ActionLink("Imie i nazwisko", "PokazCV", new { sortOrder = ViewBag.Imie })
         </th>
         <th>
-            @Html.ActionLink("Miasto", "Index", new { sortOrder = ViewBag.MiastoSort })
+            @Html.ActionLink("Miasto", "PokazCV", new { sortOrder = ViewBag.MiastoSort })
         </th>
         <th style="width:110px">
-            @Html.ActionLink("Rodzaj umowy", "Index", new { sortOrder = ViewBag.RodzajUmowySort })
-        </th>
-        <th style="width:110px">
-            @Html.ActionLink("Data dodania", "Index", new { sortOrder = ViewBag.DataDodaniaSort })
+            @Html.ActionLink("Data dodania", "PokazCV", new { sortOrder = ViewBag.DataDodaniaSort })
         </th>
         <th></th>
     </tr>
@@ -33,31 +30,28 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.IdOgloszenia)
+                @Html.DisplayFor(modelItem => item.IdCV)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Tytul)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Firma)
+                @Html.DisplayFor(modelItem => item.GetUserName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Miasto)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RodzajUmowy)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.GetFormattedDateAdd)
             </td>
             <td width="250px;">
-                @Html.ActionLink("Szczegóły", "Details", new { id = item.IdOgloszenia }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.IdCV }, new { @class = "btn btn-warning" })
                 @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Pracownik")))
                 {
-                    @Html.ActionLink("Edytuj", "Edit", "Ogloszenie", new { id = item.IdOgloszenia }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Edytuj", "Edit", "CV", new { id = item.IdCV }, new { @class = "btn btn-primary" })
                     if (User.IsInRole("Admin"))
                     {
-                        @Html.ActionLink("Usuń", "Delete", new { id = item.IdOgloszenia }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Usuń", "Delete", new { id = item.IdCV }, new { @class = "btn btn-danger" })
                     }
                 }
 
@@ -69,5 +63,5 @@
 <div>
     <br />
     Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
-    @Html.PagedListPager(Model, page => Url.Action("PokazOgloszenia", new { page, sortOrder = ViewBag.CurrentSort }))
+    @Html.PagedListPager(Model, page => Url.Action("PokazCV", new { page, sortOrder = ViewBag.CurrentSort }))
 </div>

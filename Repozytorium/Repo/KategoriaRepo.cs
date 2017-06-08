@@ -56,9 +56,19 @@ namespace Repozytorium.Repo
                                 Opis = o.MetaOpis,
                                 LiczbaOfert = o.Ogloszenie_Kategoria.Select(p => p.OgloszenieId).Count(),
                             };
+            return kategorie.ToList().AsQueryable();
+        }
 
-            //_db.Database.Log = message => Trace.WriteLine(message);
-            //var kategorie = _db.Kategorie.AsNoTracking();
+        public IQueryable<KategoriaCVViewModel> PobierzKategorieCV()
+        {
+            var kategorie = from o in _db.Kategorie.Include("CV")
+                            select new KategoriaCVViewModel
+                            {
+                                Id = o.Id,
+                                Nazwa = o.Nazwa,
+                                Opis = o.MetaOpis,
+                                LiczbaOfert = o.CV.Select(p => p.KategoriaId).Count(),
+                            };
             return kategorie.ToList().AsQueryable();
         }
 
@@ -72,19 +82,7 @@ namespace Repozytorium.Repo
 
         public IQueryable<OgloszeniaZKategoriiViewModels> PobierzOgloszeniaZKategorii(int id)
         {
-            //_db.Database.Log = message => Trace.WriteLine(message);
-            //var ogloszenia = from o in _db.Ogloszenia
-            //                 join k in _db.Ogloszenie_Kategoria on o.Id equals k.OgloszenieId
-            //                 where k.KategoriaId == id
-            //                 select o;
-            //var ogloszenia2 = ogloszenia.ToList();
-            //return ogloszenia;
-
             var ogloszeniaList = new List<OgloszeniaZKategoriiViewModels>();
-            //_db.Database.Log = message => Trace.WriteLine(message);
-            //var ogloszenia = _db.Ogloszenia.AsNoTracking();
-            //return ogloszenia;
-
             var ogloszenia = from o in _db.Ogloszenia.Include("Uzytkownik").Include("Miasto").Include("Ogloszenie_Kategoria")
                              join k in _db.Ogloszenie_Kategoria on o.Id equals k.OgloszenieId
                              where o.Zaakceptowane == true && o.DataWaznosci > DateTime.Now  && k.KategoriaId == id
@@ -116,6 +114,45 @@ namespace Repozytorium.Repo
                 });
             }
             return ogloszeniaList.AsQueryable();
+        }
+
+        public IQueryable<CVZKategoriiViewModels> PobierzCVZKategorii(int id)
+        {
+            var CVList = new List<CVZKategoriiViewModels>();
+            var CV = from o in _db.Kategorie.Include("Uzytkownik").Include("Kategoria")
+                     join k in _db.CV on o.Id equals k.KategoriaId
+                     join l in _db.Uzytkownik on k.UzytkownikId equals l.Id
+                     where k.Zaakceptowane == true && o.Id == id
+                     orderby k.DataDodania
+                     select new
+                     {
+                         UzytkownikId = l.Id,
+                                 Imie = l.Imie,
+                                 Nazwisko = l.Nazwisko,
+                                 IdCV = k.Id,
+                                 Tresc = k.Tresc,
+                                 Tytul = k.Tytul,
+                                 Miasto = l.Miasto,
+                                 DataDodania = k.DataDodania,
+                                 NazwaKategorii = _db.Kategorie.Where(q => q.Id == id).Select(p => p.Nazwa).FirstOrDefault()
+                             };
+            var x = CV.ToList();
+            foreach (var cv in x)
+            {
+                CVList.Add(new CVZKategoriiViewModels
+                {
+                    UzytkownikId = cv.UzytkownikId,
+                    Imie = cv.Imie,
+                    Nazwisko = cv.Nazwisko,
+                    IdCV = cv.IdCV,
+                    Tresc = cv.Tresc,
+                    Tytul = cv.Tytul,
+                    Miasto = cv.Miasto,
+                    DataDodania = cv.DataDodania,
+                    NazwaKategorii = cv.NazwaKategorii
+                });
+            }
+            return CVList.AsQueryable();
         }
 
         public void SaveChanges()
