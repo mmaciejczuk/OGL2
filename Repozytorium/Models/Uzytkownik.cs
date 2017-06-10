@@ -30,11 +30,13 @@ namespace Repozytorium.Models
         public DateTime? DataUrodzenia { get; set; }
         public string Ulica { get; set; }
         public string NumerDomu { get; set; }
-        public string Miasto { get; set; }
+        public string NazwaMiasta { get; set; }
         public string Kod { get; set; }
         public string Telefon { get; set; }
         public string Description { get; set; }
+        public int MiastoId { get; set; }
 
+        public virtual Miasto Miasto { get; set; }
 
         #region dodatkowe pole notmapped
         [NotMapped]

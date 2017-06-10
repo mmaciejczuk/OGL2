@@ -25,9 +25,11 @@ namespace Repozytorium.Models
         public string UzytkownikId { get; set; }
         public int? KategoriaId { get; set; }
         public bool Zaakceptowane { get; set; }
+        public int? MiastoId { get; set; }
 
         public virtual Uzytkownik Uzytkownik { get; set; }
         public virtual ICollection<Doswiadczenie> Doswiadczenia { get; set; }
         public virtual Kategoria Kategoria { get; set; }
+        public virtual Miasto Miasto { get; set; }
     }
 }

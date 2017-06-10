@@ -10,6 +10,7 @@ namespace Repozytorium.IRepo
     public interface IMiastoRepo
     {
         IQueryable<MiastoViewModel> PobierzMiasta();
+        IQueryable<MiastoViewModel> PobierzMiastaCV();
         IQueryable<OgloszeniaZMiastaViewModel> PobierzOgloszeniaZMiasta(int id);
         void Dodaj(Miasto miasto);
         bool MiastoIstnieje(Miasto miasto);

@@ -192,7 +192,17 @@
     <Compile Include="Migrations\201706041159464__6.Designer.cs">
       <DependentUpon>201706041159464__6.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\201706100754113__7.cs" />
+    <Compile Include="Migrations\201706100754113__7.Designer.cs">
+      <DependentUpon>201706100754113__7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706101022443__8.cs" />
+    <Compile Include="Migrations\201706101022443__8.Designer.cs">
+      <DependentUpon>201706101022443__8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Models\CV.cs" />
     <Compile Include="Models\Doswiadczenie.cs" />
     <Compile Include="Models\Kategoria.cs" />
@@ -242,6 +252,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706041159464__6.resx">
       <DependentUpon>201706041159464__6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706100754113__7.resx">
+      <DependentUpon>201706100754113__7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706101022443__8.resx">
+      <DependentUpon>201706101022443__8.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

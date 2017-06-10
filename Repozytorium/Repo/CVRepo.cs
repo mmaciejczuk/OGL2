@@ -19,7 +19,7 @@ namespace Repozytorium.Repo
         {
             var cvList = new List<CVViewModel>();
 
-            var ogloszenia = from o in _db.CV.Include("Uzytkownik")
+            var ogloszenia = from o in _db.CV.Include("Miasto")
                              where o.Zaakceptowane == true 
                              orderby o.DataDodania
                              select new
@@ -30,7 +30,7 @@ namespace Repozytorium.Repo
                                  IdCV = o.Id,
                                  Tresc = o.Tresc,
                                  Tytul = o.Tytul,
-                                 Miasto = o.Uzytkownik.Miasto,
+                                 Miasto = o.Miasto.Nazwa,
                                  DataDodania = o.DataDodania
                              };
             var x = ogloszenia.ToList();
@@ -62,8 +62,6 @@ namespace Repozytorium.Repo
                                  IdOgloszenia = o.Id,
                                  Tresc = o.Tresc,
                                  Tytul = o.Tytul,
-                                 //Miasto = o.Miasto.Nazwa,
-                                 //RodzajUmowy = o.RodzajUmowy.Nazwa,
                                  MiastoId = o.MiastoId,
                                  RodzajUmowyId = o.RodzajUmowyId,
                                  ZarobkiOd = o.ZarobkiOd,
@@ -76,9 +74,8 @@ namespace Repozytorium.Repo
 
         public CVViewModel GetCVById(int? id)
         {
-            var ogloszenie = from o in _db.CV.Include("Uzytkownik").Include("Miasto")
+            var ogloszenie = from o in _db.CV.Include("Miasto")
                              where o.Zaakceptowane == true
-                             orderby o.DataDodania
                              select new CVViewModel
                              {
                                  IdCV = o.Id,
@@ -87,7 +84,7 @@ namespace Repozytorium.Repo
                                  Nazwisko = o.Uzytkownik.Nazwisko,
                                  Tresc = o.Tresc,
                                  Tytul = o.Tytul,
-                                 Miasto = o.Uzytkownik.Miasto,
+                                 Miasto = o.Miasto.Nazwa,
                                  DataDodania = o.DataDodania
                              };
             var x = ogloszenie.Where(p => p.IdCV == id).FirstOrDefault();

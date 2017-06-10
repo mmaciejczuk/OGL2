@@ -11,6 +11,7 @@ namespace Repozytorium.Models
         public Miasto()
         {
             this.Ogloszenia = new HashSet<Ogloszenie>();
+            this.CV = new HashSet<CV>();
         }
 
         [Key]
@@ -21,5 +22,6 @@ namespace Repozytorium.Models
         public string Nazwa { get; set; }
 
         public virtual HashSet<Ogloszenie> Ogloszenia { get; set; }
+        public virtual HashSet<CV> CV { get; set; }
     }
 }

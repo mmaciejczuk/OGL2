@@ -239,6 +239,8 @@ namespace OGL2.Controllers
             return View(miasto);
         }
 
+
+        // GET: Miasto
         public ActionResult IndexCV(int? page, string sortOrder)
         {
             int currentPage = page ?? 1;
@@ -248,7 +250,7 @@ namespace OGL2.Controllers
             ViewBag.NazwaSort = sortOrder == "NazwaAsc" ? "Nazwa" : "NazwaAsc";
             ViewBag.IloscOfertSort = sortOrder == "IloscOfertAsc" ? "IloscOfert" : "IloscOfertAsc";
 
-            var kategorie = _repo.PobierzMiasta();
+            var kategorie = _repo.PobierzMiastaCV();
 
             switch (sortOrder)
             {

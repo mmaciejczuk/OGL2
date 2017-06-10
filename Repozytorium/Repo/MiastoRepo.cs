@@ -51,6 +51,18 @@ namespace Repozytorium.Repo
             return miasta.ToList().AsQueryable();
         }
 
+        public IQueryable<MiastoViewModel> PobierzMiastaCV()
+        {
+            var miasta = from o in _db.Miasto.Include("CV")
+                         select new MiastoViewModel
+                         {
+                             Id = o.Id,
+                             Nazwa = o.Nazwa,
+                             LiczbaOfert = o.CV.Select(p => p.MiastoId).Count(),
+                         };
+            return miasta.ToList().AsQueryable();
+        }
+
         public IQueryable<OgloszeniaZMiastaViewModel> PobierzOgloszeniaZMiasta(int id)
         {
             var ogloszeniaList = new List<OgloszeniaZMiastaViewModel>();

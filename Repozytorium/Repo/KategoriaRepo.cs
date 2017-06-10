@@ -122,6 +122,7 @@ namespace Repozytorium.Repo
             var CV = from o in _db.Kategorie.Include("Uzytkownik").Include("Kategoria")
                      join k in _db.CV on o.Id equals k.KategoriaId
                      join l in _db.Uzytkownik on k.UzytkownikId equals l.Id
+                     join m in _db.Miasto on l.MiastoId equals m.Id
                      where k.Zaakceptowane == true && o.Id == id
                      orderby k.DataDodania
                      select new
@@ -132,7 +133,7 @@ namespace Repozytorium.Repo
                                  IdCV = k.Id,
                                  Tresc = k.Tresc,
                                  Tytul = k.Tytul,
-                                 Miasto = l.Miasto,
+                                 Miasto = m.Nazwa,
                                  DataDodania = k.DataDodania,
                                  NazwaKategorii = _db.Kategorie.Where(q => q.Id == id).Select(p => p.Nazwa).FirstOrDefault()
                              };
