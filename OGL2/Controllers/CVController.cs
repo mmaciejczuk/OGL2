@@ -7,15 +7,24 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using Microsoft.AspNet.Identity;
+using System.Net;
 
 namespace OGL2.Controllers
 {
     public class CVController : Controller
     {
         private readonly ICVRepo _repo;
-        public CVController(ICVRepo repo)
+        private readonly IKategoriaRepo _kategoriaRepo;
+        private readonly IMiastoRepo _miastoRepo;
+        private readonly IWiadomoscRepo _messageRepo;
+
+        public CVController(ICVRepo repo, IMiastoRepo miastoRepo, IKategoriaRepo kategoriaRepo,
+            IWiadomoscRepo messageRepo)
         {
             _repo = repo;
+            _kategoriaRepo = kategoriaRepo;
+            _miastoRepo = miastoRepo;
+            _messageRepo = messageRepo;
         }
 
         public ActionResult Index(int? page, string sortOrder)
@@ -91,22 +100,58 @@ namespace OGL2.Controllers
             return View(ogloszenia);
         }
 
-        // GET: CV
-        public ActionResult StworzCV()
-        {
-            return View();
-        }
-
-        [HttpGet]
+        // ------------------------- CREATE -------------------------------------
+        // GET
         public ActionResult Create()
         {
-            return View();
+            CVEditViewModel cvModel = new CVEditViewModel();
+            cvModel.Miasta = _miastoRepo.GetCities();
+            cvModel.Kategorie = _kategoriaRepo.GetCategories();
+            //cvModel.Doswiadczenie = _repo.GetExperience();
+            if (cvModel == null)
+            {
+                return HttpNotFound();
+            }
+            else if (cvModel.UzytkownikId != User.Identity.GetUserId() && !(User.IsInRole("Admin") || User.IsInRole("Pracownik")))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return View(cvModel);
         }
 
-        //[HttpPost]
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
+        // POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult Create(CVEditViewModel cvViewModel, FormCollection formCollection)
+        {
+            cvViewModel.Miasta = _miastoRepo.GetCities();
+            cvViewModel.Kategorie = _kategoriaRepo.GetCategories();
+
+            var a = Convert.ToInt32(formCollection["kategoriaSelect"]);
+            var b = Convert.ToInt32(formCollection["miastoSelect"]);
+
+            if (ModelState.IsValid && Convert.ToInt32(formCollection["kategoriaSelect"]) != 0
+                                    && Convert.ToInt32(formCollection["miastoSelect"]) != 0)
+            {
+                cvViewModel.KategoriaId = Convert.ToInt32(formCollection["kategoriaSelect"]);
+                cvViewModel.MiastoId = Convert.ToInt32(formCollection["miastoSelect"]);
+                cvViewModel.UzytkownikId = User.Identity.GetUserId();
+                cvViewModel.DataDodania = DateTime.Now;
+                try
+                {
+                    //_repo.Dodaj(cvViewModel);
+                    _repo.SaveChanges();
+                    return RedirectToAction("MojeCV");
+                }
+                catch (Exception)
+                {
+                    ViewBag.Blad = true;
+                    return View(cvViewModel);
+                }
+            }
+            ViewBag.Blad = true;
+            return View(cvViewModel);
+        }
     }
 }

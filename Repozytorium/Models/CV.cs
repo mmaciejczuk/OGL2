@@ -8,6 +8,7 @@ namespace Repozytorium.Models
         public CV()
         {
             this.Doswiadczenia = new HashSet<Doswiadczenie>();
+            this.Edukacja = new HashSet<Edukacja>();
         }
         [Key]
         [Display(Name = "Id:")]
@@ -31,5 +32,6 @@ namespace Repozytorium.Models
         public virtual ICollection<Doswiadczenie> Doswiadczenia { get; set; }
         public virtual Kategoria Kategoria { get; set; }
         public virtual Miasto Miasto { get; set; }
+        public virtual ICollection<Edukacja> Edukacja { get; set; }
     }
 }

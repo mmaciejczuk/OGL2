@@ -10,9 +10,7 @@ namespace Repozytorium.IRepo
         IQueryable<OgloszenieViewModel> PobierzOgloszenia();
         OgloszenieEditViewModel GetOgloszenieDetailsById(int id);
         OgloszenieDetailsViewModel GetOgloszeniaById(int id);
-        List<Miasto> GetCities();
         List<RodzajUmowy> GetAgreementTypes();
-        List<Kategoria> GetCategories();
         void UsunOgloszenie(int id);
         void SaveChanges();
         void Dodaj(OgloszenieEditViewModel ogloszenie);

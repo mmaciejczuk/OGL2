@@ -1,2 +1,6 @@
 login: admin@jobprofit.pl
 password: Abc123_
+
+
+marian.jankowski@hotmail.com
+password: Abc123_

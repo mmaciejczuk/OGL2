@@ -77,22 +77,10 @@ namespace Repozytorium.Repo
             _db.Ogloszenie_Kategoria.Add(oglkat);
         }
 
-        public List<Miasto> GetCities()
-        {
-            var miasta = from o in _db.Miasto select o;
-            return miasta.ToList();
-        }
-
         public List<RodzajUmowy> GetAgreementTypes()
         {
             var umowy = from o in _db.RodzajUmowy select o;
             return umowy.ToList();
-        }
-
-        public List<Kategoria> GetCategories()
-        {
-            var kategorie = from o in _db.Kategorie select o;
-            return kategorie.ToList();
         }
 
         public OgloszenieEditViewModel GetOgloszenieDetailsById(int id)

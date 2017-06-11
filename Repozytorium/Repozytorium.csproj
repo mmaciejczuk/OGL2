@@ -200,11 +200,16 @@
     <Compile Include="Migrations\201706101022443__8.Designer.cs">
       <DependentUpon>201706101022443__8.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706110818080__9.cs" />
+    <Compile Include="Migrations\201706110818080__9.Designer.cs">
+      <DependentUpon>201706110818080__9.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Models\CV.cs" />
     <Compile Include="Models\Doswiadczenie.cs" />
+    <Compile Include="Models\Edukacja.cs" />
     <Compile Include="Models\Kategoria.cs" />
     <Compile Include="Models\Miasto.cs" />
     <Compile Include="Models\OglContext.cs" />
@@ -213,6 +218,7 @@
     <Compile Include="Models\RodzajUmowy.cs" />
     <Compile Include="Models\Uzytkownik.cs" />
     <Compile Include="Models\Views\AccountViewModels.cs" />
+    <Compile Include="Models\Views\CVEditViewModel.cs" />
     <Compile Include="Models\Views\CVViewModel.cs" />
     <Compile Include="Models\Views\CVZKategoriiViewModels.cs" />
     <Compile Include="Models\Views\KategoriaCVViewModel.cs" />
@@ -258,6 +264,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706101022443__8.resx">
       <DependentUpon>201706101022443__8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706110818080__9.resx">
+      <DependentUpon>201706110818080__9.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

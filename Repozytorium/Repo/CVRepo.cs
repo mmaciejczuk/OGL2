@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Repozytorium.Models.Views;
+using Repozytorium.Models;
 
 namespace Repozytorium.Repo
 {
@@ -96,6 +97,31 @@ namespace Repozytorium.Repo
             var id = from o in _db.CV.Where(p => p.UzytkownikId == guid) 
                      select o.Id;
             return Convert.ToInt32(id.FirstOrDefault());
+        }
+
+        public void Dodaj(CVEditViewModel ogloszenieEditViewModel)
+        {
+            //CV cv = new CV()
+            //{
+            //    Firma = ogloszenieEditViewModel.Firma,
+            //    Tresc = ogloszenieEditViewModel.Tresc,
+            //    Tytul = ogloszenieEditViewModel.Tytul,
+            //    DataDodania = ogloszenieEditViewModel.DataDodania,
+            //    UzytkownikId = ogloszenieEditViewModel.UzytkownikId,
+            //    DataWaznosci = ogloszenieEditViewModel.DataDodania.AddDays(14),
+            //    Zaakceptowane = ogloszenieEditViewModel.Zaakceptowane,
+            //    MiastoId = ogloszenieEditViewModel.MiastoId,
+            //    RodzajUmowyId = ogloszenieEditViewModel.RodzajUmowyId,
+            //    ZarobkiOd = ogloszenieEditViewModel.ZarobkiOd,
+            //    ZarobkiDo = ogloszenieEditViewModel.ZarobkiDo,
+            //    Wymagania = ogloszenieEditViewModel.Wymagania
+            //};
+            //_db.CV.Add(cv);
+        }
+
+        public void SaveChanges()
+        {
+            _db.SaveChanges();
         }
     }
 }

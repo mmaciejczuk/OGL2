@@ -17,6 +17,7 @@ namespace Repozytorium.IRepo
         IQueryable<CVZKategoriiViewModels> PobierzCVZKategorii(int id);
         bool KategoriaIstnieje(string kategoria);
         Kategoria GetKategoriaById(int id);
+        List<Kategoria> GetCategories();
         void Aktualizuj(Kategoria kategoria);
         void Dodaj(Kategoria kategoria);
         void SaveChanges();

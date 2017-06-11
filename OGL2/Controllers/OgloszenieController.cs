@@ -15,15 +15,20 @@ namespace OGL2.Controllers
     {
         private readonly IOgloszenieRepo _repo;
         private readonly IWiadomoscRepo _messageRepo;
+        private readonly IKategoriaRepo _kategoriaRepo;
+        private readonly IMiastoRepo _miastoRepo;
         public OgloszenieController()
         {
 
         }
 
-        public OgloszenieController(IOgloszenieRepo repo, IWiadomoscRepo messageRepo)
+        public OgloszenieController(IOgloszenieRepo repo, IWiadomoscRepo messageRepo
+            ,IMiastoRepo miastoRepo, IKategoriaRepo kategoriaRepo)
         {
             _repo = repo;
             _messageRepo = messageRepo;
+            _kategoriaRepo = kategoriaRepo;
+            _miastoRepo = miastoRepo;
         }
 
 //-------------------------- INDEX----------------------------------------
@@ -142,9 +147,9 @@ namespace OGL2.Controllers
         public ActionResult Create()
         {
             OgloszenieEditViewModel ogloszenie = new OgloszenieEditViewModel();
-            ogloszenie.Miasta = _repo.GetCities();
+            ogloszenie.Miasta = _miastoRepo.GetCities();
             ogloszenie.RodzajeUmowy = _repo.GetAgreementTypes();
-            ogloszenie.Kategorie = _repo.GetCategories();
+            ogloszenie.Kategorie = _kategoriaRepo.GetCategories();
             if (ogloszenie == null)
             {
                 return HttpNotFound();
@@ -162,9 +167,9 @@ namespace OGL2.Controllers
         [Authorize]
         public ActionResult Create(OgloszenieEditViewModel ogloszenieEditViewModel, FormCollection formCollection)
         {
-            ogloszenieEditViewModel.Miasta = _repo.GetCities();
+            ogloszenieEditViewModel.Miasta = _miastoRepo.GetCities();
             ogloszenieEditViewModel.RodzajeUmowy = _repo.GetAgreementTypes();
-            ogloszenieEditViewModel.Kategorie = _repo.GetCategories();
+            ogloszenieEditViewModel.Kategorie = _kategoriaRepo.GetCategories();
 
             var a = Convert.ToInt32(formCollection["kategoriaSelect"]);
             var b = Convert.ToInt32(formCollection["miastoSelect"]);
@@ -208,9 +213,9 @@ namespace OGL2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             OgloszenieEditViewModel ogloszenie = _repo.GetOgloszenieDetailsById((int)id);
-            ogloszenie.Miasta = _repo.GetCities();
+            ogloszenie.Miasta = _miastoRepo.GetCities();
             ogloszenie.RodzajeUmowy = _repo.GetAgreementTypes();
-            ogloszenie.Kategorie = _repo.GetCategories();
+            ogloszenie.Kategorie = _kategoriaRepo.GetCategories();
             if (ogloszenie == null)
             {
                 return HttpNotFound();
@@ -232,9 +237,9 @@ namespace OGL2.Controllers
             ogloszenieEditViewModel.KategoriaId = Convert.ToInt32(formCollection["kategoriaSelect"]);
             ogloszenieEditViewModel.MiastoId = Convert.ToInt32(formCollection["miastoSelect"]);
             ogloszenieEditViewModel.RodzajUmowyId = Convert.ToInt32(formCollection["rodzajUmowySelect"]);
-            ogloszenieEditViewModel.Miasta = _repo.GetCities();
+            ogloszenieEditViewModel.Miasta = _miastoRepo.GetCities();
             ogloszenieEditViewModel.RodzajeUmowy = _repo.GetAgreementTypes();
-            ogloszenieEditViewModel.Kategorie = _repo.GetCategories();
+            ogloszenieEditViewModel.Kategorie = _kategoriaRepo.GetCategories();
 
             if (ModelState.IsValid)
             {                

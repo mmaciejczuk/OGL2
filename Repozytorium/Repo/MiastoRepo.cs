@@ -28,6 +28,13 @@ namespace Repozytorium.Repo
             return miasto;
         }
 
+
+        public List<Miasto> GetCities()
+        {
+            var miasta = from o in _db.Miasto select o;
+            return miasta.ToList();
+        }
+
         public void Aktualizuj(Miasto miasto)
         {
             _db.Entry(miasto).State = EntityState.Modified;

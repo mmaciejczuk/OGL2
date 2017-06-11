@@ -29,6 +29,13 @@ namespace Repozytorium.Repo
             return kategoria;
         }
 
+
+        public List<Kategoria> GetCategories()
+        {
+            var kategorie = from o in _db.Kategorie select o;
+            return kategorie.ToList();
+        }
+
         public void Aktualizuj(Kategoria kategoria)
         {
             _db.Entry(kategoria).State = EntityState.Modified;
